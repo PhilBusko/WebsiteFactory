@@ -1,0 +1,10 @@
+django 
+djangorestframework
+django-cors-headers
+psycopg2
+
+jupyter
+django-extensions
+pandas
+plotly
+requests
