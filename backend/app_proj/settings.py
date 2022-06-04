@@ -32,6 +32,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # installed packages
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'app_proj.urls'
@@ -60,6 +62,16 @@ SECRET_KEY = 'django-insecure-6c7i*g#t2q1c&a%6nrvl&6g=awbg2$qlhoa0p_i6r=&#v!ji98
 DEBUG = True
 ALLOWED_HOSTS = []
 STATIC_URL = 'static/'
+
+
+
+# for react
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    # add frontend url
+)
+
+
 
 
 # DATABASE
