@@ -21,6 +21,7 @@ class LegoSet(DB.models.Model):
 
     objects = UT.BaseManager()
 
+
     """
     FieldFK = DB.models.ForeignKey(LegoSet, on_delete=DB.models.CASCADE) 
     class Meta:
