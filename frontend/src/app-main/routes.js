@@ -1,8 +1,8 @@
 /**************************************************************************************************
 APP-MAIN ROUTES
 **************************************************************************************************/
+//import * as PR from '../page-routes/_index.js'
 import BaseAxios from './base-axios.js'
-//import BaseAxios from '../page-routes/base-axios.js'
 
 export const RoutesConfig = [
     {

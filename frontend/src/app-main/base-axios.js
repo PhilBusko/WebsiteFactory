@@ -2,8 +2,8 @@
 DUMMY TEST PAGE
 **************************************************************************************************/
 import React from 'react';
+//import * as axios from './axios-config.js';
 import axios from 'axios';
-
 
 class BaseAxios extends React.Component {
 
@@ -12,22 +12,24 @@ class BaseAxios extends React.Component {
     };
 
     componentDidMount() {
-        // axios({
-        //     url: 'api/base-module/tabular/',
-        // }).then( success => {
-        //     //console.log(success.data);
-        //     this.setState({ 'tabular': success.data.legoSets });
-        // }).catch( error => {
-        //     console.log(error);
-        // });
 
         console.log(process.env.NODE_ENV);
     }
 
-    handleClick = (payload) => {
-        console.log('button clicked')
-        let newState = { 'labelVal': 100 };
-        this.setState(newState);
+    handleClick = () => {
+        //console.log('button clicked')
+
+        axios({
+            method: 'put',      // must use put to send data
+            url: 'base-axios/dummy/',
+            data: { 'inputVal': this.state.labelVal },
+        }).then( success => {
+            //console.log('received: ', success.data);
+            this.setState({ 'labelVal': success.data.dummyVal });
+        }).catch( error => {
+            console.log(error);
+        });
+
     }
 
     render() {
