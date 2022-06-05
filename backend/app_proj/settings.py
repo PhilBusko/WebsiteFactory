@@ -62,7 +62,7 @@ SECRET_KEY = 'django-insecure-6c7i*g#t2q1c&a%6nrvl&6g=awbg2$qlhoa0p_i6r=&#v!ji98
 DEBUG = True
 ALLOWED_HOSTS = []
 STATIC_URL = 'static/'
-
+STATIC_ROOT = 'app_proj.static'
 
 
 # for react
