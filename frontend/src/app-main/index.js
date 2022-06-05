@@ -33,7 +33,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 /*
 the best way to configure axios is in it's own file with create(), but it throws an error
 const axiosInstance = axios.create({
-  baseURL: (process.env.NODE_ENV == 'development' ? 'http://localhost:8000/api' : 'https://heroku/api' ),
+  baseURL: (process.env.NODE_ENV == 'development' ? 'http://localhost:8000' : 'https://heroku' ),
   headers: {'Content-Type': 'application/json'},
 });
 */
