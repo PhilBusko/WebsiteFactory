@@ -27,7 +27,7 @@ root.render(
 
 // AXIOS
 
-axios.defaults.baseURL = (process.env.NODE_ENV == 'development' ? 'http://localhost:8000' : 'https://heroku' )
+axios.defaults.baseURL = (process.env.NODE_ENV == 'development' ? 'http://localhost:8000' : 'https://website-factory.herokuapp.com/' )
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 /*
