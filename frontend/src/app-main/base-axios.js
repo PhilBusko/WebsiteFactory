@@ -35,13 +35,13 @@ class BaseAxios extends React.Component {
     render() {
         return (
             <>
-                <div>
+                <div style={{'padding': '10px'}}>
                     base axios
                 </div>
-                <div>
+                <div style={{'padding': '10px'}}>
                     <button onClick={this.handleClick}>Test Button</button>
                 </div>
-                <div>
+                <div style={{'padding': '10px'}}>
                     <input value={ this.state.labelVal } disabled={ true } ></input>
                 </div>
             </>

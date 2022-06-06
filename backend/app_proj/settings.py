@@ -57,21 +57,13 @@ TEMPLATES = [
 
 # SERVER
 
-WSGI_APPLICATION = 'app_proj.server_hooks.wsgi_app'
 SECRET_KEY = 'django-insecure-6c7i*g#t2q1c&a%6nrvl&6g=awbg2$qlhoa0p_i6r=&#v!ji98'
 DEBUG = True
-ALLOWED_HOSTS = ['website-factory.herokuapp.com']
 STATIC_URL = 'static/'
 STATIC_ROOT = 'app_proj.static'
 
-
-# for react
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-    'https://website-factory-sable.vercel.app/',
-)
-
-
+ALLOWED_HOSTS = ['localhost', 'website-factory.herokuapp.com']
+CORS_ORIGIN_WHITELIST = ('http://localhost:3000', 'https://website-factory-sable.vercel.app')
 
 
 # DATABASE
@@ -110,6 +102,4 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
-
 
