@@ -68,7 +68,7 @@ STATIC_ROOT = 'app_proj.static'
 # for react
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
-    # add frontend url
+    'https://website-factory-sable.vercel.app/',
 )
 
 
