@@ -57,18 +57,18 @@ module.exports = {
   appBuild: resolveApp(buildPath),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/app-main/index'),
+  appIndexJs: resolveModule(resolveApp, 'components/app-main/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src/app-main'),
+  appSrc: resolveApp('components'),                     // needs the root folder
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule(resolveApp, 'src/app-main/setupTests'),
-  proxySetup: resolveApp('src/app-main/setupProxy.js'),
+  testsSetup: resolveModule(resolveApp, 'components/app-main/setupTests'),
+  proxySetup: resolveApp('components/app-main/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   appWebpackCache: resolveApp('node_modules/.cache'),
   appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
-  swSrc: resolveModule(resolveApp, 'src/app-main/service-worker'),
+  swSrc: resolveModule(resolveApp, 'components/app-main/service-worker'),
   publicUrlOrPath,
 };
 
