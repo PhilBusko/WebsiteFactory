@@ -1,48 +1,23 @@
 /**************************************************************************************************
 PAGE LAYOUT
 **************************************************************************************************/
-import { AppBar, Toolbar } from "@mui/material"
-import { useTheme, useMediaQuery } from '@mui/material';
-import { Button } from "@mui/material"
-
-
-function NavBar(props) {
-    return (
-        <>
-            NavBar
-        </>
-    );
-}
+import { Box } from '@mui/material';
+import MobileNav from './mobile-nav.js';
+import DesktopNav from './desktop-nav.js';
 
 function PageLayout(props) {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-    return (
-        <>
-            {isMobile && 
-                <div>
-                    <AppBar position='sticky'>
-                        <Toolbar>
-                            <Button variant="outlined" color="inherit" >
-                                Button 1
-                            </Button>
-                            <Button variant="outlined" color="inherit">
-                                Button 2
-                            </Button>
-                        </Toolbar>
-                    </AppBar>
-                </div> 
-            }
-            {!isMobile && 
-                <div>
-                    desktop
-                </div> 
-            }
-
-            { props.children }
-        </>
-    );
+    return (<>
+        <Box name='mobile' sx={{ display: { xs: 'block', md: 'none' }}} >
+            <MobileNav></MobileNav>
+            <Box>{ props.children }</Box>
+        </Box>
+        <Box name='desktop' sx={{ display: { xs: 'none', md: 'block' }}} >
+            <Box display='flex' flexDirection='row' >
+                <DesktopNav name='navigation'></DesktopNav>
+                <Box name='content' width='100%'>{ props.children }</Box>
+            </Box>
+        </Box>
+    </>);
 }
 
 export default PageLayout;

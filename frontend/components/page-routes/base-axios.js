@@ -1,7 +1,8 @@
 /**************************************************************************************************
 BASE AXIOS PAGE
 **************************************************************************************************/
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Box } from '@mui/material';
 import axios from 'axios';
 import PageLayout from '../layout/page-layout.js'
 
@@ -35,9 +36,10 @@ function BaseAxios(props) {
             <div style={{'padding': '10px'}}>
                 <input value={ inputVal } disabled={ true } ></input>
             </div>
+            <Box height={200} width={300} bgcolor={'brown'} />
+            <hr></hr>
         </PageLayout>
     );
-
 }
 
 export default BaseAxios;
