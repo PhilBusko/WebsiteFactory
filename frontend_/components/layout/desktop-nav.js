@@ -12,8 +12,6 @@ import * as Icons from '@mui/icons-material';
 import Image from 'mui-image';
 import { RoutesConfig } from '../app-main/routes.js'
 
-
-
 const drawerWidth = 200;
 const footerHeight = 34;
 const footerBkgd = 'rgba(130,130,130,0.5)';

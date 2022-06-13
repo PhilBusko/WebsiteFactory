@@ -2,9 +2,15 @@
 BASE AXIOS PAGE
 **************************************************************************************************/
 import { useState } from 'react';
-import { Box } from '@mui/material';
 import axios from 'axios';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import PageLayout from '../layout/page-layout.js'
+
+
+
+
+
 
 function BaseAxios(props) {
 
@@ -27,9 +33,9 @@ function BaseAxios(props) {
 
     return (
         <PageLayout>
-            <div style={{'padding': '10px'}}>
+            <Typography style={{'padding': '10px'}}>
                 base axios
-            </div>
+            </Typography>
             <div style={{'padding': '10px'}}>
                 <button onClick={ handleClick }>Test Button</button>
             </div>
