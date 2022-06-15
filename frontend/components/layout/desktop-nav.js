@@ -37,7 +37,7 @@ const BottomPanel = styled(Box)(({ theme }) => ({
     'bottom': '2vh', 
     'width': drawerWidth,
     'height': footerHeight, 
-    'bgcolor': footerBkgd, 
+    'background': footerBkgd, 
 }));
 
 const MenuCollapseButton = styled(ButtonBase)(({ theme }) => ({

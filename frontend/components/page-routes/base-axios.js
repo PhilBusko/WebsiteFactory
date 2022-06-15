@@ -4,11 +4,11 @@ BASE AXIOS PAGE
 import { useState } from 'react';
 import axios from 'axios';
 import { Button, TextField } from '@mui/material';
+import { Card } from '@mui/material';
 import { Box, Grid } from '@mui/material';
 import PageLayout from '../layout/page-layout.js'
 import * as ST from '../layout/styled-elements.js'
 import { StackForm, FormItem } from '../elements/stack-form.js'
-import '../layout/styles.scss'
 
 
 
@@ -48,7 +48,7 @@ function BaseAxios(props) {
                     </ST.PageTitle>
                 </Grid>
 
-                <Grid item xs={12} lg={6} className='panel-center'>
+                <ST.GridPanel item xs={12} lg={6}>
 
                     <StackForm>
 
@@ -63,11 +63,13 @@ function BaseAxios(props) {
 
                     </StackForm>
 
-                </Grid>
+                </ST.GridPanel>
 
-                <Grid item xs={12} lg={6}>
+                <ST.GridPanel item xs={12} lg={6}>
+                    <Card elevation={3}> 
                         island 2
-                </Grid>
+                    </Card>
+                </ST.GridPanel>
 
             </Grid>
         </PageLayout>
