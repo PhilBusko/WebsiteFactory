@@ -2,22 +2,23 @@
 STACK FORM
 **************************************************************************************************/
 import { styled } from '@mui/material/styles';
-import { Card, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
 const FormItem = styled('div')(({ theme }) => ({
-  'padding': '10px',
   'textAlign': 'center',
-  //'background': 'lightblue', 
+  'back ground': 'lightblue', 
 }));
 
 function StackForm(props) {
+
+    const padSize = '16px';
+
     return (
-        <form sx={{ 'wid th': '60%' }}>
-            <Card elevation={3}>
-                <Stack spacing={1} padding='6px' sx={{ 'wid th': '80%', 'back ground': 'lightgrey' }}>
-                    { props.children }
-                </Stack>
-            </Card>
+        <form>
+            <Stack spacing={padSize}
+                sx={{ 'padding': padSize, 'back ground': 'lightyellow' }}>
+                { props.children }
+            </Stack>
         </form>
     );
 }

@@ -16,14 +16,32 @@ function BaseAxios(props) {
 
 
     const [userName, setUserName] = useState('');
-    const [userNameError, setUserNameError] = useState(false);
+    const [userNameError, setUserNameError] = useState(null);
     const handleUserName = (evt) => {
-        console.log(evt)
+        setUserName(evt.target.value);
     }
 
     const handleSubmit = (evt) => {
         console.log('submit clicked');
         evt.preventDefault();
+
+        var hasError = false;
+
+        if (userName == '') {
+            setUserNameError('Can\'t be blank');
+            hasError = true;
+        }
+        else if (userName.indexOf(' ') >= 0) {
+            setUserNameError('Can\'t have white spaces');
+            hasError = true;
+        }
+        else {
+            setUserNameError(null);
+        }
+
+        if (hasError) {
+            return;
+        }
 
         // axios({
         //     method: 'put',      // must use put to send data
@@ -49,20 +67,21 @@ function BaseAxios(props) {
                 </Grid>
 
                 <ST.GridPanel item xs={12} lg={6}>
+                    <Card elevation={3}> 
+                        <StackForm>
 
-                    <StackForm>
+                            <FormItem >
+                                <TextField variant='outlined' label='User Name' size='small'
+                                    value={ userName } error={ userNameError } helperText={ userNameError }
+                                    onChange={ handleUserName } />
+                            </FormItem>
+                            
+                            <FormItem sx={{ 'textAlign': 'right' }}>
+                                <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
+                            </FormItem>
 
-                        <FormItem >
-                            <TextField variant='outlined' label='User Name' size='small'
-                                value={ userName } onChange={ handleUserName } error={ userNameError }/>
-                        </FormItem>
-                        
-                        <FormItem sx={{ 'textAlign': 'right' }}>
-                            <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
-                        </FormItem>
-
-                    </StackForm>
-
+                        </StackForm>
+                    </Card>
                 </ST.GridPanel>
 
                 <ST.GridPanel item xs={12} lg={6}>
