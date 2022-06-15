@@ -1,19 +1,10 @@
 /**************************************************************************************************
 BASE WEBSOCKET PAGE
 **************************************************************************************************/
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import PageLayout from '../layout/page-layout.js'
 
 function BaseWebsocket(props) {
-
-    const [inputVal, setInput] = useState(0);
-
-    const handleClick = (e) => {
-        //console.log('button clicked')
-
-
-    }
 
     return (
         <PageLayout>

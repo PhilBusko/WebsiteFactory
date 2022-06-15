@@ -1,5 +1,10 @@
 /**************************************************************************************************
-STYLED ELEMENTS
+SITE STYLES
 **************************************************************************************************/
-import { styled } from '@mui/system';
+
+.panel-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 

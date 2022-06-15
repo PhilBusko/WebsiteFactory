@@ -293,24 +293,39 @@ module.exports = function (webpackEnv) {
       ],
     },
     resolve: {
+      // This allows you to set a fallback for where webpack should look for modules.
+      // We placed these paths second because we want `node_modules` to "win"
+      // if there are any conflicts. This matches Node resolution mechanism.
+      // https://github.com/facebook/create-react-app/issues/253
       modules: ['node_modules', paths.appNodeModules].concat(
         modules.additionalModulePaths || []
       ),
+      // These are the reasonable defaults supported by the Node ecosystem.
+      // We also include JSX as a common component filename extension to support
+      // some tools, although we do not recommend using it, see:
+      // https://github.com/facebook/create-react-app/issues/290
+      // `web` extension prefixes have been added for better support
+      // for React Native Web.
       extensions: paths.moduleFileExtensions
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
+        // Support React Native Web
+        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
+        // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
-
-        'PagesIndex': path.resolve(__dirname, 'src/page-routes/_index.js'),
-
       },
       plugins: [
+        // Prevents users from importing files from outside of src/ (or node_modules/).
+        // This often causes confusion because we only process files within src/ with babel.
+        // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+        // please link the files into your node_modules/ and let module-resolution kick in.
+        // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
           reactRefreshRuntimeEntry,
@@ -324,6 +339,7 @@ module.exports = function (webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
+        // Handle node_modules packages that contain sourcemaps
         shouldUseSourceMap && {
           enforce: 'pre',
           exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -692,14 +708,14 @@ module.exports = function (webpackEnv) {
             // '../cra-template-typescript/template/src/App.tsx'
             // otherwise.
             include: [
-              { file: '../**/app-main/**/*.{ts,tsx}' },
-              { file: '**/app-main/**/*.{ts,tsx}' },
+              { file: '../**/src/**/*.{ts,tsx}' },
+              { file: '**/src/**/*.{ts,tsx}' },
             ],
             exclude: [
-              { file: '**/app-main/**/__tests__/**' },
-              { file: '**/app-main/**/?(*.){spec|test}.*' },
-              { file: '**/app-main/setupProxy.*' },
-              { file: '**/app-main/setupTests.*' },
+              { file: '**/src/**/__tests__/**' },
+              { file: '**/src/**/?(*.){spec|test}.*' },
+              { file: '**/src/setupProxy.*' },
+              { file: '**/src/setupTests.*' },
             ],
           },
           logger: {
