@@ -62,7 +62,7 @@ DEBUG = True
 STATIC_URL = 'static/'
 STATIC_ROOT = 'app_proj.static'
 
-ALLOWED_HOSTS = ['localhost', 'website-factory.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'website-factory.herokuapp.com']
 CORS_ORIGIN_WHITELIST = ('http://localhost:3000', 'https://website-factory-sable.vercel.app')
 
 

@@ -5,6 +5,18 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import business_module.logic.custom as CT 
 
+
+
+@api_view(['GET'])
+def ThemeGroups(request):
+    themeLs = CT.GetThemeGroups()
+
+    
+
+
+    return Response(themeLs)
+
+
 # put request to send data from client
 @api_view(['PUT'])
 def Dummy(request):
@@ -14,11 +26,3 @@ def Dummy(request):
     resultsDx = { 'dummyVal': inputVal+10 }
 
     return Response(resultsDx)
-
-
-@api_view(['GET'])
-def ThemeGroups(request):
-    themeLs = CT.GetThemeGroups()
-    return Response(themeLs)
-
-

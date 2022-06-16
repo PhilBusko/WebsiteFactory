@@ -4,7 +4,7 @@ MOBILE NAVIGATION
 import { useState } from 'react';
 import { IconButton  } from '@mui/material';
 import { Typography, Divider } from '@mui/material';
-import { AppBar, Toolbar, Card }  from '@mui/material';
+import { AppBar, Toolbar }  from '@mui/material';
 import { Link, Menu, MenuItem } from '@mui/material';
 import { Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,6 +12,8 @@ import { RoutesConfig } from '../app-main/routes.js'
 
 function MobileNav(props) {
     
+    // show mobile menu
+
     const [anchorElem, setAnchorElem] = useState(null);
     const mobileMenuOpen = (event) => {
         setAnchorElem(event.currentTarget);
@@ -19,6 +21,8 @@ function MobileNav(props) {
     const mobileMenuClose = () => {
         setAnchorElem(null);
     };
+    
+    // render
     
     const routesLs = RoutesConfig.filter(route => route.order > 0);
 
@@ -35,9 +39,9 @@ function MobileNav(props) {
                     anchorOrigin={{'vertical': 'top', 'horizontal': 'left'}}
                     sx={{ '& .MuiPaper-root': {'background': 'light blue'},
                           '& .MuiList-root': {'padding': 0,}, }} >
-                    {   routesLs.map((route, key) => (
-                        <Box key={key}>
-                            {key != 0 && <Divider sx={{ 'margin': '0 !important' }}/>}
+                    {   routesLs.map((route, idx) => (
+                        <Box key={idx}>
+                            {idx != 0 && <Divider sx={{ 'margin': '0 !important' }}/>}
                             <MenuItem 
                                 component={Link} href={route.path}
                                 sx={{ 'min-height': '0', 'padding': '0' }} >
