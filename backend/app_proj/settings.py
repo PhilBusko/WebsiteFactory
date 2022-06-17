@@ -3,7 +3,7 @@ DJANGO SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
+BACKEND_PATH = Path(__file__).resolve().parent.parent
 
 
 # APPLICATION
@@ -71,7 +71,7 @@ CORS_ORIGIN_WHITELIST = ('http://localhost:3000', 'https://website-factory-sable
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BACKEND_PATH / 'app_db.sqlite3',
     }
 }
 
