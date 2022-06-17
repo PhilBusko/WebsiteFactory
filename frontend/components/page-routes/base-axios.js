@@ -3,17 +3,15 @@ BASE AXIOS PAGE
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, TextField, Autocomplete } from '@mui/material';
+import { Button, TextField, Autocomplete, FormHelperText } from '@mui/material';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { FormControlLabel, Checkbox } from '@mui/material';
 import { Card } from '@mui/material';
 import { Grid } from '@mui/material';
-
+import Image from 'mui-image';
 import PageLayout from '../layout/page-layout.js'
 import * as ST from '../layout/styled-elements.js'
 import { StackForm, FormItem } from '../elements/stack-form.js'
-
-
 
 
 function BaseAxios(props) {
@@ -37,7 +35,6 @@ function BaseAxios(props) {
         }).then( success => {
             //console.log('received: ', success.data);
             setThemeOptions(success.data);
-            setNameOptions(success.data);
         }).catch( error => {
             console.log(error);
         });
@@ -57,33 +54,30 @@ function BaseAxios(props) {
     // autocomplete
 
     const [setName, setSetName] = useState(null);
-    const [setInput, setSetInput] = useState('');
+    //const [setInput, setSetInput] = useState('');
     const [nameOptions, setNameOptions] = useState([]);
+
+    useEffect(() => {
+        axios({
+            url: 'base-axios/set-names/',
+        }).then( success => {
+            //console.log('received: ', success.data);
+            setNameOptions(success.data);
+        }).catch( error => {
+            console.log(error);
+        });
+    }, [])
 
     const handleSetName = (event, newValue) => {
         console.log('setname', newValue)
         setSetName(newValue);
-    };
-    const handleSetInput = (event, newValue) => {
-        console.log('inputval', newValue)
-        setSetInput(newValue);
-    };
-
-
-
-    const options = ['Option 1', 'Option 2'];
-    const [value, setValue] = useState(options[0]);
-    const [inputValue, setInputValue] = useState('');
-    
-
-
+    }; 
 
     // submit button
 
-    const handleSubmit = (evt) => {
-        console.log('submit clicked');
-        evt.preventDefault();
+    const [formResult, setFormResult] = useState(null);
 
+    function validateForm() {
         var hasError = false;
 
         if (userName == '') {
@@ -98,20 +92,30 @@ function BaseAxios(props) {
             setUserNameError(null);
         }
 
+        return hasError;
+    }
+
+    const handleSubmit = (event) => {
+        console.log('submit clicked');
+        event.preventDefault();
+        setFormResult(null);
+
+        var hasError = validateForm();
         if (hasError) {
             return;
         }
 
-        // axios({
-        //     method: 'put',      // must use put to send data
-        //     url: 'base-axios/dummy/',
-        //     data: { 'inputVal': inputVal },
-        // }).then( success => {
-        //     //console.log('received: ', success.data);
-        //     setInput(success.data.dummyVal);
-        // }).catch( error => {
-        //     console.log(error);
-        // });
+        axios({
+            method: 'put',      // must use put to send data
+            url: 'base-axios/lego-form/',
+            data: { 'variable': 'dummy-val' },
+        }).then( success => {
+            //console.log('received: ', success.data);
+            setFormResult(success.data.message);
+        }).catch( error => {
+            console.log(error);
+            setFormResult(error);
+        });
     }
 
     // render
@@ -127,7 +131,7 @@ function BaseAxios(props) {
 
                 <ST.GridPanel item xs={12} lg={6}>
                     <Card elevation={3}> 
-                        <StackForm>
+                        <StackForm width='260px'>
 
                             <FormItem >
                                 <TextField 
@@ -163,27 +167,15 @@ function BaseAxios(props) {
                                 <Autocomplete
                                     options={nameOptions} 
                                     value={setName} onChange={handleSetName} 
-                                    inputValue={setInput} onInputChange={handleSetInput} 
+                                    //inputValue={setInput} onInputChange={handleSetInput} 
                                     //open={ setInput.length > 2 } 
                                     renderInput={(params) => <TextField {...params} label='Set Name'  />}
                                     sx={{ width: '100%' }} size='small' /> 
                             </FormItem>
 
-                            <FormItem>
-                                <Autocomplete
-                                    value={value}
-                                    onChange={(event, newValue) => {setValue(newValue);}}
-                                    inputValue={inputValue}
-                                    onInputChange={(event, newInputValue) => {setInputValue(newInputValue);}}
-                                    id="controllable-states-demo"
-                                    options={options}
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="Controllable" />}
-                                />
-                            </FormItem>
+                            <FormItem sx={{ 'display': 'flex', 'justifyContent': 'space-between' }}>
 
-
-                            <FormItem sx={{ 'textAlign': 'right' }}>
+                                <FormHelperText value={formResult}>{formResult}</FormHelperText>
                                 <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
                             </FormItem>
 
@@ -192,8 +184,9 @@ function BaseAxios(props) {
                 </ST.GridPanel>
 
                 <ST.GridPanel item xs={12} lg={6}>
-                    <Card elevation={3}> 
-                        island 2
+                    <Card elevation={3} sx={{ 'padding': '16px' }} > 
+                        <Image src={require('../assets/lego-set.jpg')} 
+                            width={340} duration={0} />
                     </Card>
                 </ST.GridPanel>
 
