@@ -5,6 +5,10 @@ DJANGO SETTINGS
 from pathlib import Path
 BACKEND_PATH = Path(__file__).resolve().parent.parent
 
+import os
+DEPLOYMENT_ENV = os.environ.get('DEPLOYMENT_ENV', 'dev')
+print('env:', DEPLOYMENT_ENV)
+
 
 # APPLICATION
 
@@ -21,6 +25,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_extensions',
     # custom modules
+    'members', 
     'business_module',
 ]
 
@@ -57,8 +62,7 @@ TEMPLATES = [
 
 # SERVER
 
-SECRET_KEY = 'django-insecure-6c7i*g#t2q1c&a%6nrvl&6g=awbg2$qlhoa0p_i6r=&#v!ji98'
-DEBUG = True
+DEBUG = False if DEPLOYMENT_ENV == 'dev' else True
 STATIC_URL = 'static/'
 STATIC_ROOT = 'app_proj.static'
 
@@ -78,22 +82,20 @@ DATABASES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# USER AUTHENTICATION
+# REST API
+
+SECRET_KEY = '2q1c&a%6nrvl&6g=awbg2$qlho#v!ji98'
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+}
 
 
 # Internationalization
