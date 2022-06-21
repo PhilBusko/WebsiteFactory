@@ -2,6 +2,8 @@ django==4.0.3
 djangorestframework
 django-cors-headers
 djangorestframework-simplejwt
+Authlib~=1.0.0
+python-dotenv~=0.19.2
 psycopg2
 gunicorn
 

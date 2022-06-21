@@ -31,6 +31,26 @@ def GetTableCounts():
 
     return customTables
 
+def GetNativeTableCounts():
+    from django.apps import apps
+
+    customTables = []
+    for name, app in apps.app_configs.items():
+    
+        if name not in ['admin', 'auth', 'contenttypes', 'sessions']:
+            continue
+
+        modelLs = list(app.get_models())
+
+        for m in modelLs:
+            customTables.append({
+                'Module': name,
+                'Table': str(m).split('.')[-1].replace("'>", ""),
+                'Count': m.objects.count(),
+            })
+
+    return customTables
+
 def InsertSingle(module, table, entryDx):
 
     moduleObj = __import__(module)

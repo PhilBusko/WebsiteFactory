@@ -7,7 +7,7 @@ BACKEND_PATH = Path(__file__).resolve().parent.parent
 
 import os
 DEPLOYMENT_ENV = os.environ.get('DEPLOYMENT_ENV', 'dev')
-print('env:', DEPLOYMENT_ENV)
+print('ENV:', DEPLOYMENT_ENV)
 
 
 # APPLICATION
