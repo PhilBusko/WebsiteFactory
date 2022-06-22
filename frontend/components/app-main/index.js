@@ -1,10 +1,12 @@
 /**************************************************************************************************
-INDEX - WEBAPP ENTRY POINT
+INDEX - ENTRY POINT
 **************************************************************************************************/
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import axios from 'axios';
+import { GlobalProvider } from './global-store'
 import { RoutesConfig } from './routes'
 
 
@@ -13,16 +15,20 @@ import { RoutesConfig } from './routes'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes> 
-        { 
-          RoutesConfig.map( ({path, element}, key) => 
-            <Route exact path={ path } element={ element } key={ key } /> )
-        }
-      </Routes>
-    </BrowserRouter>
+    <GlobalProvider>
+      <BrowserRouter>
+        <Routes> 
+          { 
+            RoutesConfig.map( ({path, element}, key) => 
+              <Route exact path={ path } element={ element } key={ key } /> )
+          }
+        </Routes>
+      </BrowserRouter>
+    </GlobalProvider>
   </React.StrictMode>
 );
+
+
 
 
 // AXIOS

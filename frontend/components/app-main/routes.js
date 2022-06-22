@@ -2,15 +2,15 @@
 APP-MAIN ROUTES
 **************************************************************************************************/
 //import * as PR from 'PagesIndex' //'../page-routes/_index.js'
-import BaseAxios from '../page-routes/base-axios.js'
-import BaseWebsocket from '../page-routes/base-websocket.js'
-import Admin from '../page-routes/admin.js'
+import BaseAxios from '../page-routes/base-axios'
+import BaseWebsocket from '../page-routes/base-websocket'
+import Admin from '../page-routes/admin'
 
 export const RoutesConfig = [
     {
         'title': 'Default',
         'path': '',
-        'element': <BaseAxios />, 
+        'element': <Admin />, 
         'order': 0,
     },    
     {

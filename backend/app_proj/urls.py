@@ -2,10 +2,10 @@
 URL ROUTING
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 from django.urls import include, re_path
-from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+from rest_framework_simplejwt.views import views as JWT 
 
 import business_module.views as BV
-from members.views import UserAPIView
+from members.views import (RegisterApi, UserAPIView)
 
 
 axios_url = [
@@ -20,8 +20,15 @@ token_auth = [
 ]
 
 urlpatterns = [
-   re_path(r'^base-axios/', include((axios_url, 'axios_url'))),
-   re_path(r'^api/token/', include((token_auth, 'token_auth'))),
-   re_path(r'^api/user/', UserAPIView.as_view(), name='user'),
+    re_path(r'^base-axios/', include((axios_url, 'axios_url'))),
+    #re_path(r'^api/token/', include((token_auth, 'token_auth'))),
+
+    re_path(r'^api/token/',           JWT.TokenObtainPairView.as_view(),  name='token_obtain_pair'),
+    re_path(r'^api/token/refresh/',   JWT.TokenRefreshView.as_view(),     name='token_refresh'),
+
+    re_path(r'^api/register', RegisterApi.as_view()),
+
+
+    #re_path(r'^api/user/', UserAPIView.as_view(), name='user'),
 ]
 
