@@ -23,3 +23,8 @@ def ProcessForm(request):
     resultsDx = { 'message': 'Form accepted by server' }
     return Response(resultsDx)
 
+@api_view(['POST'])
+def DummyLogin(request):
+    print('DummyLogin', request.user, request.body)
+    resultsDx = { 'message': 'DummyLogin' }
+    return Response(resultsDx)

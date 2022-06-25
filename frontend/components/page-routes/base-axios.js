@@ -31,7 +31,7 @@ function BaseAxios(props) {
 
     useEffect(() => {
         axios({
-            url: 'base-axios/theme-groups/',
+            url: 'base-axios/theme-groups',
         }).then( success => {
             //console.log('received: ', success.data);
             setThemeOptions(success.data);
@@ -40,8 +40,8 @@ function BaseAxios(props) {
         });
     }, [])
 
-    const handleThemeGroup = (evt) => {
-        setThemeGroup(evt.target.value);
+    const handleThemeGroup = (event) => {
+        setThemeGroup(event.target.value);
     }
 
     // option checkbox
@@ -59,7 +59,7 @@ function BaseAxios(props) {
 
     useEffect(() => {
         axios({
-            url: 'base-axios/set-names/',
+            url: 'base-axios/set-names',
         }).then( success => {
             //console.log('received: ', success.data);
             setNameOptions(success.data);
@@ -107,7 +107,7 @@ function BaseAxios(props) {
 
         axios({
             method: 'put',      // must use put to send data
-            url: 'base-axios/lego-form/',
+            url: 'base-axios/lego-form',
             data: { 'variable': 'dummy-val' },
         }).then( success => {
             //console.log('received: ', success.data);

@@ -9,7 +9,7 @@ import { Button } from '@mui/material';
 import { Grid } from '@mui/material';
 
 import { GlobalContext } from '../app-main/global-store'
-//import * as AUTH from '../app-main/authentication'
+import * as AUTH from '../app-main/authentication'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../layout/styled-elements'
 
@@ -26,11 +26,125 @@ const SpacedLabel = styled('div')(({ theme }) => ({
 function Admin(props) {
 
     const { tokenStore } = React.useContext(GlobalContext);
-    const { baseUrlStore } = React.useContext(GlobalContext);
 
+    const [tokenError, setTokenError] = useState('');
+    const [requestMessage, setRequestMessage] = useState('');
+    const [requestError, setRequestError] = useState('');
+    
     React.useEffect(() => {
         //console.log(tokenStore[0]);
     }, [])
+
+
+    const handleRegister = (event) => {
+
+        const credentials = {};
+        
+        axios(AUTH.registerConfig
+        ).then(success => {
+            console.log(success);
+        }).catch( error => {
+
+            if (!!error.response.data) {
+                setTokenError(error.response.data.detail);
+            }
+            else if (!!error.message) {
+                setTokenError(error.message);
+            }
+        })
+
+    }
+
+
+    const handleLogIn = async (event) => {
+
+        const credentials = {'username': 'frontend', 'password': 'WF91cvbn'};
+        console.log(credentials);
+
+        try {
+            const tokens = await AUTH.loginUser(credentials);
+            tokenStore[1](tokens.access)
+
+        } catch (error) {
+            console.log(error.message);
+
+            if (!!error.response.data) {
+                setTokenError(error.response.data.detail);
+            }
+            else if (!!error.message) {
+                setTokenError(error.message);
+            }
+        }
+    }
+
+    const handleNonAuth = (event) => {
+        axios({
+            url: `http://localhost:8000/base-axios/theme-groups`,
+            headers: {'Content-Type': 'application/json'},
+        }).then(success => {
+            setRequestMessage(success.data);
+            setRequestError(null);
+        }).catch( error => {
+            //console.log(error)
+            var errorText = error.message;
+            if (typeof error.response?.data?.detail != 'undefined') 
+                errorText = error.response.data.detail;
+            setRequestError(errorText);
+            setRequestMessage(null);
+       });
+    }
+
+
+    const handleAuthReq = (event) => {
+        
+        axios({
+            url: `http://localhost:8000/api/auth-request`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${tokenStore[0]}`,
+            },
+        }).then(success => {
+
+            console.log(success)
+
+            setRequestMessage( JSON.stringify(success.data) );
+            setRequestError(null);
+        }).catch( error => {
+            console.log(error)
+            var errorText = error.message;
+            if (typeof error.response?.data?.detail != 'undefined') 
+                errorText = error.response.data.detail;
+            setRequestError(errorText);
+            setRequestMessage(null);
+        });
+
+    }
+
+
+    const handleRefresh = (event) => {
+        
+        axios({
+            url: `http://localhost:8000/auth/refresh`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${tokenStore[0]}`,
+            },
+        }).then(success => {
+
+            console.log(success)
+
+            setRequestMessage( JSON.stringify(success.data) );
+            setRequestError(null);
+        }).catch( error => {
+            console.log(error)
+            var errorText = error.message;
+            if (typeof error.response?.data?.detail != 'undefined') 
+                errorText = error.response.data.detail;
+            setRequestError(errorText);
+            setRequestMessage(null);
+        });
+
+    }
 
     return (
         <PageLayout>
@@ -44,18 +158,37 @@ function Admin(props) {
                 <ST.GridPanel item xs={8} lg={4} 
                     sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
                     
-                    <SpacedButton onClick={() => null} variant='contained'>Register</SpacedButton>
+                    <SpacedButton onClick={handleLogIn} variant='contained'>Register</SpacedButton>
 
-                    <SpacedButton onClick={() => null} variant='contained'>Log In</SpacedButton>
+                    <SpacedButton onClick={handleLogIn} variant='contained'>Log In</SpacedButton>
 
                     <SpacedButton onClick={() => null} variant='contained'>Log Out</SpacedButton>
 
                     <SpacedLabel>
-                        { tokenStore[0] || 'null token' }
+                        { tokenStore[0] && tokenStore[0].slice(0,20) || 'null token' }
                     </SpacedLabel>
 
-                    <SpacedLabel>
-                        { baseUrlStore[0] }
+                    <SpacedLabel sx={{ 'color': 'crimson' }}>
+                        { tokenError }
+                    </SpacedLabel>
+
+                </ST.GridPanel>
+
+                <ST.GridPanel item xs={8} lg={4} 
+                    sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
+                    
+                    <SpacedButton onClick={handleNonAuth} variant='contained'>Non Auth Request</SpacedButton>
+
+                    <SpacedButton onClick={handleAuthReq} variant='contained'>Auth Request</SpacedButton>
+
+                    <SpacedButton onClick={handleRefresh} variant='contained'>Refresh</SpacedButton>
+
+                    <SpacedLabel >
+                        { requestMessage }
+                    </SpacedLabel>
+
+                    <SpacedLabel sx={{ 'color': 'crimson' }}>
+                        { requestError }
                     </SpacedLabel>
 
                 </ST.GridPanel>

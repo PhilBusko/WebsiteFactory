@@ -15,19 +15,19 @@ export const RoutesConfig = [
     },    
     {
         'title': 'Base Axios',
-        'path': '/base-axios',
+        'path': '/base-axios/',
         'element': <BaseAxios />, 
         'order': 1,
     },
     {
         'title': 'Base Websocket',
-        'path': '/base-websocket',
+        'path': '/base-websocket/',
         'element': <BaseWebsocket />, 
         'order': 2,
     },
     {
         'title': 'Admin',
-        'path': '/admin',
+        'path': '/admin/',
         'element': <Admin />, 
         'order': 3,
     },

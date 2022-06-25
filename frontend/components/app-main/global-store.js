@@ -5,7 +5,7 @@ import React from 'react';
 
 const GlobalContext = React.createContext(null);
 
-function GlobalProvider({children}) {
+function GlobalProvider(props) {
 
   const baseValue = (process.env.NODE_ENV == 'development' ? 'http://localhost:8000' : 'https://website-factory.herokuapp.com/' );
 
@@ -19,7 +19,7 @@ function GlobalProvider({children}) {
 
   return (
     <GlobalContext.Provider value={store}>
-      { children }
+      { props.children }
     </GlobalContext.Provider>
   );
 }

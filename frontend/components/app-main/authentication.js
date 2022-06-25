@@ -2,6 +2,32 @@
 AUTHENTICATION
 **************************************************************************************************/
 
+import React from 'react';
+import axios from 'axios';
+
+
+
+const BASE_URL = (process.env.NODE_ENV == 'development' ? 'http://localhost:8000' : 'https://website-factory.herokuapp.com');
+
+
+const registerConfig = {
+    method: 'POST',
+    url: `${BASE_URL}/auth/register`,
+    headers: {'Content-Type': 'application/json'},
+    //data: JSON.stringify(credentials),
+}
+
+async function loginUser(credentials) {
+    return axios({
+        method: 'POST',
+        url: `${BASE_URL}/auth/obtain`,
+        headers: {'Content-Type': 'application/json'},
+        data: JSON.stringify(credentials),
+    }).then(success => success.data )
+}
+
+
+export { registerConfig, loginUser }
 
 
 

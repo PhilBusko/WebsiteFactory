@@ -67,7 +67,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = 'app_proj.static'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'website-factory.herokuapp.com']
-CORS_ORIGIN_WHITELIST = ('http://localhost:3000', 'https://websitefactory.vercel.app')
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000', 'https://websitefactory.vercel.app']
 
 
 # DATABASE
@@ -95,6 +95,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=30),
 }
 
 

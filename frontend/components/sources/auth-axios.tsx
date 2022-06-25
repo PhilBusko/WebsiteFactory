@@ -36,8 +36,6 @@ export const http = new HttpSetup();
 
 axios 0.21.4
 
-how to handle login with simplejwt
-
 page layout has interval to check for auth expiration
 
 
