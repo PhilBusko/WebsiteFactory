@@ -4,13 +4,13 @@ APP-MAIN ROUTES
 //import * as PR from 'PagesIndex' //'../page-routes/_index.js'
 import BaseAxios from '../page-routes/base-axios'
 import BaseWebsocket from '../page-routes/base-websocket'
-import Admin from '../page-routes/admin'
+import AuthDev from '../page-routes/auth-dev'
 
 export const RoutesConfig = [
     {
         'title': 'Default',
         'path': '',
-        'element': <Admin />, 
+        'element': <AuthDev />, 
         'order': 0,
     },    
     {
@@ -26,9 +26,9 @@ export const RoutesConfig = [
         'order': 2,
     },
     {
-        'title': 'Admin',
-        'path': '/admin/',
-        'element': <Admin />, 
+        'title': 'Auth Dev',
+        'path': '/auth-dev/',
+        'element': <AuthDev />, 
         'order': 3,
     },
 ];

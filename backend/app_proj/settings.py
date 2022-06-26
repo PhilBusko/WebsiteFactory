@@ -99,8 +99,10 @@ REST_FRAMEWORK = {
 
 from datetime import timedelta
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=10),
-    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=6),
+    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=12),
+    'ALGORITHM': 'HS512',
+    'SIGNING_KEY': SECRET_KEY,
 }
 
 

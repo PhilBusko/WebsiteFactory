@@ -1,7 +1,7 @@
 /**************************************************************************************************
 DESKTOP NAVIGATION
 **************************************************************************************************/
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import { ButtonBase } from '@mui/material';
 import { List, ListItem, Typography } from '@mui/material';
@@ -10,6 +10,7 @@ import { Box } from '@mui/material';
 import { ArrowBack, ArrowForward } from '@mui/icons-material'; 
 import Image from 'mui-image';
 import { RoutesConfig } from '../app-main/routes.js'
+import { GlobalContext } from '../app-main/global-store'
 import './styles.scss'
 
 const drawerWidth = 200;
@@ -58,7 +59,7 @@ function DesktopNav(props) {
     
     const [drawerOpen, setOpen] = useState(true);
     const toggleNav = () => {
-      setOpen(!drawerOpen);
+        setOpen(!drawerOpen);
     };
 
     const NavDrawer = styled(Drawer)(({ theme }) => ({
@@ -69,14 +70,22 @@ function DesktopNav(props) {
     }));
     
     const routesLs = RoutesConfig.filter(route => route.order > 0);
+    const { userStore } = useContext(GlobalContext);
 
     return (<>
         <NavDrawer open={drawerOpen} 
             variant='persistent' anchor='left' >
+
+            <ListItem sx={{ borderBottom: '1px solid white'}}>
+                <Typography sx={{ color: 'white' }}>
+                    { userStore[0] || 'Guest User' }
+                </Typography>
+            </ListItem>
+
             <NavList name='menu-top'>
                 {   routesLs.map( (route, key) => (
                     <NavItem key={key} button component={Link} href={route.path}>
-                        <Typography>
+                        <Typography sx={{ width: '100%', textAlign: 'right' }}>
                             {route.title}
                         </Typography>
                     </NavItem>

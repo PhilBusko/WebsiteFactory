@@ -1,28 +1,55 @@
 /**************************************************************************************************
 GLOBAL STORE
 **************************************************************************************************/
-import React from 'react';
+import { useState, useEffect, createContext } from 'react';
 
-const GlobalContext = React.createContext(null);
+import * as TK from '../app-main/token-storage'
+import AxiosConfig from '../app-main/axios-config'
+
+
+const GlobalContext = createContext(null);
 
 function GlobalProvider(props) {
 
-  const baseValue = (process.env.NODE_ENV == 'development' ? 'http://localhost:8000' : 'https://website-factory.herokuapp.com/' );
+    const [user, setUser] = useState(null);
+    const store = {
+        userStore: [user, setUser],
+    }
 
-  const [token, setToken] = React.useState(null);
-  const [baseUrl, setBaseUrl] = React.useState(baseValue);
+    useEffect(() => {
 
-  const store = {
-    tokenStore: [token, setToken],
-    baseUrlStore: [baseUrl, setBaseUrl],
-  }
+        // log in the user if a refresh token is found 
 
-  return (
-    <GlobalContext.Provider value={store}>
-      { props.children }
-    </GlobalContext.Provider>
-  );
+        const refreshToken = TK.retrieveRefreshToken();
+        if (refreshToken) {
+            AxiosConfig({
+                method: 'POST',
+                url: '/auth/refresh',
+                data: { 'refresh': refreshToken },
+            }).then(responseData => {
+                TK.storeAccessToken(responseData.access);
+
+                AxiosConfig({
+                    method: 'POST',
+                    url: '/auth/user',
+                    data: responseData,
+                }).then(responseData2 => {
+                    setUser(responseData2);
+                }).catch(errorLs => {
+                    console.log(errorLs);
+                });
+
+            }).catch(errorLs => {
+                console.log(errorLs)
+            });
+        }
+    }, [])
+
+    return (
+        <GlobalContext.Provider value={store}>
+            { props.children }
+        </GlobalContext.Provider>
+    );
 }
 
 export { GlobalContext, GlobalProvider }
-

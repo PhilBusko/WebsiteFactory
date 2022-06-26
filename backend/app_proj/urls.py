@@ -15,11 +15,14 @@ axios_url = [
 ]
 
 token_auth = [
-    re_path(r'^obtain',    JWT.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    re_path(r'^refresh',   JWT.TokenRefreshView.as_view(), name='token_refresh'),
+
+    re_path(r'^obtain',    JWT.TokenObtainPairView.as_view()),
+    re_path(r'^refresh',   JWT.TokenRefreshView.as_view()),
+
+    re_path(r'^user',    MV.UserObtain ),
+
 
     #re_path(r'^register/', RegisterApi.as_view()),
-
 ]
 
 urlpatterns = [
@@ -27,6 +30,6 @@ urlpatterns = [
     re_path(r'^auth/', include((token_auth, 'token_auth'))),
 
     #re_path(r'^api/auth-request', UserAPIView.as_view(), name='user'),
-    re_path(r'^api/auth-request', MV.LoginDate, name='user'),
+    re_path(r'^auth-dev/permission-required', MV.LoginDate),
 ]
 
