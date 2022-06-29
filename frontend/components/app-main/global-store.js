@@ -15,7 +15,7 @@ function GlobalProvider(props) {
     const store = {
         userStore: [user, setUser],
     }
-
+ 
     useEffect(() => {
 
         // log in the user if a refresh token is found 

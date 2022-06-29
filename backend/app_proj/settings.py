@@ -62,12 +62,12 @@ TEMPLATES = [
 
 # SERVER
 
-DEBUG = False if DEPLOYMENT_ENV == 'dev' else True
-STATIC_URL = 'static/'
-STATIC_ROOT = 'app_proj.static'
-
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'website-factory.herokuapp.com']
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000', 'https://websitefactory.vercel.app']
+DEBUG = False if DEPLOYMENT_ENV == 'dev' else True
+
+STATIC_URL = 'static/'
+STATIC_ROOT = 'app_proj.static'
 
 
 # DATABASE
@@ -82,9 +82,15 @@ DATABASES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# REST API
+# REST AUTH API
 
-SECRET_KEY = '2q1c&a%6nrvl&6g=awbg2$qlho#v!ji98'
+from datetime import timedelta
+SECRET_KEY = '2q1c&ABCDa%6nrvl&6g=awbWXYZg2$qlho#JKLv!ji98'
+ACCESS_TOKEN_LIFETIME = timedelta(minutes=60)
+REFRESH_TOKEN_LIFETIME = timedelta(days=1)
+ALGORITHM = 'HS512'
+
+AUTH_USER_MODEL = 'members.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -93,25 +99,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
-}
 
-from datetime import timedelta
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ALGORITHM': 'HS512',
-    'SIGNING_KEY': SECRET_KEY,
-}
-
-
-# SEND EMAILS
+# EMAIL
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER='zetaszaur@gmail.com'
-EMAIL_HOST_PASSWORD='jnvrrykxnlnrmpmp'      # google's app password
+EMAIL_HOST_PASSWORD='jnvrrykxnlnrmpmp' 
 EMAIL_PORT = 587
 PASSWORD_RESET_TIMEOUT_DAYS = 2
 

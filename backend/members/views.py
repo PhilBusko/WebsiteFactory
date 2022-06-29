@@ -28,7 +28,41 @@ def LoginDate(request):
 
 
 
-# CUSTOMIZE JWT VIEWS
+@api_view(['POST'])
+def ClickLogin(request):
+
+    # get user from request
+    # login to db
+    # make tokens
+    # return tokens and user data
+
+
+    
+
+    import jwt
+    from app_proj.settings import SIMPLE_JWT
+    tokenDx = request.data
+    accessToken = tokenDx['access']
+    accessDx = jwt.decode(accessToken, SIMPLE_JWT['SIGNING_KEY'], algorithms=[SIMPLE_JWT['ALGORITHM']])
+
+    try:
+        userMd = get_user_model().objects.filter(id=accessDx['user_id']).values()
+        userDx = list(userMd)[0]
+    except Exception as ex:
+        print(ex)
+
+    return Response(userDx['username'])
+
+
+
+
+@api_view(['POST'])
+def TokenRefresh(request):
+
+    return Response({})
+
+
+
 
 @api_view(['POST'])
 def UserObtain(request):
