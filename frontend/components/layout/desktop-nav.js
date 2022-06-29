@@ -56,7 +56,7 @@ const MenuOpenButton = styled(ButtonBase)(({ theme }) => ({
 }));
 
 function DesktopNav(props) {
-    
+
     const [drawerOpen, setOpen] = useState(true);
     const toggleNav = () => {
         setOpen(!drawerOpen);
@@ -68,7 +68,7 @@ function DesktopNav(props) {
             'width': drawerWidth, 
             'background': navBkgd },
     }));
-    
+
     const routesLs = RoutesConfig.filter(route => route.order > 0);
     const { userStore } = useContext(GlobalContext);
 

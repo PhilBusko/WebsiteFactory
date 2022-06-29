@@ -3,12 +3,11 @@ AUTH DEV
 **************************************************************************************************/
 import { useState, useEffect, useContext } from 'react';
 import { styled } from '@mui/material/styles';
-
 import { Button } from '@mui/material';
 import { Grid } from '@mui/material';
 
-import * as TK from '../app-main/token-storage'
 import AxiosConfig from '../app-main/axios-config'
+import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../layout/styled-elements'
@@ -158,8 +157,6 @@ function AuthDev(props) {
                 <ST.GridPanel item xs={8} lg={4} 
                     sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
                     
-                    <SpacedButton onClick={handleLogIn} variant='contained'>Register</SpacedButton>
-
                     <SpacedButton onClick={handleLogIn} variant='contained'>Log In</SpacedButton>
 
                     <SpacedButton onClick={handleRefresh} variant='contained'>Refresh</SpacedButton>
@@ -197,6 +194,13 @@ function AuthDev(props) {
                             <div key={idx}>{err}</div>
                         )}
                     </SpacedLabel>
+
+                </ST.GridPanel>
+
+                <ST.GridPanel item xs={8} lg={4} 
+                    sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
+                    
+                    <SpacedButton onClick={handleLogIn} variant='contained'>Register</SpacedButton>
 
                 </ST.GridPanel>
 

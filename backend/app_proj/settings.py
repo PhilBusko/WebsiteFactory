@@ -46,7 +46,7 @@ ROOT_URLCONF = 'app_proj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BACKEND_PATH, 'members', 'data')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,11 +99,21 @@ REST_FRAMEWORK = {
 
 from datetime import timedelta
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=6),
-    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=12),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ALGORITHM': 'HS512',
     'SIGNING_KEY': SECRET_KEY,
 }
+
+
+# SEND EMAILS
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER='zetaszaur@gmail.com'
+EMAIL_HOST_PASSWORD='jnvrrykxnlnrmpmp'      # google's app password
+EMAIL_PORT = 587
+PASSWORD_RESET_TIMEOUT_DAYS = 2
 
 
 # Internationalization
