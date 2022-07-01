@@ -1,14 +1,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 DATABASE UTILITIES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-import django.db as DB
+import django.db.models as MD
 
 
-class BaseManager(DB.models.Manager):
+class BaseManager(MD.Manager):
     def getOrNone(self, **kwargs):
         try:
             return self.get(**kwargs)
-        except DB.models.ObjectDoesNotExist:
+        except MD.ObjectDoesNotExist:
             return None
 
 def GetTableCounts():

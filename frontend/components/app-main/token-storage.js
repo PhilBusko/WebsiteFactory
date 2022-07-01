@@ -14,16 +14,16 @@ function decryptToken(token) {
 
 function storeAccessToken(token) {
     const newToken = encryptToken(token);
-    localStorage.setItem('accessToken', newToken);
+    localStorage.setItem('factoryAccess', newToken);
 }
 
 function storeRefreshToken(token) {
     const newToken = encryptToken(token);
-    localStorage.setItem('refreshToken', newToken);
+    localStorage.setItem('factoryRefresh', newToken);
 }
 
 function retrieveAccessToken() {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('factoryAccess');
     if (token)
         return decryptToken(token);
     else
@@ -31,17 +31,21 @@ function retrieveAccessToken() {
 }
 
 function retrieveRefreshToken() {
-    const token = localStorage.getItem('refreshToken');
+    const token = localStorage.getItem('factoryRefresh');
     if (token)
         return decryptToken(token);
     else
         return null;
 }
 
-function wipeTokens() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+function wipeAccessToken() {
+    localStorage.removeItem('factoryAccess');
 }
 
+function wipeTokens() {
+    localStorage.removeItem('factoryAccess');
+    localStorage.removeItem('factoryRefresh');
+}
 
-export { storeAccessToken, storeRefreshToken, retrieveAccessToken, retrieveRefreshToken, wipeTokens }
+export { storeAccessToken, storeRefreshToken, retrieveAccessToken, retrieveRefreshToken, wipeAccessToken, wipeTokens }
+

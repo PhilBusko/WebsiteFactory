@@ -15,6 +15,8 @@ class UserManager(BaseUserManager):
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
         newUser = self.model(email=email, **extra_fields)
+        newUser.user_name = UserManager.beautifyName(email)
+        newUser.unique_id = UserManager.getUniqueId(email)
         newUser.set_password(password)
         newUser.save(using=self._db)
         return newUser
@@ -34,8 +36,25 @@ class UserManager(BaseUserManager):
     def getUser(self, **kwargs):
         try:
             return self.get(**kwargs)
-        except DB.models.ObjectDoesNotExist:
+        except MD.ObjectDoesNotExist:
             return None
+
+    def getUniqueId(baseTx):
+        import hashlib
+        baseEnc = baseTx.encode('utf-8')
+        hashRaw = hashlib.md5(baseEnc).hexdigest()     # 32 digits
+        hashID = ''
+        for h in range(0, 9, 1):
+            hashID += hashRaw[h].capitalize()
+            if h in (2, 5): hashID += '-'
+        return hashID
+
+    def beautifyName(email):
+        import re 
+        local = email.split('@')[0]
+        nameLs = re.split("[#!%$‘&+*–\-/=?^_`.{|}~]+", local)
+        pretty = ''.join([n.capitalize() for n in nameLs if n])
+        return pretty
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -43,8 +62,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     # AbstractBaseUser
     # password = models.CharField(_('password'), max_length=128)
     # last_login = models.DateTimeField(_('last login'), blank=True, null=True)
-    # is_active = True
+    # is_superuser = MD.BooleanField(default=False)
 
+    unique_id = MD.CharField(unique=True, max_length=11) 
     email = MD.EmailField(unique=True)
     user_name = MD.CharField(max_length=30)
 
@@ -55,5 +75,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name', 'password']
+    REQUIRED_FIELDS = ['unique_id', 'user_name', 'password']
 

@@ -13,7 +13,7 @@ const onRequest = (config) => {
 };
 
 const onRequestError = (error) => {
-    //console.log('onRequestError', error)
+    console.log('onRequestError', error)
     return Promise.reject(error);
 };
 
@@ -23,39 +23,37 @@ const onResponse = (response) => {
 };
 
 const onResponseError = async (error) => {
-
     //console.log('onResponseError', error)
 
     // handle expired access token
 
     if (error.response.status === 401) {
+        //console.log('refresh trial');
 
-        console.log('refresh trial');
+        // remove expired access token, needed for custom refresh call
+        TK.wipeAccessToken();        
 
         const refreshToken = TK.retrieveRefreshToken();
-        const originalConfig = error.config;
+        // const originalConfig = error.config;
+        // console.log(originalConfig);
 
-        if (refreshToken && !originalConfig._retry) {
-
-            originalConfig._retry = true;
-            //console.log('refresh token found');
-            //console.log(originalConfig);
-
+        if (refreshToken ) { //&& !originalConfig._retry) {
             AxiosConfig({
                 method: 'POST',
-                url: '/auth/refresh',
+                url: '/auth/token-refresh',
                 data: { 'refresh': refreshToken },
+                //_retry: true,
             }).then(responseData => {
                 //console.log('trial responseData', responseData);
                 TK.storeAccessToken(responseData.access);
-                // have to make original call ?
-            }).catch(errorLs => {
-                console.log(errorLs);
-                TK.wipeTokens();
-            });
 
-            // not able to hook up the original call
-            return
+                // not able to hook up original call
+                //AxiosConfig(originalConfig);
+            }).catch(errorLs => {
+                //console.log(errorLs);
+                TK.wipeTokens();
+                return errorLs;
+            });
         }
     }
 
@@ -69,7 +67,6 @@ const onResponseError = async (error) => {
 
     return Promise.reject(errorLs);
 };
-
 
 
 const AxiosConfig = axios.create({

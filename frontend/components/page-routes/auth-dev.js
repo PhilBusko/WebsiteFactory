@@ -24,17 +24,96 @@ const SpacedLabel = styled('div')(({ theme }) => ({
 
 function AuthDev(props) {
 
-    const { userStore } = useContext(GlobalContext);
-
-    const [tokenError, setTokenError] = useState([]);
-    const [requestMessage, setRequestMessage] = useState('');
-    const [requestError, setRequestError] = useState([]);
-    
-
     useEffect(() => {
         //console.log(tokenStore[0]);
     }, [])
 
+    const { userStore } = useContext(GlobalContext);
+    const [tokenError, setTokenError] = useState([]);    
+
+    const handleLogIn = async (event) => {
+
+        const credentials = {'email': 'user.beta@website-factory.org', 'password': 'WF91cvbn'};
+        console.log(credentials);
+        TK.wipeTokens();
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/click-login',
+            //url: '/auth/obtain',
+            data: credentials,
+        }).then(responseData => {
+            userStore[1](responseData.user || 'user not set')
+            TK.storeAccessToken(responseData.access);
+            TK.storeRefreshToken(responseData.refresh);
+            setTokenError([]);
+        }).catch(errorLs => {
+            TK.wipeTokens();
+            setTokenError(errorLs);
+        });
+    }
+
+    const handleRefresh = (event) => {
+        const refreshToken = TK.retrieveRefreshToken();
+
+        if (!refreshToken) {
+            setTokenError(['no refresh token']);
+            return;
+        }
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/token-refresh',
+            data: { 'refresh': refreshToken },
+        }).then(responseData => {
+            userStore[1](responseData.user);
+            TK.storeAccessToken(responseData.access);
+            setTokenError([]);
+        }).catch(errorLs => {
+            TK.wipeTokens();
+            userStore[1](null);
+            setTokenError(errorLs);
+        });
+    }
+
+    const handleLogOut = (event) => {
+        userStore[1](null);
+        TK.wipeTokens();
+        setTokenError([]);
+    }
+
+
+    const [requestMessage, setRequestMessage] = useState('');
+    const [requestError, setRequestError] = useState([]);
+
+    const handleNonAuth = (event) => {
+        AxiosConfig({
+            url: '/base-axios/theme-groups',
+        }).then(responseData => {
+            setRequestMessage(responseData);
+            setRequestError([]);
+        }).catch(errorLs => {
+            setRequestMessage(null);
+            setRequestError(errorLs);
+       });
+    }
+
+    const handleAuthReq = (event) => {
+        AxiosConfig({
+            url: '/auth-dev/permission-required',
+        }).then(responseData => {
+            setRequestMessage(JSON.stringify(responseData));
+            setRequestError([]);
+        }).catch(errorLs => {
+            userStore[1](null);
+            setRequestMessage('');
+            setRequestError(errorLs);
+       });
+    }
+
+
+
+    
 
 
     const handleRegister = (event) => {
@@ -60,87 +139,6 @@ function AuthDev(props) {
         })
     }
 
-
-
-
-    const handleLogIn = async (event) => {
-
-        const credentials = {'username': 'frontend', 'password': 'WF91cvbn'};
-        console.log(credentials);
-
-        AxiosConfig({
-            method: 'POST',
-            url: '/auth/obtain',
-            data: credentials,
-        }).then(responseData => {
-            //userStore[1](success.data.access)
-            TK.storeAccessToken(responseData.access);
-            TK.storeRefreshToken(responseData.refresh);
-            setTokenError([]);
-
-            AxiosConfig({
-                method: 'POST',
-                url: '/auth/user',
-                data: responseData,
-            }).then(responseData2 => {
-                userStore[1](responseData2);
-            }).catch(errorLs => {
-                setTokenError(errorLs);
-            });
-
-        }).catch(errorLs => {
-            TK.wipeTokens();
-            setTokenError(errorLs);
-        });
-    }
-
-    const handleRefresh = (event) => {
-        const refreshToken = TK.retrieveRefreshToken();
-
-        AxiosConfig({
-            method: 'POST',
-            url: '/auth/refresh',
-            data: { 'refresh': refreshToken },
-        }).then(responseData => {
-            TK.storeAccessToken(responseData.access);
-            setTokenError([]);
-        }).catch(errorLs => {
-            TK.wipeTokens();
-            userStore[1](null);
-            setTokenError(errorLs);
-        });
-    }
-
-    const handleLogOut = (event) => {
-        userStore[1](null);
-        TK.wipeTokens();
-    }
-
-    const handleNonAuth = (event) => {
-        AxiosConfig({
-            url: '/base-axios/theme-groups',
-        }).then(responseData => {
-            setRequestMessage(responseData);
-            setRequestError([]);
-        }).catch(errorLs => {
-            setRequestMessage(null);
-            setRequestError(errorLs);
-       });
-    }
-
-    const handleAuthReq = (event) => {
-        AxiosConfig({
-            url: '/auth-dev/permission-required',
-        }).then(responseData => {
-            setRequestMessage(JSON.stringify(responseData));
-            setRequestError([]);
-        }).catch(errorLs => {
-            setRequestMessage('');
-            setRequestError(errorLs);
-       });
-    }
-
-    
 
 
 

@@ -15,34 +15,31 @@ function GlobalProvider(props) {
     const store = {
         userStore: [user, setUser],
     }
- 
+
     useEffect(() => {
 
         // log in the user if a refresh token is found 
 
         const refreshToken = TK.retrieveRefreshToken();
-        if (refreshToken) {
-            AxiosConfig({
-                method: 'POST',
-                url: '/auth/refresh',
-                data: { 'refresh': refreshToken },
-            }).then(responseData => {
-                TK.storeAccessToken(responseData.access);
 
-                AxiosConfig({
-                    method: 'POST',
-                    url: '/auth/user',
-                    data: responseData,
-                }).then(responseData2 => {
-                    setUser(responseData2);
-                }).catch(errorLs => {
-                    console.log(errorLs);
-                });
-
-            }).catch(errorLs => {
-                console.log(errorLs)
-            });
+        if (!refreshToken) {
+            console.log('onload: no refresh token');
+            return;
         }
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/token-refresh',
+            data: { 'refresh': refreshToken },
+        }).then(responseData => {
+            setUser(responseData.user);
+            TK.storeAccessToken(responseData.access);
+        }).catch(errorLs => {
+            TK.wipeTokens();
+            setUser(null);
+            console.log(errorLs);
+        });
+
     }, [])
 
     return (

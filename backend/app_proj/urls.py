@@ -2,7 +2,7 @@
 URL ROUTING
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 from django.urls import include, re_path
-#import rest_framework_simplejwt.views as JWT 
+import rest_framework_simplejwt.views as JWT 
 
 import business_module.views as BV
 import members.views as MV
@@ -16,11 +16,10 @@ axios_url = [
 
 token_auth = [
     re_path(r'^click-login',    MV.ClickLogin ),
-    re_path(r'^token-refresh',    MV.TokenRefresh ),
+    re_path(r'^token-refresh',  MV.TokenRefresh ),
 
     # re_path(r'^obtain',    JWT.TokenObtainPairView.as_view()),
     # re_path(r'^refresh',   JWT.TokenRefreshView.as_view()),
-
 ]
 
 urlpatterns = [
