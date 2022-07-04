@@ -2,9 +2,8 @@
 MEMBERS MODELS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 import django.db.models as MD
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from django.contrib.auth.base_user import BaseUserManager
 
 
 class UserManager(BaseUserManager):
@@ -76,4 +75,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['unique_id', 'user_name', 'password']
+
+
 

@@ -16,15 +16,16 @@ def SetNames(request):
     setLs = CT.GetSetNames()
     return Response(setLs)
 
-# put request to send data from client
-@api_view(['PUT'])
+# post request to send data from client
+@api_view(['POST'])
 def ProcessForm(request):
     print('ProcessForm', request.user, request.data)
     resultsDx = { 'message': 'Form accepted by server' }
     return Response(resultsDx)
 
-@api_view(['POST'])
-def DummyLogin(request):
-    print('DummyLogin', request.user, request.body)
-    resultsDx = { 'message': 'DummyLogin' }
+@api_view(['GET'])
+def LegoParams(request, theme):
+    print(theme)
+    resultsDx = { 'theme': theme }
     return Response(resultsDx)
+

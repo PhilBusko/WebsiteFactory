@@ -1,28 +1,28 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 LEGO MODELS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-import django.db as DB
-import app_proj.database as DH
+import django.db.models as MD
+import app_proj.database as DB
 
 
-class LegoSet(DB.models.Model):
-    SetNo = DB.models.TextField(unique=True)
-    Name = DB.models.TextField()
-    Year = DB.models.IntegerField()
+class LegoSet(MD.Model):
+    SetNo = MD.TextField(unique=True)
+    Name = MD.TextField()
+    Year = MD.IntegerField()
 
-    ThemeGroup = DB.models.TextField(null=True)
-    Theme = DB.models.TextField(null=True)
-    Subtheme = DB.models.TextField(null=True)
-    PriceStore = DB.models.FloatField(null=True)
-    PriceNew = DB.models.FloatField(null=True)
-    PriceUsed = DB.models.FloatField(null=True)
-    PieceCount = DB.models.IntegerField(null=True)
-    MinifigCount = DB.models.IntegerField(null=True)
+    ThemeGroup = MD.TextField(null=True)
+    Theme = MD.TextField(null=True)
+    Subtheme = MD.TextField(null=True)
+    PriceStore = MD.FloatField(null=True)
+    PriceNew = MD.FloatField(null=True)
+    PriceUsed = MD.FloatField(null=True)
+    PieceCount = MD.IntegerField(null=True)
+    MinifigCount = MD.IntegerField(null=True)
 
-    objects = DH.BaseManager()
+    objects = DB.BaseManager()
 
     """
-    FieldFK = DB.models.ForeignKey(LegoSet, on_delete=DB.models.CASCADE) 
+    FieldFK = MD.ForeignKey(LegoSet, on_delete=MD.CASCADE) 
     class Meta:
         unique_together = ('ColumnOne', 'ColumnTwo')
     """

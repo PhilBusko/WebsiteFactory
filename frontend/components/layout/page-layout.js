@@ -1,7 +1,9 @@
 /**************************************************************************************************
 PAGE LAYOUT
 **************************************************************************************************/
-import { Box } from '@mui/material';
+import { Button } from '@mui/material';
+import { Box, Grid } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import MobileNav from './mobile-nav.js';
 import DesktopNav from './desktop-nav.js';
 
@@ -22,4 +24,38 @@ function PageLayout(props) {
     );
 }
 
-export default PageLayout;
+const GridPanel = styled(Grid)(({ theme }) => ({
+    'display': 'flex',
+    'justifyContent': 'center',
+    'alignItems': 'center',
+}));
+
+const PageTitle = styled('h1')(({ theme }) => ({
+    'margin': '10px 0px',
+    'borderBottom': '2px solid grey',
+    'color': 'black', //theme.palette.primary.main,
+    //'textAlign': 'center',
+}));
+
+const SpacedLabel = styled('div')(({ theme }) => ({
+    'margin': '10px 0px',
+}));
+
+const SpacedButton = styled(Button)(({ theme }) => ({
+    'margin': '10px 0px',
+}));
+
+const HighlightedLabel = styled('div')(({ theme }) => ({
+    'margin': '10px 0px',
+    'font-size': '120%',
+    'color': 'DarkSlateBlue',
+}));
+
+export {
+    PageLayout, 
+    GridPanel, 
+    PageTitle, 
+    SpacedLabel, 
+    SpacedButton,
+    HighlightedLabel,
+}

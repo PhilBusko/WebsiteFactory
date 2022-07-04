@@ -9,17 +9,7 @@ import { Grid } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
 import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
-import PageLayout from '../layout/page-layout'
-import * as ST from '../layout/styled-elements'
-
-
-const SpacedButton = styled(Button)(({ theme }) => ({
-    'margin': '10px 0px',
-}));
-
-const SpacedLabel = styled('div')(({ theme }) => ({
-    'margin': '10px 0px',
-}));
+import * as LY from '../layout/page-layout'
 
 
 function AuthDev(props) {
@@ -28,12 +18,14 @@ function AuthDev(props) {
         //console.log(tokenStore[0]);
     }, [])
 
+
     const { userStore } = useContext(GlobalContext);
     const [tokenError, setTokenError] = useState([]);    
 
     const handleLogIn = async (event) => {
 
-        const credentials = {'email': 'user.beta@website-factory.org', 'password': 'WF91cvbn'};
+        //const credentials = {'email': 'user.beta@website-factory.org', 'password': 'WF91cvbn'};
+        const credentials = {'email': 'zetaszaur@gmail.com', 'password': 'GHIJ654'};
         console.log(credentials);
         TK.wipeTokens();
 
@@ -113,97 +105,117 @@ function AuthDev(props) {
 
 
 
-    
 
+    const [featuresMessage, setFeaturesMessage] = useState('');
+    const [featuresError, setFeaturesError] = useState([]);
 
     const handleRegister = (event) => {
 
-        const credentials = {};
-        
+        //const credentials = {'email': 'user.beta@website-factory.org', 'password': 'WF91cvbn'};
+        const credentials = {'email': 'zetaszaur@gmail.com', 'password': 'GHIJ654'};
+        //const credentials = {'email': 'phil.busko@gmail.com', 'password': 'GHIJ654'};
+
         AxiosConfig({
             method: 'POST',
             url: '/auth/register',
-            //data: JSON.stringify(credentials),
-        }).then(success => {
-            console.log(success);
+            data: credentials,
+        }).then(responseData => {
+            setFeaturesMessage(responseData);
+            setFeaturesError([]);
+        }).catch(errorLs => {
+            setFeaturesMessage(null);
+            setFeaturesError(errorLs);
+        });
+    }
 
-        }).catch( error => {
 
-            if (!!error.response.data) {
-                setTokenError(error.response.data.detail);
-            }
-            else if (!!error.message) {
-                setTokenError(error.message);
-            }
+    const handleForgotPass = (event) => {
 
-        })
+        //const credentials = {'email': 'user.beta@website-factory.org', 'password': 'WF91cvbn'};
+        const credentials = {'email': 'zetaszaur@gmail.com'};
+        //const credentials = {'email': 'phil.busko@gmail.com', 'password': 'GHIJ654'};
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/forgot-password',
+            data: credentials,
+        }).then(responseData => {
+            setFeaturesMessage(responseData);
+            setFeaturesError([]);
+        }).catch(errorLs => {
+            setFeaturesMessage(null);
+            setFeaturesError(errorLs);
+        });
     }
 
 
 
-
-
     return (
-        <PageLayout>
+        <LY.PageLayout>
             <Grid container spacing={2} 
                 sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
 
                 <Grid item xs={12}>
-                    <ST.PageTitle>Auth Dev</ST.PageTitle>
+                    <LY.PageTitle>Auth Dev</LY.PageTitle>
                 </Grid>
 
-                <ST.GridPanel item xs={8} lg={4} 
+                <LY.GridPanel item xs={8} lg={4} 
                     sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
                     
-                    <SpacedButton onClick={handleLogIn} variant='contained'>Log In</SpacedButton>
+                    <LY.SpacedButton onClick={handleLogIn} variant='contained'>Log In</LY.SpacedButton>
 
-                    <SpacedButton onClick={handleRefresh} variant='contained'>Refresh</SpacedButton>
+                    <LY.SpacedButton onClick={handleRefresh} variant='contained'>Refresh</LY.SpacedButton>
 
-                    <SpacedButton onClick={handleLogOut} variant='contained'>Log Out</SpacedButton>
+                    <LY.SpacedButton onClick={handleLogOut} variant='contained'>Log Out</LY.SpacedButton>
 
-                    <SpacedLabel sx={{ 'width': '300px', 'overflowWrap': 'break-word' }}>
-                        { 'token' }
-                    </SpacedLabel>
-                    <SpacedLabel sx={{ 'width': '300px', 'overflowWrap': 'break-word' }}>
-                        { 'token' }
-                    </SpacedLabel>
-
-                    <SpacedLabel sx={{ 'color': 'crimson' }}>
+                    <LY.SpacedLabel sx={{ 'color': 'crimson' }}>
                         { tokenError.map( (err, idx) => 
                             <div key={idx}>{err}</div>
                         )}
-                    </SpacedLabel>
+                    </LY.SpacedLabel>
 
-                </ST.GridPanel>
+                </LY.GridPanel>
 
-                <ST.GridPanel item xs={8} lg={4} 
+                <LY.GridPanel item xs={8} lg={4} 
                     sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column', 'height': '200px' }}>
                     
-                    <SpacedButton onClick={handleNonAuth} variant='contained'>Non Auth Request</SpacedButton>
+                    <LY.SpacedButton onClick={handleNonAuth} variant='contained'>Non Auth Request</LY.SpacedButton>
 
-                    <SpacedButton onClick={handleAuthReq} variant='contained'>Auth Request</SpacedButton>
+                    <LY.SpacedButton onClick={handleAuthReq} variant='contained'>Auth Request</LY.SpacedButton>
 
-                    <SpacedLabel >
+                    <LY.SpacedLabel >
                         { requestMessage }
-                    </SpacedLabel>
+                    </LY.SpacedLabel>
 
-                    <SpacedLabel sx={{ 'color': 'crimson' }}>
+                    <LY.SpacedLabel sx={{ 'color': 'crimson' }}>
                         { requestError.map( (err, idx) => 
                             <div key={idx}>{err}</div>
                         )}
-                    </SpacedLabel>
+                    </LY.SpacedLabel>
 
-                </ST.GridPanel>
+                </LY.GridPanel>
 
-                <ST.GridPanel item xs={8} lg={4} 
+                <LY.GridPanel item xs={8} lg={4} 
                     sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
                     
-                    <SpacedButton onClick={handleLogIn} variant='contained'>Register</SpacedButton>
+                    <LY.SpacedButton onClick={handleRegister} variant='contained'>Register</LY.SpacedButton>
 
-                </ST.GridPanel>
+                    <LY.SpacedButton onClick={handleForgotPass} variant='contained'>Forgot Password</LY.SpacedButton>
+
+                    <LY.SpacedLabel >
+                        { featuresMessage }
+                    </LY.SpacedLabel>
+
+                    <LY.SpacedLabel sx={{ 'color': 'crimson' }}>
+                        { featuresError.map( (err, idx) => 
+                            <div key={idx}>{err}</div>
+                        )}
+                    </LY.SpacedLabel>
+
+                </LY.GridPanel>
 
             </Grid>
-        </PageLayout>
+        </LY.PageLayout>
     );
 }
 

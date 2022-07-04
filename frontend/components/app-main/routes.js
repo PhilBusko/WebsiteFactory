@@ -1,16 +1,17 @@
 /**************************************************************************************************
 APP-MAIN ROUTES
 **************************************************************************************************/
-//import * as PR from 'PagesIndex' //'../page-routes/_index.js'
 import BaseAxios from '../page-routes/base-axios'
 import BaseWebsocket from '../page-routes/base-websocket'
 import AuthDev from '../page-routes/auth-dev'
+import ConfirmEmail from '../page-routes/confirm-email'
+import NewPassword from '../page-routes/new-password'
 
 export const RoutesConfig = [
     {
         'title': 'Default',
         'path': '',
-        'element': <AuthDev />, 
+        'element': <BaseAxios />, 
         'order': 0,
     },    
     {
@@ -29,7 +30,20 @@ export const RoutesConfig = [
         'title': 'Auth Dev',
         'path': '/auth-dev/',
         'element': <AuthDev />, 
-        'order': 3,
+        'order': 0,
     },
+
+    {
+        'title': 'Confirm Email',
+        'path': '/confirm-email/:userId/:token/',
+        'element': <ConfirmEmail />, 
+        'order': 0,
+    },    
+    {
+        'title': 'Reset Password',
+        'path': '/new-password/:userId/:token/',
+        'element': <NewPassword />, 
+        'order': 0,
+    },    
 ];
 

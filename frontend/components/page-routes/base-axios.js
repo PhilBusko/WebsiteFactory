@@ -2,7 +2,6 @@
 BASE AXIOS PAGE
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Button, TextField, Autocomplete, FormHelperText } from '@mui/material';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { FormControlLabel, Checkbox } from '@mui/material';
@@ -10,8 +9,8 @@ import { Card } from '@mui/material';
 import { Grid } from '@mui/material';
 import Image from 'mui-image';
 
-import PageLayout from '../layout/page-layout.js'
-import * as ST from '../layout/styled-elements.js'
+import AxiosConfig from '../app-main/axios-config'
+import * as LY from  '../layout/page-layout.js'
 import { StackForm, FormItem } from '../elements/stack-form.js'
 
 
@@ -31,18 +30,28 @@ function BaseAxios(props) {
     const [themeOptions, setThemeOptions] = useState([]);
 
     useEffect(() => {
-        axios({
+        AxiosConfig({
             url: 'base-axios/theme-groups',
-        }).then( success => {
-            //console.log('received: ', success.data);
-            setThemeOptions(success.data);
-        }).catch( error => {
-            console.log(error);
+        }).then(responseData => {
+            setThemeOptions(responseData);
+        }).catch(errorLs => {
+            console.log(errorLs);
         });
     }, [])
 
     const handleThemeGroup = (event) => {
-        setThemeGroup(event.target.value);
+        const legoTheme = event.target.value;
+        setThemeGroup(legoTheme);
+
+        // also send the practice get query with params 
+
+        AxiosConfig({
+            url: `base-axios/lego-params/${legoTheme}`,
+        }).then(responseData => {
+            console.log(responseData);
+        }).catch(errorLs => {
+            console.log(errorLs);
+        });
     }
 
     // option checkbox
@@ -59,13 +68,12 @@ function BaseAxios(props) {
     const [nameOptions, setNameOptions] = useState([]);
 
     useEffect(() => {
-        axios({
+        AxiosConfig({
             url: 'base-axios/set-names',
-        }).then( success => {
-            //console.log('received: ', success.data);
-            setNameOptions(success.data);
-        }).catch( error => {
-            console.log(error);
+        }).then(responseData => {
+            setNameOptions(responseData);
+        }).catch(errorLs => {
+            console.log(errorLs);
         });
     }, [])
 
@@ -106,31 +114,29 @@ function BaseAxios(props) {
             return;
         }
 
-        axios({
-            method: 'put',      // must use put to send data
+        AxiosConfig({
+            method: 'POST',      // must use post to send data
             url: 'base-axios/lego-form',
             data: { 'variable': 'dummy-val' },
-        }).then( success => {
-            //console.log('received: ', success.data);
-            setFormResult(success.data.message);
-        }).catch( error => {
-            console.log(error);
-            setFormResult(error);
+        }).then(responseData => {
+            setFormResult(responseData.message);
+        }).catch(errorLs => {
+            setFormResult(errorLs);
         });
     }
 
     // render
 
     return (
-        <PageLayout>
+        <LY.PageLayout>
             <Grid container spacing={2} 
                 sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
 
                 <Grid item xs={12}>
-                    <ST.PageTitle>Base Axios</ST.PageTitle>
+                    <LY.PageTitle>Base Axios</LY.PageTitle>
                 </Grid>
 
-                <ST.GridPanel item xs={12} lg={6}>
+                <LY.GridPanel item xs={12} lg={6}>
                     <Card elevation={3}> 
                         <StackForm width='260px'>
 
@@ -182,17 +188,17 @@ function BaseAxios(props) {
 
                         </StackForm>
                     </Card>
-                </ST.GridPanel>
+                </LY.GridPanel>
 
-                <ST.GridPanel item xs={12} lg={6}>
+                <LY.GridPanel item xs={12} lg={6}>
                     <Card elevation={3} sx={{ 'padding': '16px' }} > 
                         <Image src={require('../assets/lego-set.jpg')} 
                             width={340} duration={0} />
                     </Card>
-                </ST.GridPanel>
+                </LY.GridPanel>
 
             </Grid>
-        </PageLayout>
+        </LY.PageLayout>
     );
 }
 

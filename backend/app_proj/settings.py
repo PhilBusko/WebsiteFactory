@@ -116,7 +116,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER='zetaszaur@gmail.com'
 EMAIL_HOST_PASSWORD='jnvrrykxnlnrmpmp' 
 EMAIL_PORT = 587
-#PASSWORD_RESET_TIMEOUT_DAYS = 2
+PASSWORD_RESET_TIMEOUT_DAYS = 1
 
 
 # Internationalization
