@@ -8,10 +8,10 @@ import { AppBar, Toolbar }  from '@mui/material';
 import { Link, Menu, MenuItem } from '@mui/material';
 import { Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { RoutesConfig } from '../app-main/routes.js'
+import { RoutesConfig } from '../app-main/routes'
 
 function MobileNav(props) {
-    
+
     // show mobile menu
 
     const [anchorElem, setAnchorElem] = useState(null);

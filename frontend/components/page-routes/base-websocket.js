@@ -2,17 +2,18 @@
 BASE WEBSOCKET PAGE
 **************************************************************************************************/
 import { useState } from 'react';
-import * as LY from '../layout/page-layout'
+import PageLayout from '../layout/page-layout'
+import * as ST from '../elements/styled-elements'
 
 
 function BaseWebsocket(props) {
 
     return (
-        <LY.PageLayout>
+        <PageLayout>
             <div style={{'padding': '10px'}}>
                 base websocket
             </div>
-        </LY.PageLayout>
+        </PageLayout>
     );
 
 }

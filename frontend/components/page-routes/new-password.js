@@ -7,8 +7,9 @@ import { TextField, FormHelperText, Button } from '@mui/material';
 import { Grid, Card } from '@mui/material';
 import zxcvbn from 'zxcvbn';
 import AxiosConfig from '../app-main/axios-config'
-import * as LY from '../layout/page-layout.js'
-import { StackForm, FormItem } from '../elements/stack-form.js'
+import PageLayout from '../layout/page-layout'
+import * as ST from '../elements/styled-elements'
+import { StackForm, FormItem } from '../elements/stack-form'
 
 
 function NewPassword(props) {
@@ -60,21 +61,21 @@ function NewPassword(props) {
     }
 
     return (
-        <LY.PageLayout>
+        <PageLayout>
             <Grid container spacing={2} 
                 sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
 
                 <Grid item xs={12}>
-                    <LY.PageTitle>Reset Password</LY.PageTitle>
+                    <ST.PageTitle>Reset Password</ST.PageTitle>
                 </Grid>
 
-                <LY.GridPanel item xs={12} lg={6}>
+                <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ width: '280px', padding: '16px' }}> 
                         <StackForm width='260px'>
                             <FormItem >
-                                <LY.SpacedLabel >
+                                <ST.SpacedLabel >
                                     { `User ID: ${userId}` }
-                                </LY.SpacedLabel>
+                                </ST.SpacedLabel>
                             </FormItem>
                             <FormItem >
                                 <TextField 
@@ -89,10 +90,10 @@ function NewPassword(props) {
                             </FormItem>
                         </StackForm>
                     </Card>
-                </LY.GridPanel>
+                </ST.GridItemCenter>
 
             </Grid>
-        </LY.PageLayout>
+        </PageLayout>
     );
 }
 

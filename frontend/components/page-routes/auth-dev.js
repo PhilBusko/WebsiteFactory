@@ -2,14 +2,12 @@
 AUTH DEV
 **************************************************************************************************/
 import { useState, useEffect, useContext } from 'react';
-import { styled } from '@mui/material/styles';
-import { Button } from '@mui/material';
 import { Grid } from '@mui/material';
-
 import AxiosConfig from '../app-main/axios-config'
 import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
-import * as LY from '../layout/page-layout'
+import PageLayout from '../layout/page-layout'
+import * as ST from '../elements/styled-elements'
 
 
 function AuthDev(props) {
@@ -104,8 +102,6 @@ function AuthDev(props) {
     }
 
 
-
-
     const [featuresMessage, setFeaturesMessage] = useState('');
     const [featuresError, setFeaturesError] = useState([]);
 
@@ -128,7 +124,6 @@ function AuthDev(props) {
         });
     }
 
-
     const handleForgotPass = (event) => {
 
         //const credentials = {'email': 'user.beta@website-factory.org', 'password': 'WF91cvbn'};
@@ -149,73 +144,69 @@ function AuthDev(props) {
     }
 
 
-
     return (
-        <LY.PageLayout>
+        <PageLayout>
             <Grid container spacing={2} 
                 sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
 
                 <Grid item xs={12}>
-                    <LY.PageTitle>Auth Dev</LY.PageTitle>
+                    <ST.PageTitle>Auth Dev</ST.PageTitle>
                 </Grid>
 
-                <LY.GridPanel item xs={8} lg={4} 
-                    sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
+                <ST.GridItemVertical item xs={8} lg={4}>
                     
-                    <LY.SpacedButton onClick={handleLogIn} variant='contained'>Log In</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleLogIn} variant='contained'>Log In</ST.SpacedButton>
 
-                    <LY.SpacedButton onClick={handleRefresh} variant='contained'>Refresh</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleRefresh} variant='contained'>Refresh</ST.SpacedButton>
 
-                    <LY.SpacedButton onClick={handleLogOut} variant='contained'>Log Out</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleLogOut} variant='contained'>Log Out</ST.SpacedButton>
 
-                    <LY.SpacedLabel sx={{ 'color': 'crimson' }}>
+                    <ST.SpacedLabel sx={{ 'color': 'crimson' }}>
                         { tokenError.map( (err, idx) => 
                             <div key={idx}>{err}</div>
                         )}
-                    </LY.SpacedLabel>
+                    </ST.SpacedLabel>
 
-                </LY.GridPanel>
+                </ST.GridItemVertical>
 
-                <LY.GridPanel item xs={8} lg={4} 
-                    sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column', 'height': '200px' }}>
+                <ST.GridItemVertical item xs={8} lg={4} sx={{ 'height': '200px' }}>
                     
-                    <LY.SpacedButton onClick={handleNonAuth} variant='contained'>Non Auth Request</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleNonAuth} variant='contained'>Non Auth Request</ST.SpacedButton>
 
-                    <LY.SpacedButton onClick={handleAuthReq} variant='contained'>Auth Request</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleAuthReq} variant='contained'>Auth Request</ST.SpacedButton>
 
-                    <LY.SpacedLabel >
+                    <ST.SpacedLabel >
                         { requestMessage }
-                    </LY.SpacedLabel>
+                    </ST.SpacedLabel>
 
-                    <LY.SpacedLabel sx={{ 'color': 'crimson' }}>
+                    <ST.SpacedLabel sx={{ 'color': 'crimson' }}>
                         { requestError.map( (err, idx) => 
                             <div key={idx}>{err}</div>
                         )}
-                    </LY.SpacedLabel>
+                    </ST.SpacedLabel>
 
-                </LY.GridPanel>
+                </ST.GridItemVertical>
 
-                <LY.GridPanel item xs={8} lg={4} 
-                    sx={{ 'justifyContent': 'space-between', 'flexDirection': 'column' }}>
+                <ST.GridItemVertical item xs={8} lg={4}>
                     
-                    <LY.SpacedButton onClick={handleRegister} variant='contained'>Register</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleRegister} variant='contained'>Register</ST.SpacedButton>
 
-                    <LY.SpacedButton onClick={handleForgotPass} variant='contained'>Forgot Password</LY.SpacedButton>
+                    <ST.SpacedButton onClick={handleForgotPass} variant='contained'>Forgot Password</ST.SpacedButton>
 
-                    <LY.SpacedLabel >
+                    <ST.SpacedLabel >
                         { featuresMessage }
-                    </LY.SpacedLabel>
+                    </ST.SpacedLabel>
 
-                    <LY.SpacedLabel sx={{ 'color': 'crimson' }}>
+                    <ST.SpacedLabel sx={{ 'color': 'crimson' }}>
                         { featuresError.map( (err, idx) => 
                             <div key={idx}>{err}</div>
                         )}
-                    </LY.SpacedLabel>
+                    </ST.SpacedLabel>
 
-                </LY.GridPanel>
+                </ST.GridItemVertical>
 
             </Grid>
-        </LY.PageLayout>
+        </PageLayout>
     );
 }
 

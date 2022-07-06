@@ -5,8 +5,7 @@ import { styled } from '@mui/material/styles';
 import { Stack } from '@mui/material';
 
 const FormItem = styled('div')(({ theme }) => ({
-  'textAlign': 'left',
-  'back ground': 'lightblue', 
+    'textAlign': 'left',
 }));
 
 function StackForm(props) {

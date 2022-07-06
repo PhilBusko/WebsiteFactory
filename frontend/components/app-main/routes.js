@@ -30,20 +30,20 @@ export const RoutesConfig = [
         'title': 'Auth Dev',
         'path': '/auth-dev/',
         'element': <AuthDev />, 
-        'order': 0,
+        'order': 3,
     },
 
     {
         'title': 'Confirm Email',
         'path': '/confirm-email/:userId/:token/',
         'element': <ConfirmEmail />, 
-        'order': 0,
+        'order': 4,
     },    
     {
         'title': 'Reset Password',
         'path': '/new-password/:userId/:token/',
         'element': <NewPassword />, 
-        'order': 0,
+        'order': 5,
     },    
 ];
 

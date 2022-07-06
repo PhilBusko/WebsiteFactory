@@ -10,8 +10,9 @@ import { Grid } from '@mui/material';
 import Image from 'mui-image';
 
 import AxiosConfig from '../app-main/axios-config'
-import * as LY from  '../layout/page-layout.js'
-import { StackForm, FormItem } from '../elements/stack-form.js'
+import PageLayout from  '../layout/page-layout'
+import * as ST from  '../elements/styled-elements'
+import { StackForm, FormItem } from '../elements/stack-form'
 
 
 function BaseAxios(props) {
@@ -128,15 +129,15 @@ function BaseAxios(props) {
     // render
 
     return (
-        <LY.PageLayout>
+        <PageLayout>
             <Grid container spacing={2} 
                 sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
 
                 <Grid item xs={12}>
-                    <LY.PageTitle>Base Axios</LY.PageTitle>
+                    <ST.PageTitle>Base Axios</ST.PageTitle>
                 </Grid>
 
-                <LY.GridPanel item xs={12} lg={6}>
+                <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3}> 
                         <StackForm width='260px'>
 
@@ -188,17 +189,17 @@ function BaseAxios(props) {
 
                         </StackForm>
                     </Card>
-                </LY.GridPanel>
+                </ST.GridItemCenter>
 
-                <LY.GridPanel item xs={12} lg={6}>
+                <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ 'padding': '16px' }} > 
                         <Image src={require('../assets/lego-set.jpg')} 
                             width={340} duration={0} />
                     </Card>
-                </LY.GridPanel>
+                </ST.GridItemCenter>
 
             </Grid>
-        </LY.PageLayout>
+        </PageLayout>
     );
 }
 

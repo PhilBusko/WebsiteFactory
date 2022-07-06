@@ -9,14 +9,25 @@ import { Drawer, Link } from '@mui/material';
 import { Box } from '@mui/material';
 import { ArrowBack, ArrowForward } from '@mui/icons-material'; 
 import Image from 'mui-image';
-import { RoutesConfig } from '../app-main/routes.js'
+import { RoutesConfig } from '../app-main/routes'
 import { GlobalContext } from '../app-main/global-store'
-import './styles.scss'
+import * as ST from '../elements/styled-elements'
+
+import LogInModal from '../modals/login-modal'
 
 const drawerWidth = 200;
 const footerHeight = 34;
 const footerBkgd = 'rgba(130,130,130,0.5)';
 const navBkgd = '#212121';
+
+
+
+const AuthButton = styled(ButtonBase)(({ theme }) => ({
+    'marginBottom': '4px',
+    'color': 'white',
+    'fontSize': '80%',
+    'textDecoration': 'underline',
+}));
 
 const NavList = styled(List)(({ theme }) => ({
     'padding': '0 10px', 
@@ -57,6 +68,11 @@ const MenuOpenButton = styled(ButtonBase)(({ theme }) => ({
 
 function DesktopNav(props) {
 
+    const routesLs = RoutesConfig.filter(route => route.order > 0);
+    const { userStore } = useContext(GlobalContext);
+
+    // navigation drawer
+
     const [drawerOpen, setOpen] = useState(true);
     const toggleNav = () => {
         setOpen(!drawerOpen);
@@ -69,18 +85,34 @@ function DesktopNav(props) {
             'background': navBkgd },
     }));
 
-    const routesLs = RoutesConfig.filter(route => route.order > 0);
-    const { userStore } = useContext(GlobalContext);
+    
+
+    // auth buttons
+
+    const [loginOpen, setLoginOpen] = useState(true);
+    const [signupOpen, setSignupOpen] = useState(false);
+    const [logoutOpen, setLogoutOpen] = useState(false);
+
+
+    const handleLogin = () => {
+        setLoginOpen(true);
+    };
+
+
 
     return (<>
         <NavDrawer open={drawerOpen} 
             variant='persistent' anchor='left' >
 
-            <ListItem sx={{ borderBottom: '1px solid white'}}>
+            <ST.BoxSpaceBetween sx={{ padding: '6px 8px', borderBottom: '1px solid white'}}>
                 <Typography sx={{ color: 'white' }}>
                     { userStore[0] || 'Guest User' }
                 </Typography>
-            </ListItem>
+                <Box sx={{ width: '50px', textAlign: 'right' }}>
+                    <AuthButton onClick={handleLogin}>Log In</AuthButton>
+                    <AuthButton>Sign Up</AuthButton>
+                </Box>
+            </ST.BoxSpaceBetween>
 
             <NavList name='menu-top'>
                 {   routesLs.map( (route, key) => (
@@ -92,10 +124,10 @@ function DesktopNav(props) {
                 )) }
             </NavList>
             <BottomPanel name='menu-bottom'>
-                <Box height='100%' className='panel-center'>
+                <ST.BoxCenter height='100%'>
                     <Image src={require('../assets/app-icon.png')} duration={0} 
                         width={footerHeight * 0.8} height={footerHeight * 0.8} />
-                </Box>
+                </ST.BoxCenter>
                 <MenuCollapseButton onClick={toggleNav}>
                     <ArrowBack></ArrowBack>
                 </MenuCollapseButton>
@@ -106,6 +138,7 @@ function DesktopNav(props) {
                 <ArrowForward></ArrowForward>
             </MenuOpenButton>
         }
+        <LogInModal open={loginOpen} setOpen={setLoginOpen} />
     </>);
 }
 

@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Grid, Card } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
-import * as LY from '../layout/page-layout.js'
+import PageLayout from '../layout/page-layout'
+import * as ST from '../elements/styled-elements'
 
 
 function ConfirmEmail(props) {
@@ -45,35 +46,35 @@ function ConfirmEmail(props) {
     }, []);
 
     return (
-        <LY.PageLayout>
+        <PageLayout>
             <Grid container spacing={2} 
                 sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
 
                 <Grid item xs={12}>
-                    <LY.PageTitle>Confirm Email</LY.PageTitle>
+                    <ST.PageTitle>Confirm Email</ST.PageTitle>
                 </Grid>
 
-                <LY.GridPanel item xs={12} lg={6}>
+                <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ width: '280px', height: '170px', padding: '16px' }}> 
-                        <LY.SpacedLabel >
+                        <ST.SpacedLabel >
                             { `User ID: ${userId}` }
-                        </LY.SpacedLabel>
-                        <LY.SpacedLabel >
+                        </ST.SpacedLabel>
+                        <ST.SpacedLabel >
                             {  `Token: ${token.slice(0,20)}...`  }
-                        </LY.SpacedLabel>
-                        <LY.HighlightedLabel >
+                        </ST.SpacedLabel>
+                        <ST.HighlightedLabel >
                             { success }
-                        </LY.HighlightedLabel>
-                        <LY.SpacedLabel sx={{ color: 'crimson' }}>
+                        </ST.HighlightedLabel>
+                        <ST.SpacedLabel sx={{ color: 'crimson' }}>
                             { error.map( (err, idx) => 
                                 <div key={idx}>{err}</div>
                             )}
-                        </LY.SpacedLabel>
+                        </ST.SpacedLabel>
                     </Card>
-                </LY.GridPanel>
+                </ST.GridItemCenter>
 
             </Grid>
-        </LY.PageLayout>
+        </PageLayout>
     );
 }
 
