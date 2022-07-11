@@ -131,24 +131,27 @@ function BaseAxios(props) {
     return (
         <PageLayout>
             <Grid container spacing={2} 
-                sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
+                sx={{   padding: ['0px 10px', '0px 20px', '0px 200px 0px 0px'],
+                        margin: '0px', }} >
 
                 <Grid item xs={12}>
-                    <ST.PageTitle>Base Axios</ST.PageTitle>
+                    <ST.TitleGroup>
+                        <ST.SpecialText>Base Axios</ST.SpecialText>
+                    </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3}> 
                         <StackForm width='260px'>
 
-                            <FormItem >
+                            <FormItem>
                                 <TextField 
                                     value={ userName } error={ !!userNameError } helperText={ userNameError }
                                     onChange={ handleUserName }  
                                     variant='outlined' label='User Name' size='small'/>
                             </FormItem>
 
-                            <FormItem >
+                            <FormItem>
                                 <FormControl fullWidth size='small'>
                                     <InputLabel id='themeSelect'>Theme Group</InputLabel>
                                     <Select 
@@ -182,7 +185,6 @@ function BaseAxios(props) {
                             </FormItem>
 
                             <FormItem sx={{ 'display': 'flex', 'justifyContent': 'space-between' }}>
-
                                 <FormHelperText value={formResult}>{formResult}</FormHelperText>
                                 <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
                             </FormItem>
@@ -194,7 +196,7 @@ function BaseAxios(props) {
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ 'padding': '16px' }} > 
                         <Image src={require('../assets/lego-set.jpg')} 
-                            width={340} duration={0} />
+                            width={320} duration={0} />
                     </Card>
                 </ST.GridItemCenter>
 

@@ -48,28 +48,31 @@ function ConfirmEmail(props) {
     return (
         <PageLayout>
             <Grid container spacing={2} 
-                sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
+                sx={{   padding: ['0px 10px', '0px 20px', '0px 200px 0px 0px'],
+                        margin: '0px', }} >
 
                 <Grid item xs={12}>
-                    <ST.PageTitle>Confirm Email</ST.PageTitle>
+                    <ST.TitleGroup>
+                        <ST.SpecialText>Confirm Email</ST.SpecialText>
+                    </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ width: '280px', height: '170px', padding: '16px' }}> 
-                        <ST.SpacedLabel >
+                        <ST.BaseText >
                             { `User ID: ${userId}` }
-                        </ST.SpacedLabel>
-                        <ST.SpacedLabel >
+                        </ST.BaseText>
+                        <ST.BaseText >
                             {  `Token: ${token.slice(0,20)}...`  }
-                        </ST.SpacedLabel>
-                        <ST.HighlightedLabel >
+                        </ST.BaseText>
+                        <ST.HighlightText >
                             { success }
-                        </ST.HighlightedLabel>
-                        <ST.SpacedLabel sx={{ color: 'crimson' }}>
+                        </ST.HighlightText>
+                        <ST.BaseText sx={{ color: 'crimson' }}>
                             { error.map( (err, idx) => 
                                 <div key={idx}>{err}</div>
                             )}
-                        </ST.SpacedLabel>
+                        </ST.BaseText>
                     </Card>
                 </ST.GridItemCenter>
 

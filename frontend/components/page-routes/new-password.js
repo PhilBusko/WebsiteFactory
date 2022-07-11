@@ -63,19 +63,23 @@ function NewPassword(props) {
     return (
         <PageLayout>
             <Grid container spacing={2} 
-                sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
+                sx={{   padding: ['0px 10px', '0px 20px', '0px 200px 0px 0px'],
+                        margin: '0px', }} >
 
                 <Grid item xs={12}>
-                    <ST.PageTitle>Reset Password</ST.PageTitle>
+                    <ST.TitleGroup>
+                        <ST.SpecialText>Reset Password</ST.SpecialText>
+                    </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ width: '280px', padding: '16px' }}> 
+
                         <StackForm width='260px'>
                             <FormItem >
-                                <ST.SpacedLabel >
+                                <ST.BaseText >
                                     { `User ID: ${userId}` }
-                                </ST.SpacedLabel>
+                                </ST.BaseText>
                             </FormItem>
                             <FormItem >
                                 <TextField 
@@ -89,6 +93,7 @@ function NewPassword(props) {
                                 <Button type='submit' onClick={ handleSubmit } variant='contained'>Submit</Button>
                             </FormItem>
                         </StackForm>
+
                     </Card>
                 </ST.GridItemCenter>
 

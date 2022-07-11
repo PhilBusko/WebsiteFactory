@@ -4,14 +4,12 @@ This project is a full stack website which has the infrastructure built up, but 
 It is meant to be replicated as the starting point for a new project.
 It's an opinionated boilerplate which provides solutions to all the necessary parts of a website.
 
-The frontend features include routing, page layouts, form controls, and responsiveness.
-It uses React and Material UI.
-The backend server has functionality for API responses and websockets.
-It uses Python Django with REST framework.
-The backend is also a full python computing engine capable of database maintenance, web scrappers, and machine learning.
-It uses Jupyter with pandas and plotly.
-
-[Project Management Spreadsheet](https://docs.google.com/spreadsheets/d/1j07sT7-HGhPlajWFeYYBXIs4O6PKrztX-2PgnuVeJPA/edit#gid=1591015716)
+* Separate frontend (React) and backend (Django) applications, deployed with a CDN and using REST API.
+* Over 100 hours of development time into a functioning skeleton website.
+* User registration with email verification and authentication with JWT.
+* Backend connects with a PostgreSQL database.
+* Jupyter backend facilitates development of database, data scrapers, and machine learning.
+* Next Steps: implement websockets for chat or games.
 
 ### How To Use
 
@@ -22,4 +20,6 @@ It uses Jupyter with pandas and plotly.
 3. Deploy the frontend and backend to verify they are working.
 
 4. Customize with your own business logic.
+
+[Project Management Spreadsheet](https://docs.google.com/spreadsheets/d/1j07sT7-HGhPlajWFeYYBXIs4O6PKrztX-2PgnuVeJPA/edit#gid=1591015716)
 

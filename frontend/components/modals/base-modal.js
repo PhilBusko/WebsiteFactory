@@ -14,31 +14,30 @@ const ModalWrapper = styled(Box)(({ theme }) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    border: '3px ridge SlateBlue ',
+    border: '3px ridge grey',
     borderRadius: '4px', 
+    outline: 'none',
 
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '4px 6px',
+    padding: '8px',
     background: 'white',
 }));
 
 const ModalTitle = styled('h2')(({ theme }) => ({
+    width: '50%',
     margin: '0px',
     borderBottom: '2px solid grey',
     color: 'black', //theme.palette.primary.main,
 }));
 
 const CloseButton = styled(ButtonBase)(({ theme }) => ({
-    transform: 'scale(1.3)', 
+    left: '16px', bottom: '4px',
+    transform: 'scale(1.25)', 
     borderRadius: '50%', 
     color: 'crimson',
-
-    '&:hover': {
-        //color: 'black',
-        background: 'lightgrey',
-    }
+    '&:hover': {background: 'lightgrey',}
 }));
 
 function BaseModal(props) {
@@ -49,9 +48,9 @@ function BaseModal(props) {
 
     return (
         <Modal open={props.open}>
-            <ModalWrapper sx={{ width: props.width }}>
+            <ModalWrapper>
 
-                <ST.BoxSpaceBetween sx={{ width: '100%',  }}>
+                <ST.BoxSpaceBetween sx={{ width: props.width }}>
                     <ModalTitle>{props.title}</ModalTitle>
                     <CloseButton onClick={handleClose}>
                         <Close></Close>

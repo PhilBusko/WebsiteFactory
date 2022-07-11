@@ -74,6 +74,16 @@ def TokenRefresh(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def UserAccount(request):
+    query = get_user_model().objects.filter(user_name=request.user.user_name).values()
+    userDx = list(query)[0]
+    userDx = {key: userDx[key] for key in userDx if key not in 
+        ['password', 'active', 'last_login', 'is_superuser', 'verified']}
+    userDx['date_joined'] = userDx['date_joined'].strftime('%Y-%b-%d @ %H:%M')
+    return Response(userDx)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def LoginDate(request):
 
     #print('LoginDate', request.user.user_name)

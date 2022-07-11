@@ -2,7 +2,8 @@
 AUTH DEV
 **************************************************************************************************/
 import { useState, useEffect, useContext } from 'react';
-import { Grid } from '@mui/material';
+import { Button } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
 import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
@@ -73,7 +74,7 @@ function AuthDev(props) {
     }
 
 
-    const [requestMessage, setRequestMessage] = useState('');
+    const [requestMessage, setRequestMessage] = useState('default message');
     const [requestError, setRequestError] = useState([]);
 
     const handleNonAuth = (event) => {
@@ -147,63 +148,68 @@ function AuthDev(props) {
     return (
         <PageLayout>
             <Grid container spacing={2} 
-                sx={{ 'padding': ['0px 10px', '0px 20px', '0px 200px 0px 20px'] }} >
+                sx={{   padding: ['0px 10px', '0px 20px', '0px 200px 0px 0px'],
+                        margin: '0px', }} >
 
                 <Grid item xs={12}>
-                    <ST.PageTitle>Auth Dev</ST.PageTitle>
+                    <ST.TitleGroup>
+                        <ST.SpecialText>Auth Dev</ST.SpecialText>
+                    </ST.TitleGroup>
                 </Grid>
 
-                <ST.GridItemVertical item xs={8} lg={4}>
+                <ST.GridItemCenter item xs={8} lg={4}>
+                    <Stack spacing='16px' alignItems='center'>
                     
-                    <ST.SpacedButton onClick={handleLogIn} variant='contained'>Log In</ST.SpacedButton>
+                        <Button onClick={handleLogIn} variant='contained'>Log In</Button>
 
-                    <ST.SpacedButton onClick={handleRefresh} variant='contained'>Refresh</ST.SpacedButton>
+                        <Button onClick={handleRefresh} variant='contained'>Refresh</Button>
 
-                    <ST.SpacedButton onClick={handleLogOut} variant='contained'>Log Out</ST.SpacedButton>
+                        <Button onClick={handleLogOut} variant='contained'>Log Out</Button>
 
-                    <ST.SpacedLabel sx={{ 'color': 'crimson' }}>
-                        { tokenError.map( (err, idx) => 
-                            <div key={idx}>{err}</div>
-                        )}
-                    </ST.SpacedLabel>
-
-                </ST.GridItemVertical>
-
-                <ST.GridItemVertical item xs={8} lg={4} sx={{ 'height': '200px' }}>
+                        <ST.BaseText sx={{ 'color': 'crimson' }}>
+                            { tokenError.map( (err, idx) => 
+                                <div key={idx}>{err}</div>
+                            )}
+                        </ST.BaseText>
                     
-                    <ST.SpacedButton onClick={handleNonAuth} variant='contained'>Non Auth Request</ST.SpacedButton>
+                    </Stack>
+                </ST.GridItemCenter>
 
-                    <ST.SpacedButton onClick={handleAuthReq} variant='contained'>Auth Request</ST.SpacedButton>
+                <ST.GridItemCenter item xs={8} lg={4}>
+                    <Stack spacing='16px' alignItems='center'>
 
-                    <ST.SpacedLabel >
-                        { requestMessage }
-                    </ST.SpacedLabel>
+                        <Button onClick={handleNonAuth} variant='contained'>Non Auth Request</Button>
 
-                    <ST.SpacedLabel sx={{ 'color': 'crimson' }}>
-                        { requestError.map( (err, idx) => 
-                            <div key={idx}>{err}</div>
-                        )}
-                    </ST.SpacedLabel>
+                        <Button onClick={handleAuthReq} variant='contained'>Auth Request</Button>
 
-                </ST.GridItemVertical>
+                        <ST.BaseText>{ requestMessage }</ST.BaseText>
 
-                <ST.GridItemVertical item xs={8} lg={4}>
+                        <ST.BaseText sx={{ 'color': 'crimson' }}>
+                            { requestError.map( (err, idx) => 
+                                <div key={idx}>{err}</div>
+                            )}
+                        </ST.BaseText>
+
+                    </Stack>
+                </ST.GridItemCenter>
+
+                <ST.GridItemCenter item xs={8} lg={4} >
+                    <Stack spacing='16px' alignItems='center'>
                     
-                    <ST.SpacedButton onClick={handleRegister} variant='contained'>Register</ST.SpacedButton>
+                        <Button onClick={handleRegister} variant='contained'>Register</Button>
 
-                    <ST.SpacedButton onClick={handleForgotPass} variant='contained'>Forgot Password</ST.SpacedButton>
+                        <Button onClick={handleForgotPass} variant='contained'>Forgot Password</Button>
 
-                    <ST.SpacedLabel >
-                        { featuresMessage }
-                    </ST.SpacedLabel>
+                        <ST.BaseText>{ featuresMessage }</ST.BaseText>
 
-                    <ST.SpacedLabel sx={{ 'color': 'crimson' }}>
-                        { featuresError.map( (err, idx) => 
-                            <div key={idx}>{err}</div>
-                        )}
-                    </ST.SpacedLabel>
+                        <ST.BaseText sx={{ 'color': 'crimson' }}>
+                            { featuresError.map( (err, idx) => 
+                                <div key={idx}>{err}</div>
+                            )}
+                        </ST.BaseText>
 
-                </ST.GridItemVertical>
+                    </Stack>
+                </ST.GridItemCenter>
 
             </Grid>
         </PageLayout>

@@ -6,6 +6,7 @@ import BaseWebsocket from '../page-routes/base-websocket'
 import AuthDev from '../page-routes/auth-dev'
 import ConfirmEmail from '../page-routes/confirm-email'
 import NewPassword from '../page-routes/new-password'
+import UserAccount from '../page-routes/user-account'
 
 export const RoutesConfig = [
     {
@@ -37,13 +38,19 @@ export const RoutesConfig = [
         'title': 'Confirm Email',
         'path': '/confirm-email/:userId/:token/',
         'element': <ConfirmEmail />, 
-        'order': 4,
+        'order': 1,
     },    
     {
         'title': 'Reset Password',
         'path': '/new-password/:userId/:token/',
         'element': <NewPassword />, 
-        'order': 5,
+        'order': 1,
+    },    
+    {
+        'title': 'User Account',
+        'path': '/account/',
+        'element': <UserAccount />, 
+        'order': 1,
     },    
 ];
 

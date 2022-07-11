@@ -1,21 +1,16 @@
 /**************************************************************************************************
 STYLED ELEMENTS
 **************************************************************************************************/
-import { Button } from '@mui/material';
 import { Box, Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
+
+// SPACING
 
 const GridItemCenter = styled(Grid)(({ theme }) => ({
     'display': 'flex',
     'justifyContent': 'center',
-    'alignItems': 'center',
-}));
-
-const GridItemVertical = styled(Grid)(({ theme }) => ({
-    'display': 'flex',
-    'flexDirection': 'column', 
-    'justifyContent': 'space-between',
     'alignItems': 'center',
 }));
 
@@ -31,34 +26,41 @@ const BoxSpaceBetween = styled(Box)(({ theme }) => ({
     'alignItems': 'center',
 }));
 
-const PageTitle = styled('h1')(({ theme }) => ({
-    'margin': '10px 0px',
-    'borderBottom': '2px solid grey',
-    'color': 'black', //theme.palette.primary.main,
-    //'textAlign': 'center',
+const TitleGroup = styled('h1')(({ theme }) => ({
+    margin: '0px',
+    borderBottom: '2px solid rgb(150,150,150)',
+    '& .MuiTypography-root': { 
+        fontSize: '80%',    // h1 default is 32pt
+        lineHeight: '1.2', 
+    }, 
 }));
 
-const SpacedLabel = styled('div')(({ theme }) => ({
-    'margin': '10px 0px',
+
+// FONTS
+
+const BaseText = styled(Typography)(({ theme }) => ({
+    fontFamily: 'sans-serif', 
 }));
 
-const HighlightedLabel = styled('div')(({ theme }) => ({
-    'margin': '10px 0px',
+const HighlightText = styled('BaseText')(({ theme }) => ({
     'font-size': '110%',
     'color': 'DarkSlateBlue',
 }));
 
-const SpacedButton = styled(Button)(({ theme }) => ({
-    'margin': '10px 0px',
+const SpecialText = styled(Typography)(({ theme }) => ({
+    fontFamily: 'Roboto, sans-serif',
 }));
+
+
+// EXPORTS
 
 export {
     GridItemCenter, 
-    GridItemVertical, 
     BoxCenter, 
     BoxSpaceBetween,
-    PageTitle, 
-    SpacedLabel, 
-    HighlightedLabel,
-    SpacedButton,
+    TitleGroup, 
+
+    BaseText,
+    HighlightText,
+    SpecialText, 
 }

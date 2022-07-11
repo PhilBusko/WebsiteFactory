@@ -1,5 +1,5 @@
 /**************************************************************************************************
-LOG IN MODAL
+FORGOT PASSWORD MODAL
 **************************************************************************************************/
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import BaseModal from './base-modal';
 import { StackForm, FormItem } from '../elements/stack-form'
 
 
-function LogInModal(props) {
+function PasswordModal(props) {
 
     const { userStore } = useContext(GlobalContext);
     const formWidth = '280px';
@@ -28,6 +28,8 @@ function LogInModal(props) {
     const handlePassword = (evt) => {
         setPassword(evt.target.value);
     }
+
+
 
     // submit button 
 
@@ -79,7 +81,7 @@ function LogInModal(props) {
         <BaseModal
             open={props.open} 
             setOpen={props.setOpen} 
-            title='Log In'
+            title='Reset Password'
             width={formWidth} >
             <StackForm width={formWidth}>
 
@@ -106,9 +108,9 @@ function LogInModal(props) {
     );
 }
 
-LogInModal.defaultProps = {
+PasswordModal.defaultProps = {
     open: false,
     setOpen: () => {}, 
 };
 
-export default LogInModal;
+export default PasswordModal;

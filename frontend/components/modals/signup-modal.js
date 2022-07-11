@@ -1,5 +1,5 @@
 /**************************************************************************************************
-LOG IN MODAL
+SIGN UP MODAL
 **************************************************************************************************/
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,10 +11,10 @@ import BaseModal from './base-modal';
 import { StackForm, FormItem } from '../elements/stack-form'
 
 
-function LogInModal(props) {
+function SignUpModal(props) {
 
     const { userStore } = useContext(GlobalContext);
-    const formWidth = '280px';
+    const formWidth = '320px';
     let navigate = useNavigate();  
 
     // input controls
@@ -28,6 +28,10 @@ function LogInModal(props) {
     const handlePassword = (evt) => {
         setPassword(evt.target.value);
     }
+
+
+
+
 
     // submit button 
 
@@ -75,11 +79,12 @@ function LogInModal(props) {
 
     // render
 
+    
     return (
         <BaseModal
             open={props.open} 
             setOpen={props.setOpen} 
-            title='Log In'
+            title='User Registration'
             width={formWidth} >
             <StackForm width={formWidth}>
 
@@ -106,9 +111,9 @@ function LogInModal(props) {
     );
 }
 
-LogInModal.defaultProps = {
+SignUpModal.defaultProps = {
     open: false,
     setOpen: () => {}, 
 };
 
-export default LogInModal;
+export default SignUpModal;
