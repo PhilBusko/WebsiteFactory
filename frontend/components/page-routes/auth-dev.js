@@ -147,9 +147,7 @@ function AuthDev(props) {
 
     return (
         <PageLayout>
-            <Grid container spacing={2} 
-                sx={{   padding: ['0px 10px', '0px 20px', '0px 200px 0px 0px'],
-                        margin: '0px', }} >
+            <ST.GridPage container spacing={'16px'}>
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
@@ -211,7 +209,7 @@ function AuthDev(props) {
                     </Stack>
                 </ST.GridItemCenter>
 
-            </Grid>
+            </ST.GridPage >
         </PageLayout>
     );
 }

@@ -6,6 +6,7 @@ It's an opinionated boilerplate which provides solutions to all the necessary pa
 
 * Separate frontend (React) and backend (Django) applications, deployed with a CDN and using REST API.
 * Over 100 hours of development time into a functioning skeleton website.
+* Web app is fully functional on mobile browser.
 * User registration with email verification and authentication with JWT.
 * Backend connects with a PostgreSQL database.
 * Jupyter backend facilitates development of database, data scrapers, and machine learning.

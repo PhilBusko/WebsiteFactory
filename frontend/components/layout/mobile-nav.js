@@ -2,62 +2,87 @@
 MOBILE NAVIGATION
 **************************************************************************************************/
 import { useState } from 'react';
+import { styled } from '@mui/material/styles';
 import { IconButton  } from '@mui/material';
-import { Typography, Divider } from '@mui/material';
-import { AppBar, Toolbar }  from '@mui/material';
-import { Link, Menu, MenuItem } from '@mui/material';
-import { Box } from '@mui/material';
+import { Menu, Drawer } from '@mui/material';
+import { AppBar, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import * as ST from '../elements/styled-elements'
+import AuthPanel from './auth-panel'
+import NavRoutes from './nav-routes'
 
-import { RoutesConfig } from '../app-main/routes'
 
+const drawerWidth = 200;
+const navBkgd = '#212121';
+const footerBkgd = 'rgba(130,130,130,0.5)';
 
 function MobileNav(props) {
 
-    // show mobile menu
+    const [drawerOpen, setOpen] = useState(false);
+    const toggleNav = () => {
+        setOpen(!drawerOpen);
+    };
 
-    const [anchorElem, setAnchorElem] = useState(null);
-    const mobileMenuOpen = (event) => {
-        setAnchorElem(event.currentTarget);
-    };
-    const mobileMenuClose = () => {
-        setAnchorElem(null);
-    };
-    
-    // render
-    
-    const routesLs = RoutesConfig.filter(route => route.order > 0);
+    const NavDrawer = styled(Drawer)(({ theme }) => ({
+        width: (drawerOpen ? drawerWidth : 0), 
+        '& .MuiPaper-root': {
+            width: drawerWidth, 
+            background: navBkgd,     },
+    }));
+
+    const [authAnchor, setAuthAnchor] = useState(null);
 
     return (<>
-        <AppBar  >
-            <Toolbar>
-                <IconButton edge='start' color='inherit' onClick={mobileMenuOpen}>
-                    <MenuIcon />
-                </IconButton>
-                <Menu
-                    anchorEl={anchorElem}
-                    open={Boolean(anchorElem)}
-                    onClose={mobileMenuClose} 
-                    anchorOrigin={{'vertical': 'top', 'horizontal': 'left'}}
-                    sx={{ '& .MuiPaper-root': {'background': 'light blue'},
-                          '& .MuiList-root': {'padding': 0,}, }} >
-                    {   routesLs.map((route, idx) => (
-                        <Box key={idx}>
-                            {idx != 0 && <Divider sx={{ 'margin': '0 !important' }}/>}
-                            <MenuItem 
-                                component={Link} href={route.path}
-                                sx={{ 'min-height': '0', 'padding': '0' }} >
-                                <Typography sx={{ 'padding': '10px 14px', 'background': 'white'}} >
-                                    {route.title}
-                                </Typography>
-                            </MenuItem>
+        <AppBar>
+            <ST.BoxSpaceBetween>
+
+                <Box sx={{ paddingLeft: '16px'}}>
+                    <IconButton edge='start' color='inherit' onClick={toggleNav}>
+                        <MenuIcon fontSize='large' />
+                    </IconButton>
+
+                    <NavDrawer open={drawerOpen} variant='persistent' anchor='left'>
+                        <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+                            <IconButton onClick={toggleNav}
+                                sx={{
+                                    color: 'white',
+                                    '&:hover': {background: footerBkgd} }}>
+                                <ChevronLeftIcon fontSize='large'/>
+                            </IconButton>
                         </Box>
-                    )) }
-                </Menu>
-            </Toolbar>
+
+                        <NavRoutes />
+
+                    </NavDrawer>
+                </Box>
+
+                <Box sx={{ paddingRight: '12px'}}>
+                    <IconButton edge='start' color='inherit' onClick={(event) => { setAuthAnchor(event.currentTarget); }}>
+                        <ManageAccountsIcon fontSize='large'/>
+                    </IconButton>
+                    <Menu
+                        anchorEl={authAnchor}
+                        open={Boolean(authAnchor)}
+                        onClose={() => {setAuthAnchor(null); }} 
+                        anchorOrigin={{'vertical': 'top', 'horizontal': 'left'}}
+                        sx={{   '& .MuiPaper-root': {   width: '200px', top: '48px !important', 
+                                                        border: '2px solid white', borderRadius: '4px' }, 
+                                '& .MuiList-root': {padding: '0px'},     }} >
+                        
+                        <AuthPanel setModals={ props.setModals }/>
+
+                    </Menu>
+                </Box>
+
+            </ST.BoxSpaceBetween>
         </AppBar>
-        <Toolbar comment='stops the appbar from overlaying'/>
     </>);
 }
+
+MobileNav.defaultProps = {
+    setModals: {},
+};
 
 export default MobileNav;

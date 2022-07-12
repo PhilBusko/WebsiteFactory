@@ -23,13 +23,13 @@ function PageLayout(props) {
     return (
         <>
             <Box name='mobile' sx={{ display: { xs: 'block', md: 'none' }}} >
-                <Box display='flex' flexDirection='column' >
+                <Box display='flex' flexDirection='column'>
                     <MobileNav setModals={modalSetters}></MobileNav>
-                    <Box>{ props.children }</Box>
+                    <Box sx={{ marginTop: '51px', marginRight: '16px' }}>{ props.children }</Box>
                 </Box>
             </Box>
             <Box name='desktop' sx={{ display: { xs: 'none', md: 'block' }}} >
-                <Box display='flex' flexDirection='row' >
+                <Box display='flex' flexDirection='row'>
                     <DesktopNav name='navigation' setModals={modalSetters}></DesktopNav>
                     <Box name='content' width='100%'>{ props.children }</Box>
                 </Box>
