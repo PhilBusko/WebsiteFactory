@@ -1,11 +1,20 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 MEMBERS VIEWS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+import six
 from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response 
 from rest_framework import status
+
+class UserTokenGenerator(PasswordResetTokenGenerator):
+    def _make_hash_value(self, user, timestamp):
+        user_id = six.text_type(user.pk)
+        ts = six.text_type(timestamp)
+        is_active = six.text_type(user.is_active)
+        return f"{user_id}{ts}{is_active}"
 
 @api_view(['POST'])
 def ClickLogin(request):
@@ -100,21 +109,8 @@ def LoginDate(request):
     
     return Response({'date' : myDate})
 
-
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-import six
-
-class UserTokenGenerator(PasswordResetTokenGenerator):
-    def _make_hash_value(self, user, timestamp):
-        user_id = six.text_type(user.pk)
-        ts = six.text_type(timestamp)
-        is_active = six.text_type(user.is_active)
-        return f"{user_id}{ts}{is_active}"
-
 @api_view(['POST'])
-def RegisterUser(request): 
-
-    # save new user
+def CreateUser(request): 
 
     newEmail = request.data.get('email') 
     newPass = request.data.get('password')  
@@ -124,9 +120,23 @@ def RegisterUser(request):
         userMd.save()
     except Exception as ex:
         #userMd = get_user_model().objects.getUser(email=newEmail)
-        return Response({'detail': str(ex)}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'detail': 'Email is already in use.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    return Response('User is registered. Sending verification email ...')
+
+@api_view(['POST'])
+def SendVerification(request): 
 
     # create confirmation token 
+
+    verifyEmail = request.data.get('email') 
+    userMd = get_user_model().objects.getUser(email=verifyEmail)
+
+    if not userMd:
+        return Response({'detail': 'Email not in use.'}, status=status.HTTP_404_NOT_FOUND)
+
+    if userMd.verified:
+        return Response({'detail': 'User is already verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     tokenMaker = UserTokenGenerator()
     token = tokenMaker.make_token(userMd)
@@ -144,21 +154,21 @@ def RegisterUser(request):
 
         EMAIL_TEMPLATE = os.path.join(ST.BACKEND_PATH, 'members', 'data', 'register-email.html')
         message = get_template(EMAIL_TEMPLATE).render({
-            'confirmUrl': f"{frontendDomain}/confirm-email/{userMd.unique_id}/{token}/",
+            'confirmUrl': f"{frontendDomain}/verify-email/{userMd.unique_id}/{token}/",
             'expireDate': expireDate.strftime('%b %d, %Y @ %I:%M %p'),
         })
 
-        mail = EmailMessage('Confirm Your Email', message, to=[userMd.email], 
+        mail = EmailMessage('Verify Your Email', message, to=[userMd.email], 
             from_email=f"Website Factory <{ST.EMAIL_HOST_USER}>")
         mail.content_subtype = 'html'
         mail.send()
     except Exception as ex:
         return Response({'detail': str(ex)}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
-    return Response('User is registered. A confirmation email has been sent. Please check your spam folder.')
+    return Response('If the email address is in use a verification email has been sent. Please check your spam folder.')
 
 @api_view(['POST'])
-def ConfirmRegistration(request): 
+def VerifyRegistration(request): 
 
     userId = request.data.get('userId') 
     token = request.data.get('token')  

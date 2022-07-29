@@ -9,8 +9,9 @@ import business_module.views as BV
 authentication = [
     re_path(r'^click-login',    MV.ClickLogin ),
     re_path(r'^token-refresh',  MV.TokenRefresh ),
-    re_path(r'^register',  MV.RegisterUser ),
-    re_path(r'^confirm-registration', MV.ConfirmRegistration), 
+    re_path(r'^create-user',  MV.CreateUser ),
+    re_path(r'^send-verification',  MV.SendVerification ),
+    re_path(r'^verify-registration', MV.VerifyRegistration), 
     re_path(r'^forgot-password', MV.ForgotPassword), 
     re_path(r'^reset-password', MV.ResetPassword), 
     re_path(r'^user-account', MV.UserAccount), 

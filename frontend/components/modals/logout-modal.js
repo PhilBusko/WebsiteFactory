@@ -1,5 +1,5 @@
 /**************************************************************************************************
-LOG IN MODAL
+LOG OUT MODAL
 **************************************************************************************************/
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,6 @@ import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
 import BaseModal from './base-modal';
 import * as ST from '../elements/styled-elements'
-import { StackForm, FormItem } from '../elements/stack-form'
 
 
 function LogOutModal(props) {
@@ -25,7 +24,7 @@ function LogOutModal(props) {
         userStore[1](null)
         TK.wipeTokens();
 
-        // also closes this modal
+        props.setOpen(false);
         navigate('/');
     }
 
@@ -37,19 +36,19 @@ function LogOutModal(props) {
             setOpen={props.setOpen} 
             title='Log Out'
             width={formWidth} >
-            <StackForm width={formWidth}>
 
-                <FormItem sx={{ 'display': 'flex', 'justifyContent': 'center' }}>
-                    <ST.BaseText >
-                        Are you ready to log out?
-                    </ST.BaseText>
-                </FormItem>
+            <ST.BoxCenter sx={{ 'display': 'flex', 'justifyContent': 'center' }}>
+                <ST.BaseText >
+                    Are you ready to log out?
+                </ST.BaseText>
+            </ST.BoxCenter>
 
-                <FormItem sx={{ 'display': 'flex', 'justifyContent': 'center' }}>
-                    <Button type='submit' onClick={ handleLogout } variant='contained' sx={{minWidth: '80px'}}>Log Out</Button>
-                </FormItem>
+            <ST.BoxCenter>
+                <Button type='submit' onClick={ handleLogout } variant='contained' sx={{minWidth: '80px'}}>
+                    Log Out
+                </Button>
+            </ST.BoxCenter>
 
-            </StackForm>
         </BaseModal>  
     );
 }

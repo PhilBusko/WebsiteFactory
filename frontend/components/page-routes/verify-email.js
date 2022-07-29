@@ -1,15 +1,15 @@
 /**************************************************************************************************
-CONFIRM EMAIL
+VERIFY EMAIL
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { Grid, Card } from '@mui/material';
+import { Grid, Box, Stack, Card } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../elements/styled-elements'
 
 
-function ConfirmEmail(props) {
+function VerifyEmail(props) {
 
     const { userId } = useParams();
     const { token } = useParams();
@@ -25,7 +25,7 @@ function ConfirmEmail(props) {
         function runConfirm() {
             AxiosConfig({
                 method: 'POST',     
-                url: '/auth/confirm-registration',
+                url: '/auth/verify-registration',
                 data: { 'userId': userId, 'token': token },
             }).then(responseData => {
                 setSuccess( responseData );
@@ -51,26 +51,32 @@ function ConfirmEmail(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>Confirm Email</ST.SpecialText>
+                        <ST.SpecialText>Verify Email</ST.SpecialText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
-                    <Card elevation={3} sx={{ width: '280px', height: '170px', padding: '16px' }}> 
-                        <ST.BaseText >
-                            { `User ID: ${userId}` }
-                        </ST.BaseText>
-                        <ST.BaseText >
-                            {  `Token: ${token.slice(0,20)}...`  }
-                        </ST.BaseText>
-                        <ST.HighlightText >
-                            { success }
-                        </ST.HighlightText>
-                        <ST.BaseText sx={{ color: 'crimson' }}>
-                            { error.map( (err, idx) => 
-                                <div key={idx}>{err}</div>
-                            )}
-                        </ST.BaseText>
+                    <Card elevation={3} sx={{ width: '280px', padding: '16px' }}> 
+                        <Stack spacing='8px'>
+                            <ST.BaseText >
+                                { `User ID: ${userId}` }
+                            </ST.BaseText>
+                            <ST.BaseText sx={{ marginBottom: '8px' }}>
+                                { `Token: ${token.slice(0,20)}...` }
+                            </ST.BaseText>
+                            {!!success && 
+                                <ST.HighlightText >
+                                    { success }
+                                </ST.HighlightText>
+                            }
+                            <Box>
+                                { error.map( (err, idx) => 
+                                    <ST.BaseText key={idx} sx={{ color: 'crimson' }}>
+                                        {err}
+                                    </ST.BaseText>
+                                )}
+                            </Box>
+                        </Stack>
                     </Card>
                 </ST.GridItemCenter>
 
@@ -79,4 +85,4 @@ function ConfirmEmail(props) {
     );
 }
 
-export default ConfirmEmail;
+export default VerifyEmail;

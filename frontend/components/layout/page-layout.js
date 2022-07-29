@@ -9,7 +9,6 @@ import DesktopNav from './desktop-nav.js';
 import LogInModal from '../modals/login-modal'
 import LogOutModal from '../modals/logout-modal'
 import SignUpModal from '../modals/signup-modal'
-import PasswordModal from '../modals/password-modal'
 
 
 function PageLayout(props) {
@@ -17,8 +16,7 @@ function PageLayout(props) {
     const [loginOpen, setLoginOpen] = useState(false);
     const [logoutOpen, setLogoutOpen] = useState(false);
     const [signupOpen, setSignupOpen] = useState(false);
-    const [passwordOpen, setPasswordOpen] = useState(false);
-    const modalSetters = [setLoginOpen, setLogoutOpen, setSignupOpen, setPasswordOpen];
+    const modalSetters = [setLoginOpen, setLogoutOpen, setSignupOpen];
 
     return (
         <>
@@ -37,7 +35,6 @@ function PageLayout(props) {
             <LogInModal open={loginOpen} setOpen={setLoginOpen} />
             <LogOutModal open={logoutOpen} setOpen={setLogoutOpen} />
             <SignUpModal open={signupOpen} setOpen={setSignupOpen} />
-            <PasswordModal open={passwordOpen} setOpen={setPasswordOpen} />
         </>
     );
 }

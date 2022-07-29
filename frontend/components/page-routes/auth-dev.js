@@ -191,7 +191,7 @@ function AuthDev(props) {
                     </Stack>
                 </ST.GridItemCenter>
 
-                <ST.GridItemCenter item xs={8} lg={4} >
+                <ST.GridItemCenter item xs={8} lg={4}>
                     <Stack spacing='16px' alignItems='center'>
                     
                         <Button onClick={handleRegister} variant='contained'>Register</Button>

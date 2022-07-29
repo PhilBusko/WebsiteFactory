@@ -1,17 +1,16 @@
 /**************************************************************************************************
-AUTH GROUP
+AUTH PANEL
 **************************************************************************************************/
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
 import { ButtonBase } from '@mui/material';
-import { Box } from '@mui/material';
-
+import { Box, Stack } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { GlobalContext } from '../app-main/global-store'
 import * as ST from '../elements/styled-elements'
 
 
-const AuthGroup = styled(ST.BoxSpaceBetween)(({ theme }) => ({
+const AuthGroup = styled(Box)(({ theme }) => ({
     padding: '6px 8px', 
     background: '#212121',    
 }));
@@ -22,9 +21,13 @@ const UserName = styled(ST.BaseText)(({ theme }) => ({
     whiteSpace: 'nowrap',
 }));
 
+const AuthStack = styled(Stack)(({ theme }) => ({
+    width: '60px',
+    padding: '4px 0px',
+    alignItems: 'end',
+}));
+
 const AuthButton = styled(ButtonBase)(({ theme }) => ({
-    marginBottom: '4px',
-    justifyContent: 'right',
     '& .MuiTypography-root': { 
         fontSize: '90%',
         color: 'white',
@@ -41,32 +44,36 @@ function AuthPanel(props) {
     return (<>
         {!userStore[0] && 
             <AuthGroup>
-                <UserName>
-                    Guest User
-                </UserName>
-                <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-                    <AuthButton onClick={() => { props.setModals[0](true); }}>
-                        <ST.BaseText>Log In</ST.BaseText>
-                    </AuthButton>
-                    <AuthButton onClick={() => { props.setModals[2](true); }}>
-                        <ST.BaseText>Sign Up</ST.BaseText>
-                    </AuthButton>
-                </Box>
+                <ST.BoxSpaceBetween>
+                    <UserName>
+                        Guest User
+                    </UserName>
+                    <AuthStack spacing='6px'>
+                        <AuthButton onClick={() => { props.setModals[0](true); }}>
+                            <ST.BaseText>Log In</ST.BaseText>
+                        </AuthButton>
+                        <AuthButton onClick={() => { props.setModals[2](true); }}>
+                            <ST.BaseText>Sign Up</ST.BaseText>
+                        </AuthButton>
+                    </AuthStack>
+                </ST.BoxSpaceBetween>
             </AuthGroup>
         }
         {!!userStore[0] && 
-            <AuthGroup sx={{ border: '1px solid white', borderRadius: '4px' }}>
-                <UserName>
-                    { userStore[0] }
-                </UserName>
-                <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-                    <AuthButton onClick={() => { navigate('/account/'); }}>
-                        <ST.BaseText>Account</ST.BaseText>
-                    </AuthButton>
-                    <AuthButton onClick={() => { props.setModals[1](true); }}>
-                        <ST.BaseText>Log Out</ST.BaseText>
-                    </AuthButton>
-                </Box>
+            <AuthGroup>
+                <ST.BoxSpaceBetween>
+                    <UserName>
+                        { userStore[0] }
+                    </UserName>
+                    <AuthStack spacing='6px'>
+                        <AuthButton onClick={() => { navigate('/account/'); }}>
+                            <ST.BaseText>Account</ST.BaseText>
+                        </AuthButton>
+                        <AuthButton onClick={() => { props.setModals[1](true); }}>
+                            <ST.BaseText>Log Out</ST.BaseText>
+                        </AuthButton>
+                    </AuthStack>
+                </ST.BoxSpaceBetween>
             </AuthGroup>
         }
     </>);

@@ -4,11 +4,15 @@ LOG IN MODAL
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, FormHelperText, Button } from '@mui/material';
+import { Box } from '@mui/material';
+import isEmail from 'validator/lib/isEmail';
+
 import AxiosConfig from '../app-main/axios-config'
 import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
 import BaseModal from './base-modal';
-import { StackForm, FormItem } from '../elements/stack-form'
+import * as ST from '../elements/styled-elements'
+import PasswordField from '../elements/password-field'
 
 
 function LogInModal(props) {
@@ -16,49 +20,28 @@ function LogInModal(props) {
     const { userStore } = useContext(GlobalContext);
     const formWidth = '280px';
     let navigate = useNavigate();  
-
-    // input controls
-
     const [email, setEmail] = useState('zetaszaur@gmail.com');
-    const handleEmail = (evt) => {
-        setEmail(evt.target.value);
-    }
-
     const [password, setPassword] = useState('GHIJ654');
-    const handlePassword = (evt) => {
-        setPassword(evt.target.value);
-    }
 
     // submit button 
 
     const [formResult, setFormResult] = useState('');
 
-    function isFormValid() {
-        var valid = true;
+    function loginUser() {
 
-        if (email.length == 0 || password.length == 0) {
-            setFormResult('Credentials can\'t be blank');
-            valid = false;
+        if (!isEmail(email)) {
+            setFormResult('Email is not valid.');
+            return;
         }
-
-        return valid;
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setFormResult(null);
-
-        if (!isFormValid()) return;
-
-        const credentials = {
-            'email': email, 
-            'password': password,
-        };
+        if (password.length == 0) {
+            setFormResult('Password can\'t be blank');
+            return;
+        }
 
         AxiosConfig({
             method: 'POST',
             url: '/auth/click-login',
-            data: credentials,
+            data: { 'email': email, 'password': password },
         }).then(responseData => {
             userStore[1](responseData.user || 'user not set')
             TK.storeAccessToken(responseData.access);
@@ -66,11 +49,49 @@ function LogInModal(props) {
             setEmail('');
             setPassword('');
             setFormResult('');
+            props.setOpen(false);
             navigate('/account/');
         }).catch(errorLs => {
             TK.wipeTokens();
             setFormResult(errorLs[errorLs.length -1]);
         });
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setFormResult(null);
+
+        setTimeout(loginUser, 500);
+    }
+
+
+
+
+    // forgot password
+
+    function forgotPassword() {
+
+        if (!isEmail(email)) {
+            setFormResult('Email is not valid.');
+            return;
+        }
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/forgot-password',
+            data: { 'email': email },
+        }).then(responseData => {
+            setFormResult(responseData);
+        }).catch(errorLs => {
+            setFormResult(errorLs[errorLs.length -1]);
+        });
+    }
+
+    const handleForgot = (event) => {
+        event.preventDefault();
+        setFormResult(null);
+
+        setTimeout(forgotPassword, 500);
     }
 
     // render
@@ -81,27 +102,28 @@ function LogInModal(props) {
             setOpen={props.setOpen} 
             title='Log In'
             width={formWidth} >
-            <StackForm width={formWidth}>
 
-                <FormItem >
-                    <TextField 
-                        value={ email } onChange={ handleEmail } 
-                        variant='outlined' label='Email' size='small' fullWidth/>
-                </FormItem>
+            <TextField 
+                value={ email } onChange={(event) => { setEmail(event.target.value); }} 
+                variant='outlined' label='Email' size='small' fullWidth/>
 
-                <FormItem >
-                    <TextField 
-                        value={ password } onChange={ handlePassword }  
-                        type='password' inputProps={{ autoComplete: 'new-password' }}
-                        variant='outlined' label='Password' size='small' fullWidth/>
-                </FormItem>
+            <PasswordField 
+                value={ password } 
+                onChange={(event) => { setPassword(event.target.value); }}/>
 
-                <FormItem sx={{ 'display': 'flex', 'justifyContent': 'space-between' }}>
+            <ST.SmallButton onClick={ handleForgot }>
+                <ST.SpecialText>Forgot Password</ST.SpecialText>
+            </ST.SmallButton>
+
+            <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>
+                <Box sx={{ paddingRight: '6px' }}>
                     <FormHelperText value={formResult} >{formResult}</FormHelperText>
-                    <Button type='submit' onClick={ handleSubmit } variant='contained' sx={{minWidth: '80px'}} >Log In</Button>
-                </FormItem>
+                </Box>
+                <Box>
+                    <Button type='submit' onClick={ handleSubmit } variant='contained' sx={{minWidth: '80px'}}>Log In</Button>
+                </Box>
+            </ST.BoxSpaceBetween>
 
-            </StackForm>
         </BaseModal>  
     );
 }

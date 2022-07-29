@@ -1,112 +1,136 @@
 /**************************************************************************************************
 SIGN UP MODAL
 **************************************************************************************************/
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { TextField, FormHelperText, Button } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import isEmail from 'validator/lib/isEmail';
+import zxcvbn from 'zxcvbn';
 import AxiosConfig from '../app-main/axios-config'
-import * as TK from '../app-main/token-storage'
-import { GlobalContext } from '../app-main/global-store'
 import BaseModal from './base-modal';
-import { StackForm, FormItem } from '../elements/stack-form'
+import * as ST from '../elements/styled-elements'
+import PasswordField from '../elements/password-field'
 
 
 function SignUpModal(props) {
 
-    const { userStore } = useContext(GlobalContext);
-    const formWidth = '320px';
-    let navigate = useNavigate();  
-
-    // input controls
-
-    const [email, setEmail] = useState('zetaszaur@gmail.com');
-    const handleEmail = (evt) => {
-        setEmail(evt.target.value);
-    }
-
-    const [password, setPassword] = useState('GHIJ654');
-    const handlePassword = (evt) => {
-        setPassword(evt.target.value);
-    }
-
-
-
-
-
-    // submit button 
-
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [formResult, setFormResult] = useState('');
+    const formWidth = '300px';
 
-    function isFormValid() {
-        var valid = true;
+    // clear the fields when the modal is closed
 
-        if (email.length == 0 || password.length == 0) {
-            setFormResult('Credentials can\'t be blank');
-            valid = false;
-        }
-
-        return valid;
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setFormResult(null);
-
-        if (!isFormValid()) return;
-
-        const credentials = {
-            'email': email, 
-            'password': password,
-        };
-
-        AxiosConfig({
-            method: 'POST',
-            url: '/auth/click-login',
-            data: credentials,
-        }).then(responseData => {
-            userStore[1](responseData.user || 'user not set')
-            TK.storeAccessToken(responseData.access);
-            TK.storeRefreshToken(responseData.refresh);
+    useEffect(() => {
+        if (!props.open) {
             setEmail('');
             setPassword('');
             setFormResult('');
-            navigate('/account/');
+        }
+    }, [props.open])
+
+    // create new user
+
+    function createUser() {
+
+        if (!isEmail(email)) {
+            setFormResult('Email is not valid.');
+            return;
+        }
+        if (zxcvbn(password).score < 2) {
+            setFormResult('Password is too weak.');
+            return;
+        }
+
+        function verifyEmailChain() {    
+            AxiosConfig({
+                method: 'POST',
+                url: '/auth/send-verification',
+                data: { 'email': email },
+            }).then(responseData => {
+                setFormResult('A verification email has been sent. Please check your spam folder.')
+            }).catch(errorLs => {
+                setFormResult(errorLs[errorLs.length -1]);
+            });
+        }
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/create-user',
+            data: { 'email': email, 'password': password },
+        }).then(responseData => {
+            setFormResult(responseData);
+            verifyEmailChain();
         }).catch(errorLs => {
-            TK.wipeTokens();
             setFormResult(errorLs[errorLs.length -1]);
         });
     }
 
+    const handleSignup = (event) => {
+        event.preventDefault();
+        setFormResult(null);
+
+        setTimeout(createUser, 500);
+    }
+
+    // just user verification
+
+    function verifyEmail() {
+
+        if (!isEmail(email)) {
+            setFormResult('Email is not valid.');
+            return;
+        }
+
+        AxiosConfig({
+            method: 'POST',
+            url: '/auth/send-verification',
+            data: { 'email': email },
+        }).then(responseData => {
+            setFormResult(responseData);
+        }).catch(errorLs => {
+            setFormResult(errorLs[errorLs.length -1]);
+        });
+    }
+
+    const handleVerify = (event) => {
+        event.preventDefault();
+        setFormResult(null);
+
+        setTimeout(verifyEmail, 500);
+    }
+
     // render
 
-    
     return (
         <BaseModal
             open={props.open} 
             setOpen={props.setOpen} 
-            title='User Registration'
-            width={formWidth} >
-            <StackForm width={formWidth}>
+            title='Sign Up'
+            width={formWidth}>
 
-                <FormItem >
-                    <TextField 
-                        value={ email } onChange={ handleEmail } 
-                        variant='outlined' label='Email' size='small' fullWidth/>
-                </FormItem>
+            <TextField 
+                value={ email } onChange={(event) => { setEmail(event.target.value); }} 
+                variant='outlined' label='Email' size='small' fullWidth/>
 
-                <FormItem >
-                    <TextField 
-                        value={ password } onChange={ handlePassword }  
-                        type='password' inputProps={{ autoComplete: 'new-password' }}
-                        variant='outlined' label='Password' size='small' fullWidth/>
-                </FormItem>
+            <PasswordField 
+                value={ password } 
+                onChange={(event) => { setPassword(event.target.value); }}/>
 
-                <FormItem sx={{ 'display': 'flex', 'justifyContent': 'space-between' }}>
+            <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>
+                <Box sx={{ paddingRight: '6px' }}>
                     <FormHelperText value={formResult} >{formResult}</FormHelperText>
-                    <Button type='submit' onClick={ handleSubmit } variant='contained' sx={{minWidth: '80px'}} >Log In</Button>
-                </FormItem>
+                </Box>
+                <Stack spacing='8px' sx={{ width: '110px' }}>
+                    <Button type='submit' onClick={ handleSignup } variant='contained' sx={{minWidth: '80px'}}>
+                        Register
+                    </Button>
+                    <ST.SmallButton onClick={ handleVerify }>
+                        <ST.SpecialText>Send Verification</ST.SpecialText>
+                    </ST.SmallButton>
+                </Stack>
+            </ST.BoxSpaceBetween>
 
-            </StackForm>
         </BaseModal>  
     );
 }

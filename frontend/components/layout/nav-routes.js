@@ -3,7 +3,6 @@ NAVIGATION ROUTES
 **************************************************************************************************/
 import { styled } from '@mui/material/styles';
 import { List, ListItem, Link } from '@mui/material';
-
 import { RoutesConfig } from '../app-main/routes'
 import * as ST from '../elements/styled-elements'
 

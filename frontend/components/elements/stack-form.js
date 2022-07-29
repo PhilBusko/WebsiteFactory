@@ -1,18 +1,15 @@
 /**************************************************************************************************
 STACK FORM
 **************************************************************************************************/
-import { styled } from '@mui/material/styles';
 import { Stack } from '@mui/material';
-
-const FormItem = styled('div')(({ theme }) => ({
-    'textAlign': 'left',
-}));
 
 function StackForm(props) {
     return (
         <form>
-            <Stack spacing={props.padSize} 
-                sx={{ 'padding': props.padSize, 'width': props.width }}>
+            <Stack 
+                spacing={props.padSize} 
+                alignItems='start' 
+                sx={{ 'width': props.width }}>
                 { props.children }
             </Stack>
         </form>
@@ -24,4 +21,4 @@ StackForm.defaultProps = {
     'padSize': '16px',
 };
 
-export { StackForm, FormItem };
+export default StackForm;

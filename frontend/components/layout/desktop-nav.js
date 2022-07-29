@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 import { ButtonBase } from '@mui/material';
 import { Drawer, Box } from '@mui/material';
 import { ArrowBack, ArrowForward } from '@mui/icons-material'; 
-import Image from 'mui-image';
 import * as ST from '../elements/styled-elements'
 import AuthPanel from './auth-panel'
 import NavRoutes from './nav-routes'
@@ -23,6 +22,11 @@ const BottomPanel = styled(Box)(({ theme }) => ({
     'width': drawerWidth,
     'height': footerHeight, 
     'background': footerBkgd, 
+}));
+
+const LogoImage = styled('img')(({ theme }) => ({
+    width: footerHeight * 0.8, 
+    height: footerHeight * 0.8, 
 }));
 
 const MenuCollapseButton = styled(ButtonBase)(({ theme }) => ({
@@ -67,8 +71,7 @@ function DesktopNav(props) {
 
             <BottomPanel name='menu-bottom'>
                 <ST.BoxCenter height='100%'>
-                    <Image src={require('../assets/app-icon.png')} duration={0} 
-                        width={footerHeight * 0.8} height={footerHeight * 0.8} />
+                    <LogoImage src={require('../assets/app-icon.png')} />
                 </ST.BoxCenter>
                 <MenuCollapseButton onClick={toggleNav}>
                     <ArrowBack></ArrowBack>

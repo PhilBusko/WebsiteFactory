@@ -4,7 +4,7 @@ APP-MAIN ROUTES
 import BaseAxios from '../page-routes/base-axios'
 import BaseWebsocket from '../page-routes/base-websocket'
 import AuthDev from '../page-routes/auth-dev'
-import ConfirmEmail from '../page-routes/confirm-email'
+import VerifyEmail from '../page-routes/verify-email'
 import NewPassword from '../page-routes/new-password'
 import UserAccount from '../page-routes/user-account'
 
@@ -35,9 +35,9 @@ export const RoutesConfig = [
     },
 
     {
-        'title': 'Confirm Email',
-        'path': '/confirm-email/:userId/:token/',
-        'element': <ConfirmEmail />, 
+        'title': 'Verify Email',
+        'path': '/verify-email/:userId/:token/',
+        'element': <VerifyEmail />, 
         'order': 1,
     },    
     {

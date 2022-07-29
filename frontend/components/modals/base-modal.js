@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal'
 import { Close } from '@mui/icons-material'; 
 import * as ST from '../elements/styled-elements'
+import StackForm from '../elements/stack-form'
 
 
 const ModalWrapper = styled(Box)(({ theme }) => ({
@@ -21,19 +22,23 @@ const ModalWrapper = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '8px',
+    padding: '8px 24px 24px 24px',
     background: 'white',
 }));
 
 const ModalTitle = styled('h2')(({ theme }) => ({
     width: '50%',
-    margin: '0px',
+    margin: '0px 0px 8px 0px',
     borderBottom: '2px solid grey',
-    color: 'black', //theme.palette.primary.main,
+    '& .MuiTypography-root': { 
+        fontSize: '100%',    
+        lineHeight: '1.2', 
+        whiteSpace: 'nowrap',
+    }, 
 }));
 
 const CloseButton = styled(ButtonBase)(({ theme }) => ({
-    left: '16px', bottom: '4px',
+    left: '16px', bottom: '8px',
     transform: 'scale(1.25)', 
     borderRadius: '50%', 
     color: 'crimson',
@@ -49,16 +54,20 @@ function BaseModal(props) {
     return (
         <Modal open={props.open}>
             <ModalWrapper>
+                <StackForm width={props.width}>
 
-                <ST.BoxSpaceBetween sx={{ width: props.width }}>
-                    <ModalTitle>{props.title}</ModalTitle>
-                    <CloseButton onClick={handleClose}>
-                        <Close></Close>
-                    </CloseButton>
-                </ST.BoxSpaceBetween>
+                    <ST.BoxSpaceBetween>
+                        <ModalTitle>
+                            <ST.SpecialText>{props.title}</ST.SpecialText>
+                        </ModalTitle>
+                        <CloseButton onClick={handleClose}>
+                            <Close></Close>
+                        </CloseButton>
+                    </ST.BoxSpaceBetween>
 
-                <Box>{ props.children }</Box>
+                    { props.children }
                 
+                </StackForm>
             </ModalWrapper>
         </Modal>  
     );

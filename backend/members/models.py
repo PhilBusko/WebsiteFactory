@@ -70,6 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     verified = MD.BooleanField(default=False)
     active = MD.BooleanField(default=False)
     date_joined = MD.DateTimeField(auto_now_add=True)
+    #email_last_sent = MD.DateTimeField(null=True)
 
     objects = UserManager()
 

@@ -5,15 +5,18 @@ import { useState, useEffect } from 'react';
 import { Button, TextField, Autocomplete, FormHelperText } from '@mui/material';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { FormControlLabel, Checkbox } from '@mui/material';
-import { Card } from '@mui/material';
-import { Grid } from '@mui/material';
-import Image from 'mui-image';
-
+import { Grid, Box, Card } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import AxiosConfig from '../app-main/axios-config'
 import PageLayout from  '../layout/page-layout'
 import * as ST from  '../elements/styled-elements'
-import { StackForm, FormItem } from '../elements/stack-form'
+import StackForm from '../elements/stack-form'
 
+
+const AxiosImage = styled('img')(({ theme }) => ({
+    width: '350px',
+    [theme.breakpoints.down('md')]: {width: '280px'},
+}));
 
 function BaseAxios(props) {
 
@@ -139,53 +142,53 @@ function BaseAxios(props) {
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
-                    <Card elevation={3}> 
+                    <Card elevation={3} sx={{ 'padding': '16px' }} > 
                         <StackForm width='260px'>
 
-                            <FormItem>
-                                <TextField 
-                                    value={ userName } error={ !!userNameError } helperText={ userNameError }
-                                    onChange={ handleUserName }  
-                                    variant='outlined' label='User Name' size='small'/>
-                            </FormItem>
+                            <TextField 
+                                value={ userName } error={ !!userNameError } helperText={ userNameError }
+                                onChange={ handleUserName }  
+                                variant='outlined' label='User Name' size='small'/>
 
-                            <FormItem>
-                                <FormControl fullWidth size='small'>
-                                    <InputLabel id='themeSelect'>Theme Group</InputLabel>
-                                    <Select 
-                                        value={themeGroup} onChange={handleThemeGroup} 
-                                        labelId='themeSelect' label='Theme Group' size='small' >
-                                        <MenuItem key={0} value=''><em>None</em></MenuItem>
-                                        { themeOptions.map((group, idx) => (
-                                            <MenuItem key={idx+1} value={group}>
-                                                {group}
-                                            </MenuItem>
-                                        )) }
-                                    </Select>
-                                </FormControl>
-                            </FormItem>
+                            <FormControl size='small' sx={{ width: '200px' }}>
+                                <InputLabel id='themeSelect'>Theme Group</InputLabel>
+                                <Select 
+                                    value={themeGroup} onChange={handleThemeGroup} 
+                                    labelId='themeSelect' label='Theme Group' size='small' >
+                                    <MenuItem key={0} value=''><em>None</em></MenuItem>
+                                    { themeOptions.map((group, idx) => (
+                                        <MenuItem key={idx+1} value={group}>
+                                            {group}
+                                        </MenuItem>
+                                    )) }
+                                </Select>
+                            </FormControl>
 
-                            <FormItem>
-                                <FormControlLabel label='Option One' labelPlacement='end'
-                                    control={<Checkbox checked={optionChecked} onChange={handleOption}
-                                            sx={{ 'padding': '0 8px' }} />} 
-                                />
-                            </FormItem>
+                            <FormControlLabel label='Option One' labelPlacement='end'
+                                control={<Checkbox checked={optionChecked} onChange={handleOption}
+                                        sx={{ 'padding': '0 8px' }} />} 
+                            />
 
-                            <FormItem>
-                                <Autocomplete
-                                    options={nameOptions} 
-                                    value={setName} onChange={handleSetName} 
-                                    //inputValue={setInput} onInputChange={handleSetInput} 
-                                    //open={ setInput.length > 2 } 
-                                    renderInput={(params) => <TextField {...params} label='Set Name'  />}
-                                    sx={{ width: '100%' }} size='small' /> 
-                            </FormItem>
+                            <Autocomplete
+                                options={nameOptions} 
+                                value={setName} onChange={handleSetName} 
+                                //inputValue={setInput} onInputChange={handleSetInput} 
+                                //open={ setInput.length > 2 } 
+                                renderInput={(params) => <TextField {...params} label='Set Name'  />}
+                                sx={{ width: '100%' }} size='small' /> 
 
-                            <FormItem sx={{ 'display': 'flex', 'justifyContent': 'space-between' }}>
-                                <FormHelperText value={formResult}>{formResult}</FormHelperText>
-                                <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
-                            </FormItem>
+                            <ST.SmallButton onClick={ () => {} }>
+                                <ST.SpecialText>Small Button</ST.SpecialText>
+                            </ST.SmallButton>
+
+                            <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>
+                                <Box sx={{ paddingRight: '6px' }}>
+                                    <FormHelperText value={formResult}>{formResult}</FormHelperText>
+                                </Box>
+                                <Box>
+                                    <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
+                                </Box>
+                            </ST.BoxSpaceBetween>
 
                         </StackForm>
                     </Card>
@@ -193,8 +196,7 @@ function BaseAxios(props) {
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ 'padding': '16px' }} > 
-                        <Image src={require('../assets/lego-set.jpg')} 
-                            width={320} duration={0} />
+                        <AxiosImage src={require('../assets/lego-set.jpg')} />
                     </Card>
                 </ST.GridItemCenter>
 

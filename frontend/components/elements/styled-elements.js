@@ -1,6 +1,7 @@
 /**************************************************************************************************
 STYLED ELEMENTS
 **************************************************************************************************/
+import { ButtonBase } from '@mui/material';
 import { Box, Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -22,12 +23,14 @@ const GridItemCenter = styled(Grid)(({ theme }) => ({
 }));
 
 const BoxCenter = styled(Box)(({ theme }) => ({
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
 }));
 
 const BoxSpaceBetween = styled(Box)(({ theme }) => ({
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -43,20 +46,35 @@ const TitleGroup = styled('h1')(({ theme }) => ({
     }, 
 }));
 
+const SmallButton = styled(ButtonBase)(({ theme }) => ({
+    '& .MuiTypography-root': { 
+        fontSize: '90%',    
+        color: '#1e73be',
+        textDecoration: 'underline',
+    }, 
+    //'&:hover': {fontWeight: '600'}, 
+}));
+
 
 // FONTS
 
 const BaseText = styled(Typography)(({ theme }) => ({
     fontFamily: 'sans-serif', 
+    lineHeight: 1.1,
 }));
 
-const HighlightText = styled('BaseText')(({ theme }) => ({
+const HighlightText = styled(BaseText)(({ theme }) => ({
     fontSize: '110%',
-    color: 'DarkSlateBlue',
+    color: '#1e73be',
 }));
 
 const SpecialText = styled(Typography)(({ theme }) => ({
     fontFamily: 'Roboto, sans-serif',
+}));
+
+const HighlightSpecial = styled(SpecialText)(({ theme }) => ({
+    fontSize: '110%',
+    color: '#1e73be',
 }));
 
 
@@ -67,9 +85,12 @@ export {
     GridItemCenter, 
     BoxCenter, 
     BoxSpaceBetween,
+
     TitleGroup, 
+    SmallButton, 
 
     BaseText,
     HighlightText,
     SpecialText, 
+    HighlightSpecial, 
 }
