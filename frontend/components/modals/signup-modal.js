@@ -6,10 +6,10 @@ import { TextField, FormHelperText, Button } from '@mui/material';
 import { Box, Stack } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
 import zxcvbn from 'zxcvbn';
-import AxiosConfig from '../app-main/axios-config'
+import AxiosConfig from '../app-main/axios-config';
 import BaseModal from './base-modal';
-import * as ST from '../elements/styled-elements'
-import PasswordField from '../elements/password-field'
+import * as ST from '../elements/styled-elements';
+import PasswordField from '../elements/password-field';
 
 
 function SignUpModal(props) {

@@ -7,10 +7,10 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { FormControlLabel, Checkbox } from '@mui/material';
 import { Grid, Box, Card } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import AxiosConfig from '../app-main/axios-config'
-import PageLayout from  '../layout/page-layout'
-import * as ST from  '../elements/styled-elements'
-import StackForm from '../elements/stack-form'
+import AxiosConfig from '../app-main/axios-config';
+import PageLayout from  '../layout/page-layout';
+import * as ST from  '../elements/styled-elements';
+import StackForm from '../elements/stack-form';
 
 
 const AxiosImage = styled('img')(({ theme }) => ({
@@ -90,7 +90,7 @@ function BaseAxios(props) {
 
     const [formResult, setFormResult] = useState(null);
 
-    function validateForm() {
+    function submitForm() {
         var hasError = false;
 
         if (userName == '') {
@@ -101,19 +101,7 @@ function BaseAxios(props) {
             setUserNameError('Can\'t have white spaces');
             hasError = true;
         }
-        else {
-            setUserNameError(null);
-        }
 
-        return hasError;
-    }
-
-    const handleSubmit = (event) => {
-        console.log('submit clicked');
-        event.preventDefault();
-        setFormResult(null);
-
-        var hasError = validateForm();
         if (hasError) {
             return;
         }
@@ -127,6 +115,14 @@ function BaseAxios(props) {
         }).catch(errorLs => {
             setFormResult(errorLs);
         });
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setUserNameError(null);
+        setFormResult(null);
+
+        setTimeout(submitForm, 500);
     }
 
     // render

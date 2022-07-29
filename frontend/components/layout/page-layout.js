@@ -5,10 +5,9 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import MobileNav from './mobile-nav.js';
 import DesktopNav from './desktop-nav.js';
-
-import LogInModal from '../modals/login-modal'
-import LogOutModal from '../modals/logout-modal'
-import SignUpModal from '../modals/signup-modal'
+import LogInModal from '../modals/login-modal';
+import LogOutModal from '../modals/logout-modal';
+import SignUpModal from '../modals/signup-modal';
 
 
 function PageLayout(props) {

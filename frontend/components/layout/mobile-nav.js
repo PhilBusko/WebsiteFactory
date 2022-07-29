@@ -9,9 +9,9 @@ import { AppBar, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import * as ST from '../elements/styled-elements'
-import AuthPanel from './auth-panel'
-import NavRoutes from './nav-routes'
+import * as ST from '../elements/styled-elements';
+import AuthPanel from './auth-panel';
+import NavRoutes from './nav-routes';
 
 
 const drawerWidth = 200;
@@ -21,9 +21,7 @@ const footerBkgd = 'rgba(130,130,130,0.5)';
 function MobileNav(props) {
 
     const [drawerOpen, setOpen] = useState(false);
-    const toggleNav = () => {
-        setOpen(!drawerOpen);
-    };
+    const [authAnchor, setAuthAnchor] = useState(null);
 
     const NavDrawer = styled(Drawer)(({ theme }) => ({
         width: (drawerOpen ? drawerWidth : 0), 
@@ -32,7 +30,15 @@ function MobileNav(props) {
             background: navBkgd,     },
     }));
 
-    const [authAnchor, setAuthAnchor] = useState(null);
+    const toggleNav = () => {
+        setOpen(!drawerOpen);
+        setAuthAnchor(null);
+    };
+
+    const toggleAuth = (event) => {
+        setOpen(false);
+        setAuthAnchor(event.currentTarget);
+    };
 
     return (<>
         <AppBar>
@@ -59,7 +65,7 @@ function MobileNav(props) {
                 </Box>
 
                 <Box sx={{ paddingRight: '12px'}}>
-                    <IconButton edge='start' color='inherit' onClick={(event) => { setAuthAnchor(event.currentTarget); }}>
+                    <IconButton edge='start' color='inherit' onClick={ toggleAuth }>
                         <ManageAccountsIcon fontSize='large'/>
                     </IconButton>
                     <Menu

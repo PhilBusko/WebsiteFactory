@@ -6,9 +6,9 @@ import { styled } from '@mui/material/styles';
 import { ButtonBase } from '@mui/material';
 import { Drawer, Box } from '@mui/material';
 import { ArrowBack, ArrowForward } from '@mui/icons-material'; 
-import * as ST from '../elements/styled-elements'
-import AuthPanel from './auth-panel'
-import NavRoutes from './nav-routes'
+import * as ST from '../elements/styled-elements';
+import AuthPanel from './auth-panel';
+import NavRoutes from './nav-routes';
 
 
 const drawerWidth = 200;

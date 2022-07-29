@@ -6,11 +6,11 @@ import { useParams } from 'react-router';
 import { FormHelperText, Button } from '@mui/material';
 import { Box, Grid, Card } from '@mui/material';
 import zxcvbn from 'zxcvbn';
-import AxiosConfig from '../app-main/axios-config'
-import PageLayout from '../layout/page-layout'
-import * as ST from '../elements/styled-elements'
-import StackForm  from '../elements/stack-form'
-import PasswordField from '../elements/password-field'
+import AxiosConfig from '../app-main/axios-config';
+import PageLayout from '../layout/page-layout';
+import * as ST from '../elements/styled-elements';
+import StackForm  from '../elements/stack-form';
+import PasswordField from '../elements/password-field';
 
 
 function NewPassword(props) {

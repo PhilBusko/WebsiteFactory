@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonBase } from '@mui/material';
 import { Box, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { GlobalContext } from '../app-main/global-store'
-import * as ST from '../elements/styled-elements'
+import { GlobalContext } from '../app-main/global-store';
+import * as ST from '../elements/styled-elements';
 
 
 const AuthGroup = styled(Box)(({ theme }) => ({

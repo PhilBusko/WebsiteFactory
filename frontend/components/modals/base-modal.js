@@ -4,10 +4,10 @@ BASE MODAL
 import { styled } from '@mui/material/styles';
 import { ButtonBase } from '@mui/material';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal'
+import Modal from '@mui/material/Modal';
 import { Close } from '@mui/icons-material'; 
-import * as ST from '../elements/styled-elements'
-import StackForm from '../elements/stack-form'
+import * as ST from '../elements/styled-elements';
+import StackForm from '../elements/stack-form';
 
 
 const ModalWrapper = styled(Box)(({ theme }) => ({

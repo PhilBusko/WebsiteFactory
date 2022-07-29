@@ -2,17 +2,27 @@
 BASE WEBSOCKET PAGE
 **************************************************************************************************/
 import { useState } from 'react';
-import PageLayout from '../layout/page-layout'
-import * as ST from '../elements/styled-elements'
+import { Grid, Box, Card } from '@mui/material';
+import PageLayout from '../layout/page-layout';
+import * as ST from '../elements/styled-elements';
 
 
 function BaseWebsocket(props) {
 
     return (
         <PageLayout>
-            <div style={{'padding': '10px'}}>
-                base websocket
-            </div>
+            <ST.GridPage container spacing={'16px'}>
+
+                <Grid item xs={12}>
+                    <ST.TitleGroup>
+                        <ST.SpecialText>Base Websocket</ST.SpecialText>
+                    </ST.TitleGroup>
+                </Grid>
+
+
+
+
+            </ST.GridPage>
         </PageLayout>
     );
 
