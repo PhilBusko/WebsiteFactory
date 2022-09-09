@@ -51,7 +51,7 @@ function VerifyEmail(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>Verify Email</ST.SpecialText>
+                        <ST.SpecialText>VERIFY EMAIL</ST.SpecialText>
                     </ST.TitleGroup>
                 </Grid>
 

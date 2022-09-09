@@ -38,7 +38,7 @@ function NavRoutes(props) {
             {   routesLs.map( (route, key) => (
                 <NavItem key={key} button component={Link} href={route.path}>
                     <NavText>
-                        {route.title}
+                        { route.title.toUpperCase() }
                     </NavText>
                 </NavItem>
             )) }

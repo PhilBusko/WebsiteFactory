@@ -108,7 +108,7 @@ function LogInModal(props) {
                 onChange={(event) => { setPassword(event.target.value); }}/>
 
             <ST.SmallButton onClick={ handleForgot }>
-                <ST.SpecialText>Forgot Password</ST.SpecialText>
+                <ST.BaseText>Forgot Password</ST.BaseText>
             </ST.SmallButton>
 
             <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>

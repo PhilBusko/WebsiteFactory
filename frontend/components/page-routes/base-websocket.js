@@ -15,7 +15,7 @@ function BaseWebsocket(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>Base Websocket</ST.SpecialText>
+                        <ST.SpecialText>BASE WEBSOCKET</ST.SpecialText>
                     </ST.TitleGroup>
                 </Grid>
 

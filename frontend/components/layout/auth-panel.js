@@ -15,7 +15,7 @@ const AuthGroup = styled(Box)(({ theme }) => ({
     background: '#212121',    
 }));
 
-const UserName = styled(ST.BaseText)(({ theme }) => ({
+const UserName = styled(ST.SpecialText)(({ theme }) => ({
     fontSize: '125%',
     color: 'white',
     whiteSpace: 'nowrap',
@@ -46,7 +46,7 @@ function AuthPanel(props) {
             <AuthGroup>
                 <ST.BoxSpaceBetween>
                     <UserName>
-                        Guest User
+                        GUEST USER t
                     </UserName>
                     <AuthStack spacing='6px'>
                         <AuthButton onClick={() => { props.setModals[0](true); }}>

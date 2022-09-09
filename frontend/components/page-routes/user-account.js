@@ -32,12 +32,12 @@ function UserAccount(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>User Account</ST.SpecialText>
+                        <ST.SpecialText>USER ACCOUNT</ST.SpecialText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
-                    <Card elevation={3} sx={{ padding: '16px' }}> 
+                    <ST.ContentCard elevation={3}> 
                         <Stack spacing='8px' sx={{ width: '280px' }}>
                             <ST.BaseText >
                                 { `Name: ${userInfo.user_name}` }
@@ -59,7 +59,7 @@ function UserAccount(props) {
                                 )}
                             </Box>
                         </Stack>
-                    </Card>
+                    </ST.ContentCard>
                 </ST.GridItemCenter>
 
             </ST.GridPage >

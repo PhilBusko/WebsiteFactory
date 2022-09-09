@@ -47,10 +47,6 @@ const CloseButton = styled(ButtonBase)(({ theme }) => ({
 
 function BaseModal(props) {
 
-    const handleClose = () => {
-        props.setOpen(false);
-    };
-
     return (
         <Modal open={props.open}>
             <ModalWrapper>
@@ -58,15 +54,15 @@ function BaseModal(props) {
 
                     <ST.BoxSpaceBetween>
                         <ModalTitle>
-                            <ST.SpecialText>{props.title}</ST.SpecialText>
+                            <ST.SpecialText>{ props.title.toUpperCase() }</ST.SpecialText>
                         </ModalTitle>
-                        <CloseButton onClick={handleClose}>
+                        <CloseButton onClick={() => { props.setOpen(false); }}>
                             <Close></Close>
                         </CloseButton>
                     </ST.BoxSpaceBetween>
 
                     { props.children }
-                
+
                 </StackForm>
             </ModalWrapper>
         </Modal>  

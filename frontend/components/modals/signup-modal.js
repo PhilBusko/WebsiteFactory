@@ -126,7 +126,7 @@ function SignUpModal(props) {
                         Register
                     </Button>
                     <ST.SmallButton onClick={ handleVerify }>
-                        <ST.SpecialText>Send Verification</ST.SpecialText>
+                        <ST.BaseText>Send Verification</ST.BaseText>
                     </ST.SmallButton>
                 </Stack>
             </ST.BoxSpaceBetween>

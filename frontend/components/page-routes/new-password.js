@@ -56,12 +56,12 @@ function NewPassword(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>Reset Password</ST.SpecialText>
+                        <ST.SpecialText>RESET PASSWORD</ST.SpecialText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
-                    <Card elevation={3} sx={{ 'padding': '16px' }} > 
+                    <ST.ContentCard elevation={3}> 
                         <StackForm width='260px'>
 
                             <ST.BaseText >
@@ -81,7 +81,7 @@ function NewPassword(props) {
                             </ST.BoxSpaceBetween>
 
                         </StackForm>
-                    </Card>
+                    </ST.ContentCard>
                 </ST.GridItemCenter>
 
             </ST.GridPage >

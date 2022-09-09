@@ -2,9 +2,21 @@
 STYLED ELEMENTS
 **************************************************************************************************/
 import { ButtonBase } from '@mui/material';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Card } from '@mui/material';
 import { Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { createTheme, styled } from '@mui/material/styles';
+import Legothick from '../assets/Legothick.ttf';
+
+
+// THEME
+
+const AppTheme = createTheme({  
+    overrides: {
+        MuiCssBaseline: {
+            '@global': { '@font-face': [ Legothick ] }, 
+        },
+    },
+});
 
 
 // SPACING
@@ -19,7 +31,12 @@ const GridPage = styled(Grid)(({ theme }) => ({
 const GridItemCenter = styled(Grid)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'start',
+}));
+
+const ContentCard = styled(Card)(({ theme }) => ({
+    padding: '16px', 
+    overflow: 'visible', 
 }));
 
 const BoxCenter = styled(Box)(({ theme }) => ({
@@ -48,7 +65,7 @@ const TitleGroup = styled('h1')(({ theme }) => ({
 
 const SmallButton = styled(ButtonBase)(({ theme }) => ({
     '& .MuiTypography-root': { 
-        fontSize: '90%',    
+        fontSize: '100%',    
         color: '#1e73be',
         textDecoration: 'underline',
     }, 
@@ -59,7 +76,7 @@ const SmallButton = styled(ButtonBase)(({ theme }) => ({
 // FONTS
 
 const BaseText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'sans-serif', 
+    fontFamily: 'Roboto, sans-serif', 
     lineHeight: 1.1,
 }));
 
@@ -69,7 +86,7 @@ const HighlightText = styled(BaseText)(({ theme }) => ({
 }));
 
 const SpecialText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Legothick',
 }));
 
 const HighlightSpecial = styled(SpecialText)(({ theme }) => ({
@@ -81,11 +98,13 @@ const HighlightSpecial = styled(SpecialText)(({ theme }) => ({
 // EXPORTS
 
 export {
+    AppTheme,
+
     GridPage, 
     GridItemCenter, 
+    ContentCard, 
     BoxCenter, 
     BoxSpaceBetween,
-
     TitleGroup, 
     SmallButton, 
 

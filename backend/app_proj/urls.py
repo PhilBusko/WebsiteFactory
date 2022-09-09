@@ -18,10 +18,12 @@ authentication = [
 ]
 
 axios_url = [
-    re_path(r'^theme-groups', BV.ThemeGroups),
-    re_path(r'^set-names', BV.SetNames),
     re_path(r'^lego-form', BV.ProcessForm),
-    re_path(r'^lego-params/(?P<theme>\w{0,30})', BV.LegoParams),
+    re_path(r'^theme-groups', BV.ThemeGroups),
+    re_path(r'^sets-by-theme/(?P<theme>.+)', BV.SetsByTheme),
+
+    re_path(r'^set-names', BV.SetNames),
+    re_path(r'^set-info/(?P<setName>.+)', BV.SetInfo),
 ]
 
 urlpatterns = [

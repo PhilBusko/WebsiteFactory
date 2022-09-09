@@ -3,6 +3,8 @@ PAGE LAYOUT
 **************************************************************************************************/
 import { useState } from 'react';
 import { Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { AppTheme } from '../elements/styled-elements';
 import MobileNav from './mobile-nav.js';
 import DesktopNav from './desktop-nav.js';
 import LogInModal from '../modals/login-modal';
@@ -18,7 +20,7 @@ function PageLayout(props) {
     const modalSetters = [setLoginOpen, setLogoutOpen, setSignupOpen];
 
     return (
-        <>
+        <ThemeProvider theme={AppTheme}>
             <Box name='mobile' sx={{ display: { xs: 'block', md: 'none' }}} >
                 <Box display='flex' flexDirection='column'>
                     <MobileNav setModals={modalSetters}></MobileNav>
@@ -34,7 +36,8 @@ function PageLayout(props) {
             <LogInModal open={loginOpen} setOpen={setLoginOpen} />
             <LogOutModal open={logoutOpen} setOpen={setLogoutOpen} />
             <SignUpModal open={signupOpen} setOpen={setSignupOpen} />
-        </>
+            <br></br>
+        </ThemeProvider>
     );
 }
 
