@@ -149,7 +149,7 @@ def SendVerification(request):
         from django.template.loader import get_template
         import app_proj.settings as ST
 
-        frontendDomain = ST.CORS_ORIGIN_WHITELIST[0] if ST.DEPLOYMENT_ENV == 'dev' else ST.CORS_ORIGIN_WHITELIST[-1] 
+        frontendDomain = ST.CORS_ORIGIN_WHITELIST[0] if ST.DEPLOYMENT_ENV == 'DEV' else ST.CORS_ORIGIN_WHITELIST[-1] 
         expireDate = datetime.datetime.now() + datetime.timedelta(days=ST.PASSWORD_RESET_TIMEOUT_DAYS)
 
         EMAIL_TEMPLATE = os.path.join(ST.BACKEND_PATH, 'members', 'data', 'register-email.html')
@@ -210,7 +210,7 @@ def ForgotPassword(request):
         from django.template.loader import get_template
         import app_proj.settings as ST
 
-        frontendDomain = ST.CORS_ORIGIN_WHITELIST[0] if ST.DEPLOYMENT_ENV == 'dev' else ST.CORS_ORIGIN_WHITELIST[-1] 
+        frontendDomain = ST.CORS_ORIGIN_WHITELIST[0] if ST.DEPLOYMENT_ENV == 'DEV' else ST.CORS_ORIGIN_WHITELIST[-1] 
         expireDate = datetime.datetime.now() + datetime.timedelta(days=ST.PASSWORD_RESET_TIMEOUT_DAYS)
 
         EMAIL_TEMPLATE = os.path.join(ST.BACKEND_PATH, 'members', 'data', 'forgot-password.html')

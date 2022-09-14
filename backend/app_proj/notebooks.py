@@ -2,7 +2,9 @@
 NOTEBOOK UTILITIES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-NOTEBOOK_ENV = 'dev'  # 'production'
+# NOTEBOOK_ENV = 'DEV'  
+NOTEBOOK_ENV = 'PROD'  
+
 
 def DataframeToDicts(myDf):
     myLs = myDf.to_dict('records')

@@ -78,6 +78,17 @@ DATABASES = {
         'NAME': BACKEND_PATH / 'app_db.sqlite3',
     }
 }
+if DEPLOYMENT_ENV == 'PROD':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'philbit/factory_db',
+            'USER': 'philbit',
+            'PASSWORD': 'v2_3u7Ry_kzPKmRDUUEszVtXhVx9jcPA',
+            'HOST': 'db.bit.io',
+            'PORT': '5432',
+        }
+    }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
