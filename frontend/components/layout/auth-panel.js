@@ -16,7 +16,8 @@ const AuthGroup = styled(Box)(({ theme }) => ({
 }));
 
 const UserName = styled(ST.SpecialText)(({ theme }) => ({
-    fontSize: '125%',
+    fontSize: '150%',
+    letterSpacing: '0.01em', 
     color: 'white',
     whiteSpace: 'nowrap',
 }));
@@ -42,11 +43,11 @@ function AuthPanel(props) {
     let navigate = useNavigate();  
 
     return (<>
-        {!userStore[0] && 
+        { !!userStore && ['initial', 'guest'].includes(userStore[0]['status']) && 
             <AuthGroup>
-                <ST.BoxSpaceBetween>
+                <ST.FlexHorizontal sx={{ justifyContent: 'space-between' }} >
                     <UserName>
-                        GUEST USER t
+                        GUEST t
                     </UserName>
                     <AuthStack spacing='6px'>
                         <AuthButton onClick={() => { props.setModals[0](true); }}>
@@ -56,14 +57,14 @@ function AuthPanel(props) {
                             <ST.BaseText>Sign Up</ST.BaseText>
                         </AuthButton>
                     </AuthStack>
-                </ST.BoxSpaceBetween>
+                </ST.FlexHorizontal >
             </AuthGroup>
         }
-        {!!userStore[0] && 
+        { !!userStore && ['user', 'admin'].includes(userStore[0]['status']) && 
             <AuthGroup>
-                <ST.BoxSpaceBetween>
+                <ST.FlexHorizontal sx={{ justifyContent: 'space-between' }} >
                     <UserName>
-                        { userStore[0] }
+                        { userStore[0]['name'] }
                     </UserName>
                     <AuthStack spacing='6px'>
                         <AuthButton onClick={() => { navigate('/account/'); }}>
@@ -73,7 +74,7 @@ function AuthPanel(props) {
                             <ST.BaseText>Log Out</ST.BaseText>
                         </AuthButton>
                     </AuthStack>
-                </ST.BoxSpaceBetween>
+                </ST.FlexHorizontal>
             </AuthGroup>
         }
     </>);

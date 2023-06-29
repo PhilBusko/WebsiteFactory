@@ -1,10 +1,9 @@
 /**************************************************************************************************
-SIMPLE TABLE
+PAGINATED TABLE
 **************************************************************************************************/
-import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles'
 import { DataGrid } from '@mui/x-data-grid';
-import * as ST from '../elements/styled-elements';
+import * as ST from '../styled-elements';
 
 
 const StyledTable = styled(DataGrid)(({ theme }) => ({
@@ -23,8 +22,15 @@ const StyledTable = styled(DataGrid)(({ theme }) => ({
     },
 }));
 
+const EmptyTable = styled(ST.FlexHorizontal)(({ theme }) => ({
+    width: '460px',
+    height: '200px',
+    border: '1px solid black',
+    borderRadius: '2px',
+    background: 'white', 
+}));
 
-function SimpleTable(props) {
+function PaginatedTable(props) {
 
     // add id for data grid
 
@@ -41,12 +47,17 @@ function SimpleTable(props) {
     for (var c = 0; c < colNames.length; c++) { 
         if (colNames[c] == 'id') continue;
         var isNumber = typeof(props.dataLs[0][colNames[c]]) == 'number';
-        var longString = props.dataLs[0][colNames[c]].toString().length > 18;
+
+        var longString = false;
+        for (var r = 0; r < 10; r++) { 
+            if (props.dataLs[r][colNames[c]].toString().length > 18)
+                longString = true;
+        }
 
         var colWidth = 110;
         if (isNumber) colWidth = 80;
         if (longString) colWidth = 210;
-        tableWidth += colWidth * 1.06;
+        tableWidth += colWidth * 1.01;
         //if (tableWidth > 280) tableWidth = 280;
 
         var newCol = {
@@ -61,27 +72,33 @@ function SimpleTable(props) {
         colDefs.push(newCol);
     }
 
-    const rowsBeforeScroll = 12;
-
-    return (
-        <Box >
+    // render
+    
+    return (<>
+        { props.dataLs.length > 0 &&
             <StyledTable
                 rows={props.dataLs}
                 columns={colDefs}
-                sx={{ width: tableWidth, height: ( props.dataLs.length <= rowsBeforeScroll ? 'auto' : '560px' )}}
-                autoHeight={ props.dataLs.length <= rowsBeforeScroll }
-                density='compact'           // applies to header 
-                getRowHeight={() => ( props.dataLs.length <= rowsBeforeScroll ? 36 : 'auto' )}  // applies to rows, 36px is compact height
-                disableColumnMenu           // disable menu on each header
-                hideFooter
-                disableSelectionOnClick     // keeps row from turning blue on select
+                sx={{ width: tableWidth }}
+                pageSize={12}
+                autoHeight={true}
+                density='compact'            
+                //getRowHeight={() => 'auto' }  // makes row conform to the height of the content, inconsistent with paginating
+                disableColumnMenu            
+                disableSelectionOnClick     
             />
-        </Box>
-    );
+        }
+        { props.dataLs.length === 0 &&
+            <EmptyTable sx={{ width: props.width, }}>
+                <ST.BaseText>No Data</ST.BaseText>
+            </EmptyTable>
+        }
+    </>);
 }
 
-SimpleTable.defaultProps = {
+PaginatedTable.defaultProps = {
+    width: '400px',
     dataLs: [],
 };
 
-export default SimpleTable;
+export default PaginatedTable;

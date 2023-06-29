@@ -33,7 +33,7 @@ function PasswordField(props) {
             label='Password' 
             size='small' 
             fullWidth
-            sx={{ '& .MuiOutlinedInput-root': {padding: '0'} }}
+            sx={{ '& .MuiOutlinedInput-root': {padding: '0'}, background: 'white', borderRadius: '4px' }}
         />
     );
 }

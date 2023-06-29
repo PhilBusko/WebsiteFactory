@@ -1,9 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NOTEBOOK UTILITIES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+import random 
 
-# NOTEBOOK_ENV = 'DEV'  
-NOTEBOOK_ENV = 'PROD'  
+NOTEBOOK_ENV = 'DEV'  
+# NOTEBOOK_ENV = 'PROD'  
 
 
 def DataframeToDicts(myDf):
@@ -13,13 +14,9 @@ def DataframeToDicts(myDf):
             if str(v) in ['nan', 'NaT', '<NA>'] : d[k] = None
     return myLs
 
-def ConvertFigureToJson(figure):
-    import json
-    from plotly.utils import PlotlyJSONEncoder
-
-    redata = json.loads(json.dumps(figure.data, cls=PlotlyJSONEncoder))
-    relayout = json.loads(json.dumps(figure.layout, cls=PlotlyJSONEncoder))
-    fig_json=json.dumps({'data': redata,'layout': relayout})
-
-    return fig_json
+def GetRandom(myDf, window):
+    sampleMax = myDf.shape[0] - window if myDf.shape[0] - window > 0 else 1
+    randStart = random.randint(0, sampleMax)
+    sampleDf = myDf[randStart:randStart+window] 
+    return sampleDf
 

@@ -1,7 +1,7 @@
 /**************************************************************************************************
 LOG IN MODAL
 **************************************************************************************************/
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, FormHelperText, Button } from '@mui/material';
 import { Box } from '@mui/material';
@@ -11,7 +11,8 @@ import * as TK from '../app-main/token-storage';
 import { GlobalContext } from '../app-main/global-store';
 import BaseModal from './base-modal';
 import * as ST from '../elements/styled-elements';
-import PasswordField from '../elements/password-field';
+import PasswordField from '../elements/controls/password-field';
+import FormSubmit from '../elements/controls/form-submit'
 
 
 function LogInModal(props) {
@@ -21,10 +22,19 @@ function LogInModal(props) {
     let navigate = useNavigate();  
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [formResult, setFormResult] = useState('');
+
+    // clear the fields when the modal is closed
+
+    useEffect(() => {
+        if (!props.open) {
+            setEmail('');
+            setPassword('');
+            setFormResult('');
+        }
+    }, [props.open])
 
     // submit button 
-
-    const [formResult, setFormResult] = useState('');
 
     function loginUser() {
 
@@ -42,7 +52,11 @@ function LogInModal(props) {
             url: '/auth/click-login',
             data: { 'email': email, 'password': password },
         }).then(responseData => {
-            userStore[1](responseData.user || 'user not set')
+            const newUser = {
+                'name': responseData.user,
+                'status': responseData.admin ? 'admin' : 'user',
+            }
+            userStore[1](newUser);
             TK.storeAccessToken(responseData.access);
             TK.storeRefreshToken(responseData.refresh);
             setEmail('');
@@ -111,14 +125,8 @@ function LogInModal(props) {
                 <ST.BaseText>Forgot Password</ST.BaseText>
             </ST.SmallButton>
 
-            <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>
-                <Box sx={{ paddingRight: '6px' }}>
-                    <FormHelperText value={formResult} >{formResult}</FormHelperText>
-                </Box>
-                <Box>
-                    <Button type='submit' onClick={ handleSubmit } variant='contained' sx={{minWidth: '80px'}}>Log In</Button>
-                </Box>
-            </ST.BoxSpaceBetween>
+            <FormSubmit message={ formResult } 
+                onSubmit={ handleSubmit }/>
 
         </BaseModal>  
     );

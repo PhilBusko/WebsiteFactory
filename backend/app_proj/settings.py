@@ -1,13 +1,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 DJANGO SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-from pathlib import Path
-BACKEND_PATH = Path(__file__).resolve().parent.parent
-
 import os
-DEPLOYMENT_ENV = os.environ.get('DEPLOYMENT_ENV', 'dev')
-print('ENV:', DEPLOYMENT_ENV)
+
+BACKEND_PATH = os.path.dirname(os.path.dirname(__file__))
+DEPLOYMENT_ENV = os.environ.get('DEPLOYMENT_ENV', 'DEV')
+# DEPLOYMENT_ENV = os.environ.get('DEPLOYMENT_ENV', 'PROD')
+print('env:', DEPLOYMENT_ENV)
 
 
 # APPLICATION
@@ -21,12 +20,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # installed packages
-	'rest_framework',
+    'rest_framework',
     'corsheaders',
     'django_extensions',
     # custom modules
     'members', 
     'business_module',
+    'central',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +64,7 @@ TEMPLATES = [
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'website-factory.herokuapp.com']
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000', 'https://websitefactory.vercel.app']
-DEBUG = False if DEPLOYMENT_ENV == 'dev' else True
+DEBUG = False if DEPLOYMENT_ENV == 'DEV' else True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'app_proj.static'
@@ -75,27 +75,27 @@ STATIC_ROOT = 'app_proj.static'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BACKEND_PATH / 'app_db.sqlite3',
+        'NAME': os.path.join(BACKEND_PATH, 'app_db.sqlite3'),
     }
 }
-if DEPLOYMENT_ENV == 'PROD':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'philbit/factory_db',
-            'USER': 'philbit',
-            'PASSWORD': 'v2_3u7Ry_kzPKmRDUUEszVtXhVx9jcPA',
-            'HOST': 'db.bit.io',
-            'PORT': '5432',
-        }
-    }
+# if DEPLOYMENT_ENV == 'PROD':
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'HOST': 'db.bit.io',
+#             'PORT': '5432',
+#             'NAME': 'philbit/factory_db',
+#             'USER': 'philbit',
+#             'PASSWORD': 'v2_3u7Ry_kzPKmRDUUEszVtXhVx9jcPA',
+#         }
+#     }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # REST AUTH API
 
-SECRET_KEY = '2q1c&ABCDa%6nrvl&6g=awbWXYZg2$qlho#JKLv!ji98'
+SECRET_KEY = '2f#1c&ABCDw3bs1tef4ct0r7WXYZg2$qlho#JKLvYji98'
 
 AUTH_USER_MODEL = 'members.User'
 
@@ -122,11 +122,12 @@ SIMPLE_JWT = {
 
 # EMAIL
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER='zetaszaur@gmail.com'
-EMAIL_HOST_PASSWORD='jnvrrykxnlnrmpmp' 
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.hover.com'
+EMAIL_HOST_USER = 'admin@busko.site'
+EMAIL_HOST_PASSWORD = '2ws3ed$RF%TG' 
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
 PASSWORD_RESET_TIMEOUT_DAYS = 1
 
 

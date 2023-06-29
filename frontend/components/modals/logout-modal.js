@@ -21,11 +21,11 @@ function LogOutModal(props) {
     const handleLogout = (event) => {
         event.preventDefault();
 
-        userStore[1](null)
+        userStore[1]({'name': '', 'status': 'guest'})
         TK.wipeTokens();
 
         props.setOpen(false);
-        navigate('/');
+        navigate('/base-axios/');
     }
 
     // render
@@ -37,17 +37,17 @@ function LogOutModal(props) {
             title='Log Out'
             width={formWidth} >
 
-            <ST.BoxCenter sx={{ 'display': 'flex', 'justifyContent': 'center' }}>
+            <ST.FlexHorizontal>
                 <ST.BaseText >
-                    Are you ready to log out?
+                    Ready to log out?
                 </ST.BaseText>
-            </ST.BoxCenter>
+            </ST.FlexHorizontal>
 
-            <ST.BoxCenter>
+            <ST.FlexHorizontal>
                 <Button type='submit' onClick={ handleLogout } variant='contained' sx={{minWidth: '80px'}}>
                     Log Out
                 </Button>
-            </ST.BoxCenter>
+            </ST.FlexHorizontal>
 
         </BaseModal>  
     );

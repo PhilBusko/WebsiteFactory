@@ -12,9 +12,11 @@ function GlobalProvider(props) {
 
     // global state
 
-    const [user, setUser] = useState(null);
+    const [userDx, setUserDx] = useState({'name': '', 'status': 'initial'});    // initial, guest, user, admin
+    const [navOpen, setNavOpen] = useState(true);
     const store = {
-        userStore: [user, setUser],
+        userStore: [userDx, setUserDx],
+        navStore: [navOpen, setNavOpen],
     }
 
     // onload for the app 
@@ -22,28 +24,37 @@ function GlobalProvider(props) {
     function tryLogin() {
 
         // log in the user if a refresh token is found 
-    
+
         const refreshToken = TK.retrieveRefreshToken();
     
         if (!refreshToken) {
             console.log('onload: no refresh token');
+            const newUser = {'name': '', 'status': 'guest',}
+            setUserDx(newUser);
             return;
         }
-    
+
+        console.log('start login from refresh')
         AxiosConfig({
             method: 'POST',
             url: '/auth/token-refresh',
             data: { 'refresh': refreshToken },
         }).then(responseData => {
-            setUser(responseData.user);
+            const newUser = {
+                'name': responseData.user,
+                'status': responseData.admin ? 'admin' : 'user',
+            }
+            setUserDx(newUser);
             TK.storeAccessToken(responseData.access);
+            //console.log('end login from refresh')
         }).catch(errorLs => {
             TK.wipeTokens();
-            setUser(null);
+            const newUser = {'name': '', 'status': 'guest',}
+            setUserDx(newUser);
             console.log(errorLs);
         });
     }
-    
+
     useEffect(() => {
         tryLogin();
     }, [])

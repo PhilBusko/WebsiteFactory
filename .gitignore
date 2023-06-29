@@ -183,6 +183,8 @@ typings/
 
 ### CUSTOM
 
-frontend/build
+frontend/build/
+**.sqlite3
+**/data/backup/
 desktop.ini
-
+.DS_Store

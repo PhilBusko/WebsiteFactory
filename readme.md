@@ -22,5 +22,3 @@ It's an opinionated boilerplate which provides solutions to all the necessary pa
 
 4. Customize with your own business logic.
 
-[Project Management Spreadsheet](https://docs.google.com/spreadsheets/d/1j07sT7-HGhPlajWFeYYBXIs4O6PKrztX-2PgnuVeJPA/edit#gid=1591015716)
-

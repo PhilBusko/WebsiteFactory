@@ -9,7 +9,8 @@ import zxcvbn from 'zxcvbn';
 import AxiosConfig from '../app-main/axios-config';
 import BaseModal from './base-modal';
 import * as ST from '../elements/styled-elements';
-import PasswordField from '../elements/password-field';
+import PasswordField from '../elements/controls/password-field';
+import FormSubmit from '../elements/controls/form-submit'
 
 
 function SignUpModal(props) {
@@ -87,6 +88,7 @@ function SignUpModal(props) {
             url: '/auth/send-verification',
             data: { 'email': email },
         }).then(responseData => {
+            console.log(responseData);
             setFormResult(responseData);
         }).catch(errorLs => {
             setFormResult(errorLs[errorLs.length -1]);
@@ -117,19 +119,15 @@ function SignUpModal(props) {
                 value={ password } 
                 onChange={(event) => { setPassword(event.target.value); }}/>
 
-            <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>
-                <Box sx={{ paddingRight: '6px' }}>
-                    <FormHelperText value={formResult} >{formResult}</FormHelperText>
-                </Box>
-                <Stack spacing='8px' sx={{ width: '110px' }}>
-                    <Button type='submit' onClick={ handleSignup } variant='contained' sx={{minWidth: '80px'}}>
-                        Register
-                    </Button>
-                    <ST.SmallButton onClick={ handleVerify }>
-                        <ST.BaseText>Send Verification</ST.BaseText>
-                    </ST.SmallButton>
-                </Stack>
-            </ST.BoxSpaceBetween>
+            <FormSubmit 
+                message={ formResult } 
+                onSubmit={ handleSignup } />
+
+            <ST.FlexHorizontal sx={{width: '100%', justifyContent: 'flex-end' }}>
+                <ST.SmallButton onClick={ handleVerify }>
+                    <ST.BaseText>Send Verification</ST.BaseText>
+                </ST.SmallButton>
+            </ST.FlexHorizontal>
 
         </BaseModal>  
     );

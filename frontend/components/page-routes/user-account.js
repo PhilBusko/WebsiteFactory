@@ -2,10 +2,12 @@
 USER ACCOUNT
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
-import { Grid, Stack, Box, Card } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../elements/styled-elements'
+import DisplayDict from '../elements/display/display-dict';
+import ReadOnlyArea from '../elements/controls/read-only-area';
 
 
 function UserAccount(props) {
@@ -16,7 +18,7 @@ function UserAccount(props) {
     useEffect(() => {
 
         AxiosConfig({
-            url: '/auth/user-account',
+            url: '/central/user-account',
         }).then(responseData => {
             setUserInfo(responseData);
             setErrorLs([]);
@@ -36,28 +38,13 @@ function UserAccount(props) {
                     </ST.TitleGroup>
                 </Grid>
 
-                <ST.GridItemCenter item xs={12} lg={6}>
+                <ST.GridItemCenter item xs={12} lg={4}>
                     <ST.ContentCard elevation={3}> 
                         <Stack spacing='8px' sx={{ width: '280px' }}>
-                            <ST.BaseText >
-                                { `Name: ${userInfo.user_name}` }
-                            </ST.BaseText>
-                            <ST.BaseText >
-                                {  `Email: ${userInfo.email}`  }
-                            </ST.BaseText>
-                            <ST.BaseText >
-                                {  `Unique ID: ${userInfo.unique_id}`  }
-                            </ST.BaseText>
-                            <ST.BaseText >
-                                {  `Date Joined: ${userInfo.date_joined}`  }
-                            </ST.BaseText>
-                            <Box>
-                                { errorLs.map( (err, idx) => 
-                                    <ST.BaseText key={idx} sx={{ 'color': 'crimson' }}>
-                                        {err}
-                                    </ST.BaseText>
-                                )}
-                            </Box>
+                            <DisplayDict infoDx={userInfo} />
+                            { errorLs.length > 0 &&
+                                <ReadOnlyArea label={ '' } valueLs={ errorLs } mode={ 'error' } />
+                            }
                         </Stack>
                     </ST.ContentCard>
                 </ST.GridItemCenter>

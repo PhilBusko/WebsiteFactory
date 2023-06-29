@@ -42,7 +42,7 @@ function MobileNav(props) {
 
     return (<>
         <AppBar>
-            <ST.BoxSpaceBetween>
+            <ST.FlexHorizontal sx={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
 
                 <Box sx={{ paddingLeft: '16px'}}>
                     <IconButton edge='start' color='inherit' onClick={toggleNav}>
@@ -82,7 +82,7 @@ function MobileNav(props) {
                     </Menu>
                 </Box>
 
-            </ST.BoxSpaceBetween>
+            </ST.FlexHorizontal>
         </AppBar>
     </>);
 }

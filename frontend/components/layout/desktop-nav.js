@@ -70,9 +70,9 @@ function DesktopNav(props) {
             <NavRoutes />
 
             <BottomPanel name='menu-bottom'>
-                <ST.BoxCenter height='100%'>
+                <ST.FlexHorizontal height='100%'>
                     <LogoImage src={require('../assets/app-icon.png')} />
-                </ST.BoxCenter>
+                </ST.FlexHorizontal>
                 <MenuCollapseButton onClick={toggleNav}>
                     <ArrowBack></ArrowBack>
                 </MenuCollapseButton>

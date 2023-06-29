@@ -40,8 +40,8 @@ function ImageGallery(props) {
     return (
         <ImageList cols={galleryCols} >
             <Gallery >
-                { props.imageLs.map( (imgInfo, key) => (
-                    <StyledImageItem key={key}>
+                { props.imageLs.map( (imgInfo, idx) => (
+                    <StyledImageItem key={idx}>
                         <GalleryItem original={ imgInfo.path } width='1024' height='768' >
                             {({ ref, open }) => (
                                 <ThumbnailImage src={ imgInfo.path } ref={ref} onClick={open} />

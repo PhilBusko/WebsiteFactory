@@ -69,7 +69,7 @@ def InsertBulk(module, table, dataLs):
     moduleObj = __import__(module)
     folderObj = getattr(moduleObj, 'models')
     classObj = getattr(folderObj, table)
-    
+
     for dx in dataLs:
         for k, v in dx.items():
             if str(v) in ['nan', 'NaT']:

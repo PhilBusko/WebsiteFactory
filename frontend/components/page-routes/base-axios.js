@@ -2,22 +2,32 @@
 BASE AXIOS PAGE
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
-import { Button, TextField, Autocomplete, FormHelperText } from '@mui/material';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { FormControlLabel, Checkbox } from '@mui/material';
+import { TextField, Autocomplete } from '@mui/material';
 import { Grid, Box, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
 import AxiosConfig from '../app-main/axios-config';
 import PageLayout from  '../layout/page-layout';
 import * as ST from  '../elements/styled-elements';
-import StackForm from '../elements/stack-form';
-import PaginatedTable from '../elements/paginated-table';
-import DisplayDict from '../elements/display-dict';
+
+import StackForm from '../elements/controls/stack-form';
+import TextInput from '../elements/controls/text-input';
+// import NumberInput from '../elements/controls/number-input';
+import SelectMultiple from '../elements/controls/select-multiple';
+import FullCheckbox from '../elements/controls/full-checkbox';
+import FormSubmit from '../elements/controls/form-submit';
+
+import SelectSingle from '../elements/controls/select-single';
+import PaginatedTable from '../elements/display/paginated-table';
+import DisplayDict from '../elements/display/display-dict';
 
 
 const AxiosImage = styled('img')(({ theme }) => ({
-    width: '350px',
-    [theme.breakpoints.down('md')]: {width: '280px'},
+    width: '320px',
+    [theme.breakpoints.down('md')]: {width: '420px'},
+    cursor: 'pointer',
+    border: '2px solid white',
+    '&:hover': {border: '2px solid black'},
 }));
 
 function BaseAxios(props) {
@@ -26,6 +36,7 @@ function BaseAxios(props) {
 
     const [userName, setUserName] = useState('');
     const [userNameError, setUserNameError] = useState(null);
+    const [multiVal, setMultiVal] = useState([]);
     const [optionChecked, setOptionChecked] = useState(false);
     const [formResult, setFormResult] = useState(null);
 
@@ -64,8 +75,6 @@ function BaseAxios(props) {
         setTimeout(submitForm, 500);
     }
 
-
-
     // select lego theme
 
     const [themeGroup, setThemeGroup] = useState('');
@@ -82,8 +91,8 @@ function BaseAxios(props) {
         });
     }, [])
 
-    const handleThemeGroup = (event) => {
-        const legoTheme = event.target.value;
+    const handleThemeGroup = (legoTheme) => {
+        // const legoTheme = event.target.value;
         setThemeGroup(legoTheme);
 
         AxiosConfig({
@@ -95,8 +104,6 @@ function BaseAxios(props) {
             console.log(errorLs);
         });
     }
-
-
 
     // autocomplete
 
@@ -129,7 +136,6 @@ function BaseAxios(props) {
         });
     }
 
-
     // render
 
     return (
@@ -138,7 +144,7 @@ function BaseAxios(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>BASE AXIOS</ST.SpecialText>
+                        <ST.SpecialText>AXIOS PAGE</ST.SpecialText>
                     </ST.TitleGroup>
                 </Grid>
 
@@ -146,30 +152,28 @@ function BaseAxios(props) {
                     <ST.ContentCard elevation={3}> 
                         <StackForm width='260px'>
 
-                            <TextField 
-                                value={ userName } error={ !!userNameError } helperText={ userNameError }
-                                onChange={(event) => { setUserName(event.target.value); }}
-                                variant='outlined' label='Text Entry' size='small'/>
+                            <ST.HighlightText>HTML Form</ST.HighlightText>
 
-                            <FormControlLabel label='Option One' labelPlacement='end'
-                                control={<Checkbox checked={optionChecked} 
-                                            onChange={(event) => { setOptionChecked(event.target.checked); }}
-                                            sx={{ 'padding': '0 8px' }} 
-                                        />} 
-                            />
+                            <TextInput 
+                                label='Free Text' 
+                                value={ userName } onChange={ setUserName }
+                                errorMsg={ userNameError } />
 
-                            <ST.SmallButton onClick={ () => { alert('Button Effect'); }}>
+                            <SelectMultiple 
+                                label={ 'Multiple Choice' } optionLs={ themeOptions } 
+                                value={ multiVal } onChange={ setMultiVal } /> 
+
+                            <FullCheckbox
+                                label={ 'Option One' }
+                                isChecked={ optionChecked } 
+                                onChange={ setOptionChecked } /> 
+
+                            <ST.SmallButton onClick={() => { alert('Button Effect'); }}>
                                 <ST.BaseText>Small Button</ST.BaseText>
                             </ST.SmallButton>
 
-                            <ST.BoxSpaceBetween sx={{ alignItems: 'flex-start' }}>
-                                <Box sx={{ paddingRight: '6px' }}>
-                                    <FormHelperText value={formResult}>{formResult}</FormHelperText>
-                                </Box>
-                                <Box>
-                                    <Button type='submit' onClick={ handleSubmit } variant='contained'>Send Form</Button>
-                                </Box>
-                            </ST.BoxSpaceBetween>
+                            <FormSubmit message={ formResult } 
+                                onSubmit={ handleSubmit }/>
 
                         </StackForm>
                     </ST.ContentCard>
@@ -177,40 +181,9 @@ function BaseAxios(props) {
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <ST.ContentCard elevation={3}> 
-                        <AxiosImage src={require('../assets/lego-set.jpg')} />
-                    </ST.ContentCard>
-                </ST.GridItemCenter>
-
-                <ST.GridItemCenter item xs={12} lg={8}>
-                    <ST.ContentCard elevation={3}> 
                         <Stack spacing='16px'>
 
-                            <FormControl size='small' sx={{ width: '200px' }}>
-                                <InputLabel id='themeSelect'>Theme Group</InputLabel>
-                                <Select 
-                                    value={themeGroup} onChange={handleThemeGroup} 
-                                    labelId='themeSelect' label='Theme Group' size='small' >
-                                    <MenuItem key={0} value=''><em>None</em></MenuItem>
-                                    { themeOptions.map((group, idx) => (
-                                        <MenuItem key={idx+1} value={group}>
-                                            {group}
-                                        </MenuItem>
-                                    )) }
-                                </Select>
-                            </FormControl>
-
-                            <PaginatedTable dataLs={setsByTheme}>
-                            </PaginatedTable>
-
-                        </Stack>
-                    </ST.ContentCard>
-                </ST.GridItemCenter>
-
-
-
-                <ST.GridItemCenter item xs={12} lg={4}>
-                    <ST.ContentCard elevation={3}> 
-                        <Stack spacing='16px'>
+                            <ST.HighlightText>Display Dict</ST.HighlightText>
 
                             <Autocomplete
                                 options={nameOptions} 
@@ -222,12 +195,44 @@ function BaseAxios(props) {
                                 renderInput={(params) => <TextField {...params} label='Set Name'/>}
                                 sx={{ width: '300px' }} size='small' /> 
 
-                            <DisplayDict infoDx={setInfo}>
+                            <DisplayDict infoDx={setInfo} height={'206px'}>
                             </DisplayDict>
 
                         </Stack>
                     </ST.ContentCard>
                 </ST.GridItemCenter>
+
+                <ST.GridItemCenter item xs={12} lg={8}>
+                    <ST.ContentCard elevation={3}> 
+                        <Stack spacing='16px'>
+
+                            <ST.HighlightText>Data Table</ST.HighlightText>
+
+                            <SelectSingle
+                                label={ 'Theme Group' } width={ '180px' } hasNone={ true }
+                                optionLs={ themeOptions } value={ themeGroup } 
+                                onChange={ handleThemeGroup } />
+
+                            <PaginatedTable
+                                width={ '675px' } 
+                                dataLs={setsByTheme} />
+
+                        </Stack>
+                    </ST.ContentCard>
+                </ST.GridItemCenter>
+
+                <ST.GridItemCenter item xs={12} lg={4}>
+                    <ST.ContentCard elevation={3}> 
+                        <Stack spacing='16px'>
+
+                            <ST.HighlightText>Image</ST.HighlightText>
+
+                            <AxiosImage src={require('../assets/lego-set.jpg')} />
+
+                        </Stack>
+                    </ST.ContentCard>
+                </ST.GridItemCenter>
+
 
             </ST.GridPage >
         </PageLayout>

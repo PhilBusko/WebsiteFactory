@@ -3,7 +3,7 @@ PAGINATED TABLE
 **************************************************************************************************/
 import { styled } from '@mui/material/styles'
 import { DataGrid } from '@mui/x-data-grid';
-import * as ST from '../elements/styled-elements';
+import * as ST from '../styled-elements';
 
 
 const StyledTable = styled(DataGrid)(({ theme }) => ({
@@ -22,7 +22,7 @@ const StyledTable = styled(DataGrid)(({ theme }) => ({
     },
 }));
 
-const EmptyTable = styled(ST.BoxCenter)(({ theme }) => ({
+const EmptyTable = styled(ST.FlexHorizontal)(({ theme }) => ({
     width: '460px',
     height: '200px',
     border: '1px solid black',

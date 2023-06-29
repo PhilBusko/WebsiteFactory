@@ -9,17 +9,17 @@ import { RoutesConfig } from './routes'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <GlobalProvider>
-      <BrowserRouter>
-        <Routes> 
-          { 
-            RoutesConfig.map( ({path, element}, key) => 
-              <Route exact path={ path } element={ element } key={ key } /> )
-          }
-        </Routes>
-      </BrowserRouter>
-    </GlobalProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <GlobalProvider>
+            <BrowserRouter>
+                <Routes> 
+                { 
+                    RoutesConfig.map( ({path, element}, key) => 
+                        <Route exact path={ path } element={ element } key={ key } /> )
+                }
+                </Routes>
+            </BrowserRouter>
+        </GlobalProvider>
+    </React.StrictMode>
 );
 

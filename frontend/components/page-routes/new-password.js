@@ -9,8 +9,10 @@ import zxcvbn from 'zxcvbn';
 import AxiosConfig from '../app-main/axios-config';
 import PageLayout from '../layout/page-layout';
 import * as ST from '../elements/styled-elements';
-import StackForm  from '../elements/stack-form';
-import PasswordField from '../elements/password-field';
+import StackForm  from '../elements/controls/stack-form';
+import ReadOnlyLabel from '../elements/controls/read-only-label'
+import PasswordField from '../elements/controls/password-field';
+import FormSubmit from '../elements/controls/form-submit'
 
 
 function NewPassword(props) {
@@ -64,21 +66,13 @@ function NewPassword(props) {
                     <ST.ContentCard elevation={3}> 
                         <StackForm width='260px'>
 
-                            <ST.BaseText >
-                                { `User ID: ${userId}` }
-                            </ST.BaseText>
+                            <ReadOnlyLabel label={'User ID'} value={userId} />
 
                             <PasswordField value={ password } 
                                 onChange={(event) => { setPassword(event.target.value); }}/>
 
-                            <ST.BoxSpaceBetween>
-                                <Box sx={{ paddingRight: '6px' }}>
-                                    <FormHelperText value={formResult}>{formResult}</FormHelperText>
-                                </Box>
-                                <Box>
-                                    <Button type='submit' onClick={ handleSubmit } variant='contained'>Submit</Button>
-                                </Box>
-                            </ST.BoxSpaceBetween>
+                            <FormSubmit message={ formResult } 
+                                onSubmit={ handleSubmit }/>
 
                         </StackForm>
                     </ST.ContentCard>

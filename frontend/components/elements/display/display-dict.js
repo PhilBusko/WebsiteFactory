@@ -2,12 +2,13 @@
 DISPLAY DICTIONARY
 **************************************************************************************************/
 import { styled } from '@mui/material/styles'
-import * as ST from '../elements/styled-elements';
+import * as ST from '../styled-elements';
+
 
 function DisplayDict(props) {
 
     const DisplayTable = styled('table')(({ theme }) => ({
-        maxWidth: '280px',
+        maxWidth: props.width,
         padding: '4px 6px', 
         border: '1px solid black',
         background: 'white',
@@ -23,7 +24,7 @@ function DisplayDict(props) {
                     { Object.keys(props.infoDx).map((key, idx) => ( 
                         <tr key={idx}>
                             <td>
-                                <ST.BaseText><b>{key}:</b></ST.BaseText>
+                                <ST.BaseText sx={{ whiteSpace: 'nowrap'}}><b>{key}:</b></ST.BaseText>
                             </td>
                             <td>
                                 <ST.BaseText>{props.infoDx[key]}</ST.BaseText>
@@ -34,7 +35,7 @@ function DisplayDict(props) {
             </DisplayTable>
         }
         {Object.keys(props.infoDx).length == 0 &&
-            <DisplayTable sx={{ width: '220px', height: '160px' }}>
+            <DisplayTable sx={{ height: props.height }}>
                 <tbody>
                     <tr>
                         <td>
@@ -49,6 +50,8 @@ function DisplayDict(props) {
 
 DisplayDict.defaultProps = {
     infoDx: {},
+    width: '280px',
+    height: '180px',
 };
 
 export default DisplayDict;
