@@ -30,7 +30,7 @@ const AxiosImage = styled('img')(({ theme }) => ({
     '&:hover': {border: '2px solid black'},
 }));
 
-function BaseAxios(props) {
+function AxiosPage(props) {
 
     // form submission
 
@@ -233,10 +233,9 @@ function BaseAxios(props) {
                     </ST.ContentCard>
                 </ST.GridItemCenter>
 
-
             </ST.GridPage >
         </PageLayout>
     );
 }
 
-export default BaseAxios;
+export default AxiosPage;

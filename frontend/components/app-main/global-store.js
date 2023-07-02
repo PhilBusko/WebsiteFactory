@@ -2,8 +2,8 @@
 GLOBAL STORE
 **************************************************************************************************/
 import { useState, useEffect, createContext } from 'react';
-import * as TK from '../app-main/token-storage'
-import AxiosConfig from '../app-main/axios-config'
+import * as TK from '../app-main/token-storage';
+import AxiosConfig from '../app-main/axios-config';
 
 
 const GlobalContext = createContext(null);

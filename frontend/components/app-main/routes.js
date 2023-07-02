@@ -1,30 +1,31 @@
 /**************************************************************************************************
 APP-MAIN ROUTES
 **************************************************************************************************/
-import BaseAxios from '../page-routes/base-axios'
-import BaseWebsocket from '../page-routes/base-websocket'
-import AuthDev from '../page-routes/auth-dev'
-import VerifyEmail from '../page-routes/verify-email'
-import NewPassword from '../page-routes/new-password'
-import UserAccount from '../page-routes/user-account'
+import AxiosPage from '../page-routes/axios-page';
+import WebsocketPage from '../page-routes/websocket-page';
+import AuthDev from '../page-routes/auth-dev';
+import VerifyEmail from '../page-routes/verify-email';
+import NewPassword from '../page-routes/new-password';
+import UserAccount from '../page-routes/user-account';
+
 
 export const RoutesConfig = [
     {
         'title': 'Default',
         'path': '',
-        'element': <BaseAxios />, 
+        'element': <AxiosPage />, 
         'order': 0,
     },    
     {
-        'title': 'Base Axios',
-        'path': '/base-axios/',
-        'element': <BaseAxios />, 
+        'title': 'Axios Page',
+        'path': '/axios-page/',
+        'element': <AxiosPage />, 
         'order': 1,
     },
     {
-        'title': 'Base Websocket',
-        'path': '/base-websocket/',
-        'element': <BaseWebsocket />, 
+        'title': 'Websocket Page',
+        'path': '/websocket-page/',
+        'element': <WebsocketPage />, 
         'order': 2,
     },
     {

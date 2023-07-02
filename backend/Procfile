@@ -1,1 +1,1 @@
-web: gunicorn app_proj.server_wsgi
+web: daphne -b 0.0.0.0 -p 443 app_proj.server_asgi:application

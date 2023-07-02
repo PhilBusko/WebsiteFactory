@@ -47,5 +47,9 @@ function wipeTokens() {
     localStorage.removeItem('factoryRefresh');
 }
 
-export { storeAccessToken, storeRefreshToken, retrieveAccessToken, retrieveRefreshToken, wipeAccessToken, wipeTokens }
+export { 
+    storeAccessToken, storeRefreshToken, 
+    retrieveAccessToken, retrieveRefreshToken, 
+    wipeAccessToken, wipeTokens 
+}
 

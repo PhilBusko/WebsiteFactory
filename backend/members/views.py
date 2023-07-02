@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response 
 from rest_framework import status
 
+
 class UserTokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp):
         user_id = six.text_type(user.pk)
@@ -85,7 +86,7 @@ def TokenRefresh(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def LoginDate(request):
-
+    # sample for call that requires authentication
     #print('LoginDate', request.user.user_name)
 
     try:
@@ -238,4 +239,17 @@ def ResetPassword(request):
         return Response({'detail': 'Token not authenticated'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     return Response('Your password has been changed.')
+
+
+
+# use signal to create user profile
+# calling during verification is better than at registration
+
+# from django.dispatch import receiver
+# from django.db.models.signals import post_save
+# @receiver(post_save, sender=AM.User)
+# def TriggerProgress(sender, instance, created, **kwargs):
+#     if created:
+#         prog_m, crtd = Progress.objects.get_or_create(
+#             UserFK = instance)
 

@@ -13,6 +13,7 @@ print('env:', DEPLOYMENT_ENV)
 
 INSTALLED_APPS = [
     # django base
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +42,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'app_proj.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -59,6 +58,14 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = 'app_proj.server_asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',      # for prod use redis
+    }
+}
+
 
 # SERVER
 
@@ -66,6 +73,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'website-factory.herokuapp.com']
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000', 'https://websitefactory.vercel.app']
 DEBUG = False if DEPLOYMENT_ENV == 'DEV' else True
 
+ROOT_URLCONF = 'app_proj.urls'
 STATIC_URL = 'static/'
 STATIC_ROOT = 'app_proj.static'
 

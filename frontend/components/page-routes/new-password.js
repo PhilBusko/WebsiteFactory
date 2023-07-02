@@ -3,7 +3,6 @@ NEW PASSWORD
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { FormHelperText, Button } from '@mui/material';
 import { Box, Grid, Card } from '@mui/material';
 import zxcvbn from 'zxcvbn';
 import AxiosConfig from '../app-main/axios-config';
