@@ -34,9 +34,8 @@ function WebsocketPage(props) {
     let refreshToken = TK.retrieveRefreshToken();
     let host = 'ws://localhost:8000';
     if (window.location.host.includes('localhost') == false) 
-        host = `ws://website-factory.herokuapp.com`;
-    // const socketUrl = `${host}/ws-connect/${refreshToken}/`;         // needs closing slash 
-    const socketUrl = `${host}/ws-connect/`;       
+        host = 'wss://website-factory.herokuapp.com';
+    const socketUrl = `${host}/ws-connect/${refreshToken}/`;         // needs closing slash 
 
     const { sendJsonMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
         onOpen: (event) => {
