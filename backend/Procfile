@@ -1,1 +1,1 @@
-web: daphne -b 0.0.0.0 -p 5050 app_proj.server_asgi:application
+web: daphne -b 0.0.0.0 -p $PORT app_proj.server_asgi:application
