@@ -14,6 +14,7 @@ print('env:', DEPLOYMENT_ENV)
 INSTALLED_APPS = [
     # django base
     'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
