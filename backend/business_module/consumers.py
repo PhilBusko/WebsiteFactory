@@ -15,20 +15,22 @@ class SampleConsumer(WebsocketConsumer):
 
         # get user model from the token
 
-        refreshToken = self.scope['url_route']['kwargs']['token']
+        # refreshToken = self.scope['url_route']['kwargs']['token']
 
-        import jwt
-        from app_proj.settings import SIMPLE_JWT
-        refreshDx = jwt.decode(refreshToken, SIMPLE_JWT['SIGNING_KEY'], algorithms=[SIMPLE_JWT['ALGORITHM']])
+        # import jwt
+        # from app_proj.settings import SIMPLE_JWT
+        # refreshDx = jwt.decode(refreshToken, SIMPLE_JWT['SIGNING_KEY'], algorithms=[SIMPLE_JWT['ALGORITHM']])
 
-        userMd = get_user_model().objects.getUser(id=refreshDx['user_id'])
-        if not userMd:
-            raise Exception('No user for refresh token.')
+        # userMd = get_user_model().objects.getUser(id=refreshDx['user_id'])
+        # if not userMd:
+        #     raise Exception('No user for refresh token.')
 
         # accept connection if user is found 
 
-        self.room_name = userMd.unique_id
-        self.room_group_name = f"group.{userMd.unique_id}"
+        # self.room_name = userMd.unique_id
+        # self.room_group_name = f"group.{userMd.unique_id}"
+        self.room_name = '001'
+        self.room_group_name = f"group.001"
 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name, self.channel_name)

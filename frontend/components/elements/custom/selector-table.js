@@ -1,5 +1,5 @@
 /**************************************************************************************************
-PAGINATED TABLE
+SELECTOR TABLE
 **************************************************************************************************/
 import { styled } from '@mui/material/styles'
 import { DataGrid } from '@mui/x-data-grid';
@@ -31,7 +31,7 @@ const EmptyTable = styled(ST.FlexHorizontal)(({ theme }) => ({
 }));
 
 
-function PaginatedTable(props) {
+function SelectorTable(props) {
 
     // add id for data grid
 
@@ -91,8 +91,8 @@ function PaginatedTable(props) {
     </>);
 }
 
-PaginatedTable.defaultProps = {
+SelectorTable.defaultProps = {
     dataLs: [],
 };
 
-export default PaginatedTable;
+export default SelectorTable;

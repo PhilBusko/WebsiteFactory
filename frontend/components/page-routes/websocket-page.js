@@ -2,7 +2,7 @@
 WEBSOCKET PAGE
 **************************************************************************************************/
 import { useState } from 'react';
-import { Grid, Box, Card } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
@@ -13,6 +13,7 @@ import PageLayout from '../layout/page-layout';
 import * as ST from '../elements/styled-elements';
 import StackForm from '../elements/controls/stack-form';
 import ReadOnlyLabel from '../elements/controls/read-only-label';
+import Canvas from '../elements/custom/canvas';
 
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -29,13 +30,16 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 function WebsocketPage(props) {
 
+    // websocket
+
     const [progressVal, setProgressVal] = useState(0);
 
     let refreshToken = TK.retrieveRefreshToken();
     let host = 'ws://localhost:8000';
     if (window.location.host.includes('localhost') == false) 
         host = 'wss://website-factory.herokuapp.com';
-    const socketUrl = `${host}/ws-connect/${refreshToken}/`;         // needs closing slash 
+    // const socketUrl = `${host}/ws-connect/${refreshToken}/`;         // needs closing slash 
+    const socketUrl = `${host}/ws-connect/`;
 
     const { sendJsonMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
         onOpen: (event) => {
@@ -72,6 +76,17 @@ function WebsocketPage(props) {
             'payload': null,
         }
         sendJsonMessage(wsMessage);
+    }
+
+
+    // canvas
+
+    function circlePulse(ctx, frameCount) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+        ctx.fillStyle = 'crimson'
+        ctx.beginPath()
+        ctx.arc(50, 50, 20*Math.sin(frameCount*0.03)**2, 0, 2*Math.PI)
+        ctx.fill()
     }
 
     return (
