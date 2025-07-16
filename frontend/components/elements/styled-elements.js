@@ -6,16 +6,16 @@ import { Box, Grid, Card } from '@mui/material';
 import { Typography } from '@mui/material';
 import { createTheme, styled } from '@mui/material/styles';
 
-import Legothick from '../assets/Legothick.ttf';
+// import Legothick from '../assets/Legothick.ttf';
 
 
 // THEME
 
 const AppTheme = createTheme({
     overrides: {
-        MuiCssBaseline: {
-            '@global': { '@font-face': [ Legothick ] }, 
-        },
+        // MuiCssBaseline: {
+        //     '@global': { '@font-face': [ Legothick ] }, 
+        // },
     },
 });
 
@@ -92,7 +92,8 @@ const HighlightText = styled(BaseText)(({ theme }) => ({
 }));
 
 const SpecialText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'Legothick, Belanosima',
+    fontFamily: 'Legothick',
+    // fontFamily: 'Belanosima',
 }));
 
 const HighlightSpecial = styled(SpecialText)(({ theme }) => ({
