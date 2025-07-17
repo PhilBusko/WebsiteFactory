@@ -19,7 +19,7 @@ function PageLayout(props) {
     const [signupOpen, setSignupOpen] = useState(false);
     const modalSetters = [setLoginOpen, setLogoutOpen, setSignupOpen];
 
-    return (
+    return (<>
         <ThemeProvider theme={AppTheme}>
             <Box name='mobile' sx={{ display: { xs: 'block', md: 'none' }}} >
                 <Box display='flex' flexDirection='column'>
@@ -38,7 +38,7 @@ function PageLayout(props) {
             <SignUpModal open={signupOpen} setOpen={setSignupOpen} />
             <br></br>
         </ThemeProvider>
-    );
+    </>);
 }
 
 export default PageLayout;

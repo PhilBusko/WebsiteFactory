@@ -57,7 +57,7 @@ function NewPassword(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>RESET PASSWORD</ST.SpecialText>
+                        <ST.TitleText>RESET PASSWORD</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 

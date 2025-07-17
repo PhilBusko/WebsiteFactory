@@ -23,8 +23,9 @@ const NavItem = styled(ListItem)(({ theme }) => ({
                     '& .MuiTypography-root': { fontWeight: '600' }, },
 }));
 
-const NavText = styled(ST.SpecialText)(({ theme }) => ({
+const NavText = styled(ST.LinkText)(({ theme }) => ({
     paddingRight: '12px',
+    fontSize: '17px',
     color: 'white', 
 }));
 
@@ -38,7 +39,8 @@ function NavRoutes(props) {
             {   routesLs.map( (route, key) => (
                 <NavItem key={key} button component={Link} href={route.path}>
                     <NavText>
-                        { route.title.toUpperCase() }
+                        { route.title } 
+                        {/* .toUpperCase() } */}
                     </NavText>
                 </NavItem>
             )) }

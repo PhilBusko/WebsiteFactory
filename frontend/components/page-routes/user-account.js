@@ -34,7 +34,7 @@ function UserAccount(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>USER ACCOUNT</ST.SpecialText>
+                        <ST.TitleText>USER ACCOUNT</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 

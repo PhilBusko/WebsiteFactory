@@ -7,6 +7,7 @@ import { Grid, Box, Stack, Card } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../elements/styled-elements'
+import ReadOnlyLabel from '../elements/controls/read-only-label'
 
 
 function VerifyEmail(props) {
@@ -51,23 +52,22 @@ function VerifyEmail(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>VERIFY EMAIL</ST.SpecialText>
+                        <ST.TitleText>VERIFY EMAIL</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <Card elevation={3} sx={{ width: '280px', padding: '16px' }}> 
                         <Stack spacing='8px'>
-                            <ST.BaseText >
-                                { `User ID: ${userId}` }
-                            </ST.BaseText>
-                            <ST.BaseText sx={{ marginBottom: '8px' }}>
-                                { `Token: ${token.slice(0,20)}...` }
-                            </ST.BaseText>
+
+                            <ReadOnlyLabel label={'User ID'} value={userId} />
+
+                            <ReadOnlyLabel label={'Token'} value={token.slice(0,20)} />
+
                             {!!success && 
-                                <ST.HighlightText >
+                                <ST.BaseText >
                                     { success }
-                                </ST.HighlightText>
+                                </ST.BaseText>
                             }
                             <Box>
                                 { error.map( (err, idx) => 

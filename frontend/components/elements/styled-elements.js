@@ -6,18 +6,10 @@ import { Box, Grid, Card } from '@mui/material';
 import { Typography } from '@mui/material';
 import { createTheme, styled } from '@mui/material/styles';
 
-// import Legothick from '../assets/Legothick.ttf';
-
 
 // THEME
 
-const AppTheme = createTheme({
-    overrides: {
-        // MuiCssBaseline: {
-        //     '@global': { '@font-face': [ Legothick ] }, 
-        // },
-    },
-});
+const AppTheme = createTheme({});
 
 
 // SPACING
@@ -59,8 +51,9 @@ const TitleGroup = styled('h1')(({ theme }) => ({
     paddingRight: '20px', 
     borderBottom: '2px solid rgb(150,150,150)',
     '& .MuiTypography-root': { 
-        fontSize: '80%',    // h1 default is 32pt
-        lineHeight: '1.2', 
+        fontSize: '34px',
+        // fontWeight: 'bold',
+        textTransform: 'uppercase',
     }, 
 }));
 
@@ -83,22 +76,19 @@ const SmallButton = styled(ButtonBase)(({ theme }) => ({
 
 const BaseText = styled(Typography)(({ theme }) => ({
     fontFamily: 'Roboto, sans-serif', 
+    fontSize: '16px',
     lineHeight: 1.1,
 }));
 
-const HighlightText = styled(BaseText)(({ theme }) => ({
-    fontSize: '110%',
-    fontWeight: 'bold',
+const TitleText = styled(Typography)(({ theme }) => ({
+    fontFamily: 'Domino Brick',
+    fontSize: '24px',
+    // fontFamily: 'Legothick',
 }));
 
-const SpecialText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'Legothick',
-    // fontFamily: 'Belanosima',
-}));
-
-const HighlightSpecial = styled(SpecialText)(({ theme }) => ({
-    fontSize: '110%',
-    color: '#1e73be',
+const LinkText = styled(Typography)(({ theme }) => ({
+    fontFamily: 'LEGO BRIX',
+    fontSize: '14px',
 }));
 
 
@@ -117,7 +107,6 @@ export {
     SmallButton, 
 
     BaseText,
-    HighlightText,
-    SpecialText, 
-    HighlightSpecial, 
+    TitleText,
+    LinkText, 
 }

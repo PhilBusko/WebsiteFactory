@@ -31,7 +31,7 @@ const ModalTitle = styled('h2')(({ theme }) => ({
     width: '50%',
     margin: '0px 0px 8px 0px',
     '& .MuiTypography-root': { 
-        fontSize: '100%',    
+        fontSize: '30px',    
         lineHeight: '1.2', 
         whiteSpace: 'nowrap',
     }, 
@@ -55,7 +55,7 @@ function BaseModal(props) {
 
                     <ST.FlexHorizontal sx={{ justifyContent: 'space-between' }} >
                         <ModalTitle>
-                            <ST.SpecialText>{ props.title.toUpperCase() }</ST.SpecialText>
+                            <ST.TitleText>{ props.title.toUpperCase() }</ST.TitleText>
                         </ModalTitle>
                         <CloseButton onClick={() => { props.setOpen(false); }}>
                             <Close></Close>

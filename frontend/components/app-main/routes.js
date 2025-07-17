@@ -1,7 +1,7 @@
 /**************************************************************************************************
 APP-MAIN ROUTES
 **************************************************************************************************/
-import AxiosPage from '../page-routes/axios-page';
+import HttpPage from '../page-routes/http-page';
 import WebsocketPage from '../page-routes/websocket-page';
 import AuthDev from '../page-routes/auth-dev';
 import VerifyEmail from '../page-routes/verify-email';
@@ -13,13 +13,13 @@ export const RoutesConfig = [
     {
         'title': 'Default',
         'path': '',
-        'element': <AxiosPage />, 
+        'element': <HttpPage />, 
         'order': 0,
     },    
     {
-        'title': 'Axios Page',
-        'path': '/axios-page/',
-        'element': <AxiosPage />, 
+        'title': 'Http Page',
+        'path': '/http-page/',
+        'element': <HttpPage />, 
         'order': 1,
     },
     {

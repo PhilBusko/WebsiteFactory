@@ -95,7 +95,7 @@ function WebsocketPage(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>WEBSOCKET PAGE</ST.SpecialText>
+                        <ST.TitleText>WEBSOCKET PAGE</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
@@ -103,7 +103,7 @@ function WebsocketPage(props) {
                     <ST.ContentCard elevation={3}> 
                         <StackForm width='300px'>
 
-                            <ST.HighlightText>Backend Processing</ST.HighlightText>
+                            <ST.TitleText>Backend Processing</ST.TitleText>
 
                             <ReadOnlyLabel label={ 'Websocket' } value={ connectionStatus } />
 

@@ -30,7 +30,7 @@ const AxiosImage = styled('img')(({ theme }) => ({
     '&:hover': {border: '2px solid black'},
 }));
 
-function AxiosPage(props) {
+function HttpPage(props) {
 
     // form submission
 
@@ -144,7 +144,7 @@ function AxiosPage(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.SpecialText>AXIOS PAGE</ST.SpecialText>
+                        <ST.TitleText>HTTP PAGE</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
@@ -152,7 +152,7 @@ function AxiosPage(props) {
                     <ST.ContentCard elevation={3}> 
                         <StackForm width='260px'>
 
-                            <ST.HighlightText>HTML Form</ST.HighlightText>
+                            <ST.TitleText>HTML Form</ST.TitleText>
 
                             <TextInput 
                                 label='Free Text' 
@@ -183,7 +183,7 @@ function AxiosPage(props) {
                     <ST.ContentCard elevation={3}> 
                         <Stack spacing='16px'>
 
-                            <ST.HighlightText>Display Dict</ST.HighlightText>
+                            <ST.TitleText>Display Dict</ST.TitleText>
 
                             <Autocomplete
                                 options={nameOptions} 
@@ -206,7 +206,7 @@ function AxiosPage(props) {
                     <ST.ContentCard elevation={3}> 
                         <Stack spacing='16px'>
 
-                            <ST.HighlightText>Data Table</ST.HighlightText>
+                            <ST.TitleText>Data Table</ST.TitleText>
 
                             <SelectSingle
                                 label={ 'Theme Group' } width={ '180px' } hasNone={ true }
@@ -225,7 +225,7 @@ function AxiosPage(props) {
                     <ST.ContentCard elevation={3}> 
                         <Stack spacing='16px'>
 
-                            <ST.HighlightText>Image</ST.HighlightText>
+                            <ST.TitleText>Image</ST.TitleText>
 
                             <AxiosImage src={require('../assets/lego-set.jpg')} />
 
@@ -238,4 +238,4 @@ function AxiosPage(props) {
     );
 }
 
-export default AxiosPage;
+export default HttpPage;
