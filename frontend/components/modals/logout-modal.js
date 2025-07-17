@@ -25,7 +25,7 @@ function LogOutModal(props) {
         TK.wipeTokens();
 
         props.setOpen(false);
-        navigate('/base-axios/');
+        navigate('/');
     }
 
     // render
