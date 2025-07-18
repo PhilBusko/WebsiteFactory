@@ -7,6 +7,7 @@ import AuthDev from '../page-routes/auth-dev';
 import VerifyEmail from '../page-routes/verify-email';
 import NewPassword from '../page-routes/new-password';
 import UserAccount from '../page-routes/user-account';
+import GalleryPage from '../page-routes/gallery-page';
 
 
 export const RoutesConfig = [
@@ -51,6 +52,12 @@ export const RoutesConfig = [
         'title': 'User Account',
         'path': '/account/',
         'element': <UserAccount />, 
+        'order': 1,
+    },    
+    {
+        'title': 'Gallery',
+        'path': '/gallery/',
+        'element': <GalleryPage />, 
         'order': 1,
     },    
 ];

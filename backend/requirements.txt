@@ -15,3 +15,4 @@ django-extensions
 pandas
 plotly
 requests
+pillow
