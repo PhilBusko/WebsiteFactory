@@ -4,7 +4,6 @@ LOG IN MODAL
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, FormHelperText, Button } from '@mui/material';
-import { Box } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
 import AxiosConfig from '../app-main/axios-config';
 import * as TK from '../app-main/token-storage';

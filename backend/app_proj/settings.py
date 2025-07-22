@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     # installed packages
     'rest_framework',
     'corsheaders',
-    'django_extensions',
     # custom modules
     'members', 
     'business_module',

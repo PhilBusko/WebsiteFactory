@@ -1,17 +1,17 @@
-django==4.0.3
-channels==4.0.0
+django
+channels
 djangorestframework
 django-cors-headers
 djangorestframework-simplejwt
-Authlib~=1.0.0
-python-dotenv~=0.19.2
+#Authlib~=1.0.0
+#python-dotenv~=0.19.2
 
 psycopg2
 gunicorn
 daphne==4.0.0
 
 jupyter
-django-extensions
+#django-extensions
 pandas
 plotly
 requests

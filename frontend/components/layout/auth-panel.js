@@ -1,18 +1,21 @@
 /**************************************************************************************************
 AUTH PANEL
 **************************************************************************************************/
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ButtonBase } from '@mui/material';
 import { Box, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
 import { GlobalContext } from '../app-main/global-store';
 import * as ST from '../elements/styled-elements';
+import LogInModal from '../modals/login-modal';
+import SignUpModal from '../modals/signup-modal';
+import LogOutModal from '../modals/logout-modal';
 
 
 const AuthGroup = styled(Box)(({ theme }) => ({
     padding: '6px 8px', 
-    background: '#212121',    
 }));
 
 const UserName = styled(ST.TitleText)(({ theme }) => ({
@@ -40,7 +43,12 @@ const AuthButton = styled(ButtonBase)(({ theme }) => ({
 function AuthPanel(props) {
 
     const { userStore } = useContext(GlobalContext);
-    let navigate = useNavigate();  
+    let navigate = useNavigate();
+
+    const [loginOpen, setLoginOpen] = useState(false);
+    const [signupOpen, setSignupOpen] = useState(false);
+    const [logoutOpen, setLogoutOpen] = useState(false);
+
 
     return (<>
         { !!userStore && ['initial', 'guest'].includes(userStore[0]['status']) && 
@@ -50,10 +58,10 @@ function AuthPanel(props) {
                         GUEST
                     </UserName>
                     <AuthStack spacing='6px'>
-                        <AuthButton onClick={() => { props.setModals[0](true); }}>
+                        <AuthButton onClick={() => { setLoginOpen(true); }}>
                             <ST.BaseText>Log In</ST.BaseText>
                         </AuthButton>
-                        <AuthButton onClick={() => { props.setModals[2](true); }}>
+                        <AuthButton onClick={() => { setSignupOpen(true); }}>
                             <ST.BaseText>Sign Up</ST.BaseText>
                         </AuthButton>
                     </AuthStack>
@@ -70,18 +78,22 @@ function AuthPanel(props) {
                         <AuthButton onClick={() => { navigate('/account/'); }}>
                             <ST.BaseText>Account</ST.BaseText>
                         </AuthButton>
-                        <AuthButton onClick={() => { props.setModals[1](true); }}>
+                        <AuthButton onClick={() => { setLogoutOpen(true); }}>
                             <ST.BaseText>Log Out</ST.BaseText>
                         </AuthButton>
                     </AuthStack>
                 </ST.FlexHorizontal>
             </AuthGroup>
         }
+
+        <LogInModal open={loginOpen} setOpen={setLoginOpen} />
+        <SignUpModal open={signupOpen} setOpen={setSignupOpen} />
+        <LogOutModal open={logoutOpen} setOpen={setLogoutOpen} />
+
     </>);
 }
 
 AuthPanel.defaultProps = {
-    setModals: [],
 };
 
 export default AuthPanel;

@@ -51,7 +51,7 @@ class UserManager(BaseUserManager):
     def beautifyName(email):
         import re 
         local = email.split('@')[0]
-        nameLs = re.split("[#!%$‘&+*–\-/=?^_`.{|}~]+", local)
+        nameLs = re.split("[#!%$‘&+*–/=?^_`.{|}~-]+", local)
         pretty = ''.join([n.capitalize() for n in nameLs if n])
         return pretty
 
