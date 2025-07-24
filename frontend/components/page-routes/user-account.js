@@ -7,7 +7,7 @@ import AxiosConfig from '../app-main/axios-config'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../elements/styled-elements'
 import DisplayDict from '../elements/display/display-dict';
-import ReadOnlyArea from '../elements/controls/read-only-area';
+import ReadOnlyArea from '../elements/display/read-only-area';
 
 
 function UserAccount(props) {
@@ -34,14 +34,17 @@ function UserAccount(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.TitleText>USER ACCOUNT</ST.TitleText>
+                        <ST.TitleText>User Account</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
-                <ST.GridItemCenter item xs={12} lg={4}>
+                <ST.GridItemCenter item xs={12} lg={6}>
                     <ST.ContentCard elevation={3}> 
-                        <Stack spacing='8px' sx={{ width: '280px' }}>
-                            <DisplayDict infoDx={userInfo} />
+                        <Stack spacing='8px' sx={{ width: '380px' }}>
+                            <DisplayDict 
+                                infoDx={userInfo}
+                                width= {'100%' }
+                            />
                             { errorLs.length > 0 &&
                                 <ReadOnlyArea label={ '' } valueLs={ errorLs } mode={ 'error' } />
                             }

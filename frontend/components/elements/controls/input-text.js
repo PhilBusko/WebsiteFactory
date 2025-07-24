@@ -3,13 +3,14 @@ TEXT INPUT
 **************************************************************************************************/
 import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import * as ST from '../styled-elements';
 
 
 const StyledText = styled(TextField)(({ theme }) => ({
     '& input': { padding: '4px 8px', },
     '& label': { top: '-12px', },
-    '& label.MuiInputLabel-shrink': { top: '0px', },
-    '& .MuiInputBase-root': { background: 'white', },
+    '& label.MuiInputLabel-shrink': { top: '0px' },
+    background: ST.ControlBkgd,
 }));
 
 function TextInput(props) {
@@ -27,6 +28,9 @@ function TextInput(props) {
             onChange={(event) => { props.onChange(event.target.value); }}
             error={ !!props.errorMsg }
             helperText={ props.errorMsg }
+
+            inputProps={{style: {fontFamily: ST.BaseFont, color: ST.ContentColor}}}
+            InputLabelProps={{style: {fontFamily: ST.BaseFont, color: ST.ControlLabel}}}
         />
     );
 }

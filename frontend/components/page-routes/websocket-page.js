@@ -11,9 +11,9 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import * as TK from '../app-main/token-storage';
 import PageLayout from '../layout/page-layout';
 import * as ST from '../elements/styled-elements';
-import StackForm from '../elements/controls/stack-form';
-import ReadOnlyLabel from '../elements/controls/read-only-label';
-import Canvas from '../elements/custom/canvas';
+import FormStack from '../elements/controls/form-stack';
+import ReadOnlyLabel from '../elements/display/read-only-label';
+import { ButtonGeneral } from '../elements/controls/button-family'
 
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -78,48 +78,61 @@ function WebsocketPage(props) {
         sendJsonMessage(wsMessage);
     }
 
-
-    // canvas
-
-    function circlePulse(ctx, frameCount) {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-        ctx.fillStyle = 'crimson'
-        ctx.beginPath()
-        ctx.arc(50, 50, 20*Math.sin(frameCount*0.03)**2, 0, 2*Math.PI)
-        ctx.fill()
-    }
-
+    
     return (
         <PageLayout>
             <ST.GridPage container spacing={'16px'}>
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.TitleText>WEBSOCKET PAGE</ST.TitleText>
+                        <ST.TitleText>Websocket Page</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <ST.ContentCard elevation={3}> 
-                        <StackForm width='300px'>
+                        <FormStack width='300px'>
 
                             <ST.TitleText>Backend Processing</ST.TitleText>
 
                             <ReadOnlyLabel label={ 'Websocket' } value={ connectionStatus } />
 
-                            <Box>
-                                <Button type='submit' onClick={ handleStart } variant='contained'>
-                                    <ST.BaseText>Start</ST.BaseText>
-                                </Button>
-                            </Box>
+                                <ButtonGeneral
+                                    buttonLabel='Start'
+                                    onClick={ handleStart }
+                                />
 
                             <Box sx={{ width: '100%' }}>
                                 <BorderLinearProgress variant='determinate' value={ progressVal } />
                             </Box>
 
-                        </StackForm>
+                        </FormStack>
                     </ST.ContentCard>
                 </ST.GridItemCenter>
+
+
+                <ST.GridItemCenter item xs={12} lg={6}>
+                    <ST.ContentCard elevation={3}> 
+                        <FormStack width='400px'>
+
+                            <ST.TitleText>Font Test</ST.TitleText>
+
+                            <ST.BaseText>
+                                Lego is a line of plastic construction toys manufactured by the Lego Group, 
+                                a privately held company based in Billund, Denmark. 
+                                Lego consists of variously coloured interlocking plastic bricks made of 
+                                acrylonitrile butadiene styrene (ABS) that accompany an array of gears, 
+                                figurines called minifigures, and various other parts. 
+                                Its pieces can be assembled and connected in many ways to construct objects, 
+                                including vehicles, buildings, and working robots. 
+                                Assembled Lego models can be taken apart, and their pieces can be reused 
+                                to create new constructions.                           
+                            </ST.BaseText>
+
+                        </FormStack>
+                    </ST.ContentCard>
+                </ST.GridItemCenter>
+
 
             </ST.GridPage>
         </PageLayout>

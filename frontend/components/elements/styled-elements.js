@@ -1,7 +1,6 @@
 /**************************************************************************************************
 STYLED ELEMENTS
 **************************************************************************************************/
-import { ButtonBase } from '@mui/material';
 import { Box, Grid, Card } from '@mui/material';
 import { Typography } from '@mui/material';
 import { createTheme, styled } from '@mui/material/styles';
@@ -10,6 +9,15 @@ import { createTheme, styled } from '@mui/material/styles';
 // THEME
 
 const AppTheme = createTheme({});
+
+const BaseFont = 'Lexend';
+const TitleFont = 'Domino Brick';
+const LinkFont = 'LEGO BRIX';
+const SpecialFont = 'Cloud';
+
+const ContentColor = 'blue';
+const ControlLabel = 'darkgreen';
+const ControlBkgd = 'lavender';
 
 
 // SPACING
@@ -52,8 +60,7 @@ const TitleGroup = styled('h1')(({ theme }) => ({
     borderBottom: '2px solid rgb(150,150,150)',
     '& .MuiTypography-root': { 
         fontSize: '34px',
-        // fontWeight: 'bold',
-        textTransform: 'uppercase',
+        fontVariant: 'small-caps',
     }, 
 }));
 
@@ -62,33 +69,30 @@ const ContentCard = styled(Card)(({ theme }) => ({
     overflow: 'visible', 
 }));
 
-const SmallButton = styled(ButtonBase)(({ theme }) => ({
-    '& .MuiTypography-root': { 
-        fontSize: '100%',    
-        color: '#1e73be',
-        textDecoration: 'underline',
-        '&:hover': {fontWeight: '600'},
-    }, 
-}));
-
 
 // FONTS
 
 const BaseText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'Roboto, sans-serif', 
+    fontFamily: BaseFont, 
     fontSize: '16px',
-    lineHeight: 1.1,
+    lineHeight: 1.3,
+    color: ContentColor,
 }));
 
 const TitleText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'Domino Brick',
+    fontFamily: TitleFont,
     fontSize: '24px',
-    // fontFamily: 'Legothick',
 }));
 
 const LinkText = styled(Typography)(({ theme }) => ({
-    fontFamily: 'LEGO BRIX',
+    fontFamily: LinkFont,
     fontSize: '14px',
+}));
+
+const SpecialText = styled(Typography)(({ theme }) => ({
+    fontFamily: SpecialFont,
+    fontSize: '16px',
+    color: ContentColor,
 }));
 
 
@@ -104,9 +108,18 @@ export {
 
     TitleGroup, 
     ContentCard, 
-    SmallButton, 
+
+    BaseFont,
+    TitleFont,
+    LinkFont,
+    SpecialFont,
+
+    ContentColor,
+    ControlLabel,
+    ControlBkgd,
 
     BaseText,
     TitleText,
     LinkText, 
+    SpecialText,
 }

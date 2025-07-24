@@ -11,6 +11,7 @@ function DisplayDict(props) {
         maxWidth: props.width,
         padding: '4px 6px', 
         border: '1px solid black',
+        borderRadius: '3px',
         background: 'white',
         '& tr': {
             '& td:nth-of-type(1)': {paddingRight: '6px'},

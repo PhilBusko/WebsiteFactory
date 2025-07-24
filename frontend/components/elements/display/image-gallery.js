@@ -39,7 +39,7 @@ function ImageGallery(props) {
         galleryCols = 4;
 
     return (
-        <ImageList cols={ galleryCols } gap={ '8px' }>
+        <ImageList cols={ galleryCols } gap={ 8 }>
             <Gallery withCaption>
                 { props.imageLs.map( (imgInfo, key) => (
                     <StyledImageItem key={key}>

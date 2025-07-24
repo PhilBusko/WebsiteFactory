@@ -10,12 +10,11 @@ import AxiosConfig from '../app-main/axios-config';
 import PageLayout from  '../layout/page-layout';
 import * as ST from  '../elements/styled-elements';
 
-import StackForm from '../elements/controls/stack-form';
-import TextInput from '../elements/controls/text-input';
-// import NumberInput from '../elements/controls/number-input';
+import FormStack from '../elements/controls/form-stack';
+import TextInput from '../elements/controls/input-text';
 import SelectMultiple from '../elements/controls/select-multiple';
-import FullCheckbox from '../elements/controls/full-checkbox';
-import FormSubmit from '../elements/controls/form-submit';
+import FullCheckbox from '../elements/controls/checkbox-full';
+import { ButtonSubmit, ButtonSmall } from '../elements/controls/button-family'
 
 import SelectSingle from '../elements/controls/select-single';
 import PaginatedTable from '../elements/display/paginated-table';
@@ -144,13 +143,13 @@ function HttpPage(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.TitleText>HTTP PAGE</ST.TitleText>
+                        <ST.TitleText>HTTP Page</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <ST.ContentCard elevation={3}> 
-                        <StackForm width='260px'>
+                        <FormStack width='260px'>
 
                             <ST.TitleText>HTML Form</ST.TitleText>
 
@@ -168,14 +167,17 @@ function HttpPage(props) {
                                 isChecked={ optionChecked } 
                                 onChange={ setOptionChecked } /> 
 
-                            <ST.SmallButton onClick={() => { alert('Button Effect'); }}>
-                                <ST.BaseText>Small Button</ST.BaseText>
-                            </ST.SmallButton>
+                            <ButtonSmall 
+                                buttonLabel={ 'Small Button' }
+                                onClick={() => { }} //alert('Button Effect'); }}
+                            />
 
-                            <FormSubmit message={ formResult } 
-                                onSubmit={ handleSubmit }/>
+                            <ButtonSubmit 
+                                message={ formResult } 
+                                onSubmit={ handleSubmit }
+                            />
 
-                        </StackForm>
+                        </FormStack>
                     </ST.ContentCard>
                 </ST.GridItemCenter>
 
@@ -193,10 +195,13 @@ function HttpPage(props) {
                                 //open={ setInput.length > 2 } 
                                 getOptionLabel={(option) => option}
                                 renderInput={(params) => <TextField {...params} label='Set Name'/>}
-                                sx={{ width: '300px' }} size='small' /> 
+                                sx={{ width: '300px' }} size='small'
+                            /> 
 
-                            <DisplayDict infoDx={setInfo} height={'206px'}>
-                            </DisplayDict>
+                            <DisplayDict 
+                                infoDx={setInfo} 
+                                height={'233px'}
+                            />
 
                         </Stack>
                     </ST.ContentCard>

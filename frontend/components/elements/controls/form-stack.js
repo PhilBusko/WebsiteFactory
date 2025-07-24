@@ -1,9 +1,9 @@
 /**************************************************************************************************
-STACK FORM
+FORM STACK 
 **************************************************************************************************/
 import { Stack } from '@mui/material';
 
-function StackForm(props) {
+function FormStack(props) {
     return (
         <form>
             <Stack 
@@ -16,9 +16,9 @@ function StackForm(props) {
     );
 }
 
-StackForm.defaultProps = {
+FormStack.defaultProps = {
     'width': '300px',
     'padSize': '16px',
 };
 
-export default StackForm;
+export default FormStack;

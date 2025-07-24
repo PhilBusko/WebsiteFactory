@@ -33,10 +33,11 @@ const AuthStack = styled(Stack)(({ theme }) => ({
 
 const AuthButton = styled(ButtonBase)(({ theme }) => ({
     '& .MuiTypography-root': { 
-        fontSize: '90%',
+        fontSize: '14px',
+        fontWeight: 'bold',
         color: 'white',
-        textDecoration: 'underline',
-        '&:hover': {fontWeight: '600'}, },
+        '&:hover': {textDecoration: 'underline',}, 
+    },
 }));
 
 
@@ -59,10 +60,10 @@ function AuthPanel(props) {
                     </UserName>
                     <AuthStack spacing='6px'>
                         <AuthButton onClick={() => { setLoginOpen(true); }}>
-                            <ST.BaseText>Log In</ST.BaseText>
+                            <ST.SpecialText>Log In</ST.SpecialText>
                         </AuthButton>
                         <AuthButton onClick={() => { setSignupOpen(true); }}>
-                            <ST.BaseText>Sign Up</ST.BaseText>
+                            <ST.SpecialText>Sign Up</ST.SpecialText>
                         </AuthButton>
                     </AuthStack>
                 </ST.FlexHorizontal >
@@ -76,10 +77,10 @@ function AuthPanel(props) {
                     </UserName>
                     <AuthStack spacing='6px'>
                         <AuthButton onClick={() => { navigate('/account/'); }}>
-                            <ST.BaseText>Account</ST.BaseText>
+                            <ST.SpecialText>Account</ST.SpecialText>
                         </AuthButton>
                         <AuthButton onClick={() => { setLogoutOpen(true); }}>
-                            <ST.BaseText>Log Out</ST.BaseText>
+                            <ST.SpecialText>Log Out</ST.SpecialText>
                         </AuthButton>
                     </AuthStack>
                 </ST.FlexHorizontal>

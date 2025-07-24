@@ -7,7 +7,7 @@ import { Grid, Box, Stack, Card } from '@mui/material';
 import AxiosConfig from '../app-main/axios-config'
 import PageLayout from '../layout/page-layout'
 import * as ST from '../elements/styled-elements'
-import ReadOnlyLabel from '../elements/controls/read-only-label'
+import ReadOnlyLabel from '../elements/display/read-only-label'
 
 
 function VerifyEmail(props) {
@@ -52,7 +52,7 @@ function VerifyEmail(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.TitleText>VERIFY EMAIL</ST.TitleText>
+                        <ST.TitleText>Verify Email</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 

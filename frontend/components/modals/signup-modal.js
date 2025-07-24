@@ -2,15 +2,15 @@
 SIGN UP MODAL
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
-import { TextField, FormHelperText, Button } from '@mui/material';
 import { Box, Stack } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
 import zxcvbn from 'zxcvbn';
+
 import AxiosConfig from '../app-main/axios-config';
 import BaseModal from './base-modal';
 import * as ST from '../elements/styled-elements';
-import PasswordField from '../elements/controls/password-field';
-import FormSubmit from '../elements/controls/form-submit'
+import { EmailInput, PasswordInput } from '../elements/controls/input-auth';
+import { ButtonSubmit, ButtonSmall } from '../elements/controls/button-family'
 
 
 function SignUpModal(props) {
@@ -111,22 +111,27 @@ function SignUpModal(props) {
             title='Sign Up'
             width={formWidth}>
 
-            <TextField 
-                value={ email } onChange={(event) => { setEmail(event.target.value); }} 
-                variant='outlined' label='Email' size='small' fullWidth/>
+            <EmailInput 
+                value={ email } 
+                onChange={(event) => { setEmail(event.target.value); }} 
+            />
 
-            <PasswordField 
+            <PasswordInput 
                 value={ password } 
-                onChange={(event) => { setPassword(event.target.value); }}/>
+                onChange={(event) => { setPassword(event.target.value); }}
+            />
 
-            <FormSubmit 
+            <ButtonSubmit 
                 message={ formResult } 
-                onSubmit={ handleSignup } />
+                onSubmit={ handleSignup } 
+            />
 
             <ST.FlexHorizontal sx={{width: '100%', justifyContent: 'flex-end' }}>
-                <ST.SmallButton onClick={ handleVerify }>
-                    <ST.BaseText>Send Verification</ST.BaseText>
-                </ST.SmallButton>
+                <ButtonSmall 
+                    buttonLabel={ 'Send Verification' }
+                    textWidth='130px'
+                    onClick={ handleVerify }
+                />
             </ST.FlexHorizontal>
 
         </BaseModal>  

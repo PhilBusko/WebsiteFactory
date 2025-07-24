@@ -3,21 +3,21 @@ LOG IN MODAL
 **************************************************************************************************/
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, FormHelperText, Button } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
+
 import AxiosConfig from '../app-main/axios-config';
 import * as TK from '../app-main/token-storage';
 import { GlobalContext } from '../app-main/global-store';
 import BaseModal from './base-modal';
 import * as ST from '../elements/styled-elements';
-import PasswordField from '../elements/controls/password-field';
-import FormSubmit from '../elements/controls/form-submit'
+import { EmailInput, PasswordInput } from '../elements/controls/input-auth';
+import { ButtonSubmit, ButtonSmall } from '../elements/controls/button-family'
 
 
 function LogInModal(props) {
 
     const { userStore } = useContext(GlobalContext);
-    const formWidth = '280px';
+    const formWidth = '320px';
     let navigate = useNavigate();  
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -110,22 +110,29 @@ function LogInModal(props) {
             open={props.open} 
             setOpen={props.setOpen} 
             title='Log In'
-            width={formWidth} >
+            width={formWidth}
+        >
 
-            <TextField 
-                value={ email } onChange={(event) => { setEmail(event.target.value); }} 
-                variant='outlined' label='Email' size='small' fullWidth/>
+            <EmailInput 
+                value={ email } 
+                onChange={(event) => { setEmail(event.target.value); }} 
+            />
 
-            <PasswordField 
+            <PasswordInput 
                 value={ password } 
-                onChange={(event) => { setPassword(event.target.value); }}/>
+                onChange={(event) => { setPassword(event.target.value); }}
+            />
 
-            <ST.SmallButton onClick={ handleForgot }>
-                <ST.BaseText>Forgot Password</ST.BaseText>
-            </ST.SmallButton>
+            <ButtonSmall 
+                buttonLabel={ 'Forgot Password' }
+                textWidth='130px'
+                onClick={ handleForgot }
+            />
 
-            <FormSubmit message={ formResult } 
-                onSubmit={ handleSubmit }/>
+            <ButtonSubmit 
+                message={ formResult } 
+                onSubmit={ handleSubmit }
+            />
 
         </BaseModal>  
     );

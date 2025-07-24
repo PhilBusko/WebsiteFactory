@@ -11,8 +11,13 @@ function ReadOnlyLabel(props) {
     const elemId = props.label.toLowerCase().replace(' ', '');
 
     return (
-        <ST.FlexHorizontal id={elemId} 
-                sx={{ width: props.width, justifyContent: 'start', background: 'white', borderRadius: '3px', }}>
+        <ST.FlexHorizontal 
+            id={elemId} 
+            sx={{ width: props.width, 
+                justifyContent: 'start', 
+                background: ST.ControlBkgd, 
+                borderRadius: '3px', 
+        }}>
             <Box sx={{ padding: '6px 6px 6px 0px' }}>   
                 <ST.BaseText><b>{props.label}:</b></ST.BaseText>
             </Box>

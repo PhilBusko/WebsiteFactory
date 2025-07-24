@@ -8,6 +8,7 @@ import * as TK from '../app-main/token-storage'
 import { GlobalContext } from '../app-main/global-store'
 import BaseModal from './base-modal';
 import * as ST from '../elements/styled-elements'
+import { ButtonGeneral } from '../elements/controls/button-family'
 
 
 function LogOutModal(props) {
@@ -20,6 +21,7 @@ function LogOutModal(props) {
 
     const handleLogout = (event) => {
         event.preventDefault();
+        console.log('log out button')
 
         userStore[1]({'name': '', 'status': 'guest'})
         TK.wipeTokens();
@@ -44,9 +46,9 @@ function LogOutModal(props) {
             </ST.FlexHorizontal>
 
             <ST.FlexHorizontal>
-                <Button type='submit' onClick={ handleLogout } variant='contained' sx={{minWidth: '80px'}}>
+                <ButtonGeneral onClick={ handleLogout }>
                     Log Out
-                </Button>
+                </ButtonGeneral>
             </ST.FlexHorizontal>
 
         </BaseModal>  

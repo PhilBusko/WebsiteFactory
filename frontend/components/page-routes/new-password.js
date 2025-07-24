@@ -8,10 +8,10 @@ import zxcvbn from 'zxcvbn';
 import AxiosConfig from '../app-main/axios-config';
 import PageLayout from '../layout/page-layout';
 import * as ST from '../elements/styled-elements';
-import StackForm  from '../elements/controls/stack-form';
-import ReadOnlyLabel from '../elements/controls/read-only-label'
-import PasswordField from '../elements/controls/password-field';
-import FormSubmit from '../elements/controls/form-submit'
+import FormStack  from '../elements/controls/form-stack';
+import { ButtonSubmit } from '../elements/controls/button-family'
+import ReadOnlyLabel from '../elements/display/read-only-label'
+import { PasswordInput } from '../elements/controls/input-auth';
 
 
 function NewPassword(props) {
@@ -19,10 +19,6 @@ function NewPassword(props) {
     const { userId } = useParams();
     const { token } = useParams();
     const [formResult, setFormResult] = useState(null);
-
-    useEffect(() => {
-    }, []);
-
     const [password, setPassword] = useState('');
 
     function resetPassword() {
@@ -57,23 +53,27 @@ function NewPassword(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.TitleText>RESET PASSWORD</ST.TitleText>
+                        <ST.TitleText>Reset Password</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 
                 <ST.GridItemCenter item xs={12} lg={6}>
                     <ST.ContentCard elevation={3}> 
-                        <StackForm width='260px'>
+                        <FormStack width='260px'>
 
                             <ReadOnlyLabel label={'User ID'} value={userId} />
 
-                            <PasswordField value={ password } 
-                                onChange={(event) => { setPassword(event.target.value); }}/>
+                            <PasswordInput
+                                value={ password } 
+                                onChange={(event) => { setPassword(event.target.value); }}
+                            />
 
-                            <FormSubmit message={ formResult } 
-                                onSubmit={ handleSubmit }/>
+                            <ButtonSubmit 
+                                message={ formResult } 
+                                onSubmit={ handleSubmit }
+                            />
 
-                        </StackForm>
+                        </FormStack>
                     </ST.ContentCard>
                 </ST.GridItemCenter>
 

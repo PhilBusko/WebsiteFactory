@@ -151,7 +151,7 @@ function AuthDev(props) {
 
                 <Grid item xs={12}>
                     <ST.TitleGroup>
-                        <ST.TitleText>AUTH DEV</ST.TitleText>
+                        <ST.TitleText>Auth Development</ST.TitleText>
                     </ST.TitleGroup>
                 </Grid>
 

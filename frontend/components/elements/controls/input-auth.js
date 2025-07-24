@@ -1,19 +1,55 @@
 /**************************************************************************************************
-PASSWORD FIELD
+AUTH INPUT
 - having a confirm password input reduces the conversion rate
 - better solution is to show/hide password
 **************************************************************************************************/
 import { useState } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import * as ST from '../styled-elements';
 
-function PasswordField(props) {
+
+const StyledText = styled(TextField)(({ theme }) => ({
+    background: ST.ControlBkgd,
+}));
+
+
+// EMAIL FIELD
+
+function EmailInput(props) {
+
+    return (
+        <StyledText 
+            value={ props.value } 
+            onChange={ props.onChange }  
+
+            label='Email' 
+            variant='outlined'
+            size='medium'
+            fullWidth
+
+            inputProps={{style: {fontFamily: ST.BaseFont, color: ST.ContentColor, fontSize: '18px'}}}
+            InputLabelProps={{style: {fontFamily: ST.BaseFont, color: ST.ControlLabel}}}
+        />
+    );
+}
+
+EmailInput.defaultProps = {
+    value: '',
+    onChange: () => {}, 
+};
+
+
+// PASSWORD INPUT
+
+function PasswordInput(props) {
 
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <TextField 
+        <StyledText 
             value={ props.value } 
             onChange={ props.onChange }  
             type={showPassword ? 'text' : 'password'}
@@ -29,18 +65,24 @@ function PasswordField(props) {
                 ),
             }}
 
-            variant='outlined' 
             label='Password' 
-            size='small' 
+            variant='outlined' 
+            size='medium' 
             fullWidth
-            sx={{ '& .MuiOutlinedInput-root': {padding: '0'}, background: 'white', borderRadius: '4px' }}
+
+            inputProps={{style: {fontFamily: ST.BaseFont, color: ST.ContentColor, fontSize: '18px'}}}
+            InputLabelProps={{style: {fontFamily: ST.BaseFont, color: ST.ControlLabel}}}
         />
     );
 }
 
-PasswordField.defaultProps = {
+PasswordInput.defaultProps = {
     value: '',
     onChange: () => {}, 
 };
 
-export default PasswordField;
+
+export {
+    EmailInput,
+    PasswordInput,
+}
