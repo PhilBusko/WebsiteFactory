@@ -214,7 +214,7 @@ function HttpPage(props) {
                             <ST.TitleText>Data Table</ST.TitleText>
 
                             <SelectSingle
-                                label={ 'Theme Group' } width={ '180px' } hasNone={ true }
+                                label={ 'Theme Group' } width={ '180px' }
                                 optionLs={ themeOptions } value={ themeGroup } 
                                 onChange={ handleThemeGroup } />
 

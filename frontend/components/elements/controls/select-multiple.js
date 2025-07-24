@@ -6,25 +6,36 @@ import { Box } from '@mui/material';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/material/styles';
+import * as ST from  '../styled-elements';
+
 
 const StyledLabel = styled(Box)(({ theme }) => ({
     '& .MuiFormLabel-root': { top: -12 },
-    '& .MuiInputLabel-shrink': { top: 0 },
+    '& .MuiInputLabel-shrink': { 
+        top: 0, 
+        left: -3,                       // compensate for new font
+    },
+    '& .MuiInputLabel-root': {
+        fontFamily: ST.BaseFont,        // works but not for shrunk label spacing
+        color: ST.ControlLabel,
+    },
 }));
 
 const StyledSelect = styled(Select)(({ theme }) => ({
-    background: 'white',
-    '& .MuiSelect-select': { padding: '4px 0px 4px 8px'},
-    //'& .Mui-selected': { background: 'green !important' },
+    background: ST.ControlBkgd,
+    '& .MuiSelect-select': { padding: '6px 0px 4px 8px'},
 }));
 
 const StyledItem = styled(MenuItem)(({ theme }) => ({
-    //height: '24px',     // makes scrollbar show up
-    minHeight: '0px', 
-    padding: '0px', 
-    //background: 'white !important',
-    //'& .Mui-selected': { background: 'green !important' },
+    background: ST.ControlBkgd,
+    '&:hover': { background: 'mintcream', },
+    '&.Mui-selected': { background: ST.ControlBkgd, },
 }));
+
+const StyledCheckbox = styled(Checkbox)(({ theme }) => ({
+    padding: '0px 6px 0px 0px',
+}));
+
 
 function SelectMultiple(props) {
 
@@ -62,18 +73,18 @@ function SelectMultiple(props) {
                 label={props.label}
                 value={props.value}
                 onChange={handleSelect}
-                renderValue={(selected) => { return selected.join(', '); }}
+                renderValue={(selected) => { return <ST.BaseText>{selected.join(', ')}</ST.BaseText> }}
                 multiple >
                 { !!props.hasSelectAll && 
                     <StyledItem key={0} value={'ALL'}>
-                        <Checkbox checked={ selectAll } />
-                        Select All
+                        <StyledCheckbox checked={ selectAll } />
+                        <ST.BaseText>Select All</ST.BaseText>
                     </StyledItem>
                 }
                 { props.optionLs.map((option, idx) => (
                     <StyledItem key={idx+1} value={option}>
-                        <Checkbox checked={props.value.indexOf(option) > -1} />
-                        {option}
+                        <StyledCheckbox checked={props.value.indexOf(option) > -1} />
+                        <ST.BaseText>{option}</ST.BaseText>
                     </StyledItem>
                 )) }
             </StyledSelect>
@@ -83,11 +94,11 @@ function SelectMultiple(props) {
 
 SelectMultiple.defaultProps = {
     label: 'Select',
+    width: '100%', 
+    hasSelectAll: true, 
     optionLs: [],       // list of strings
     value: [], 
     onChange: () => {}, 
-    width: '100%', 
-    hasSelectAll: true, 
 };
 
 export default SelectMultiple;
