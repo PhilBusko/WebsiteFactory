@@ -18,7 +18,7 @@ const StyledImageItem = styled(ImageListItem)(({ theme }) => ({
 
 const StyledItemBar = styled(ImageListItemBar)(({ theme }) => ({
     maxHeight: '30px',
-    fontFamily: 'Roboto', 
+    fontFamily: ST.BaseFont, 
     padding: '2px 6px',
     '& .MuiImageListItemBar-titleWrap': {padding: '0px'},
 }));
@@ -49,7 +49,7 @@ function ImageGallery(props) {
                                 width={ imgInfo.width } 
                                 height={ imgInfo.height }
                                 caption={ ` <div style="
-                                                font-family: Roboto;
+                                                font-family: ${ST.BaseFont};
                                                 font-size: 26px;
                                                 color: gold;
                                                 text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;

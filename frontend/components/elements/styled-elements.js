@@ -15,9 +15,9 @@ const TitleFont = 'Domino Brick';
 const LinkFont = 'LEGO BRIX';
 const SpecialFont = 'Cloud';
 
-const ContentColor = 'blue';
-const ControlLabel = 'darkgreen';
-const ControlBkgd = 'lavender';
+const ContentColor = 'black';
+const ControlLabel = 'dimgrey';
+const ControlBkgd = 'white';
 
 
 // SPACING

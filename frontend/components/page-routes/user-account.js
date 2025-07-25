@@ -3,11 +3,11 @@ USER ACCOUNT
 **************************************************************************************************/
 import { useState, useEffect } from 'react';
 import { Grid, Stack } from '@mui/material';
-import AxiosConfig from '../app-main/axios-config'
-import PageLayout from '../layout/page-layout'
-import * as ST from '../elements/styled-elements'
+import AxiosConfig from '../app-main/axios-config';
+import PageLayout from '../layout/page-layout';
+import * as ST from '../elements/styled-elements';
 import DisplayDict from '../elements/display/display-dict';
-import ReadOnlyArea from '../elements/display/read-only-area';
+import { ReadOnlyArea } from '../elements/display/read-only';
 
 
 function UserAccount(props) {

@@ -12,7 +12,7 @@ function DisplayDict(props) {
         padding: '4px 6px', 
         border: '1px solid black',
         borderRadius: '3px',
-        background: 'white',
+        background: ST.ControlBkgd,
         '& tr': {
             '& td:nth-of-type(1)': {paddingRight: '6px'},
         },
@@ -40,7 +40,9 @@ function DisplayDict(props) {
                 <tbody>
                     <tr>
                         <td>
-                            <ST.BaseText sx={{textAlign: 'center'}}>No Data</ST.BaseText>
+                            <ST.BaseText sx={{textAlign: 'center', fontSize: '20px'}}>
+                                No Data
+                            </ST.BaseText>
                         </td>
                     </tr> 
                 </tbody>

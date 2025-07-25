@@ -1,16 +1,17 @@
 /**************************************************************************************************
 NEW PASSWORD
 **************************************************************************************************/
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
-import { Box, Grid, Card } from '@mui/material';
+import { Grid } from '@mui/material';
 import zxcvbn from 'zxcvbn';
+
 import AxiosConfig from '../app-main/axios-config';
 import PageLayout from '../layout/page-layout';
 import * as ST from '../elements/styled-elements';
 import FormStack  from '../elements/controls/form-stack';
-import { ButtonSubmit } from '../elements/controls/button-family'
-import ReadOnlyLabel from '../elements/display/read-only-label'
+import { ButtonSubmit } from '../elements/controls/button-family';
+import { ReadOnlyLabel } from '../elements/display/read-only';
 import { PasswordInput } from '../elements/controls/input-auth';
 
 

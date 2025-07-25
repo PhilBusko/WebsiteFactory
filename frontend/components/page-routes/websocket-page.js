@@ -12,8 +12,8 @@ import * as TK from '../app-main/token-storage';
 import PageLayout from '../layout/page-layout';
 import * as ST from '../elements/styled-elements';
 import FormStack from '../elements/controls/form-stack';
-import ReadOnlyLabel from '../elements/display/read-only-label';
-import { ButtonGeneral } from '../elements/controls/button-family'
+import { ReadOnlyLabel } from '../elements/display/read-only';
+import { ButtonGeneral } from '../elements/controls/button-family';
 
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({

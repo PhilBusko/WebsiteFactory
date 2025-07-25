@@ -1,5 +1,6 @@
 /**************************************************************************************************
 SIMPLE TABLE
+- not updated with fonts, not used in factory
 **************************************************************************************************/
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles'

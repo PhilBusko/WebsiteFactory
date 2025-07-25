@@ -4,10 +4,11 @@ VERIFY EMAIL
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Grid, Box, Stack, Card } from '@mui/material';
-import AxiosConfig from '../app-main/axios-config'
-import PageLayout from '../layout/page-layout'
-import * as ST from '../elements/styled-elements'
-import ReadOnlyLabel from '../elements/display/read-only-label'
+
+import AxiosConfig from '../app-main/axios-config';
+import PageLayout from '../layout/page-layout';
+import * as ST from '../elements/styled-elements';
+import { ReadOnlyLabel } from '../elements/display/read-only';
 
 
 function VerifyEmail(props) {

@@ -8,12 +8,26 @@ import * as ST from '../styled-elements';
 
 const StyledTable = styled(DataGrid)(({ theme }) => ({
     border: '1px solid black',
-    background: 'white', 
+    background: ST.ControlBkgd, 
+
+    // header font
+    '& .MuiDataGrid-columnHeaders': {
+        fontFamily: ST.SpecialFont,
+        fontSize: '18px',
+        fontWeight: 'bold',
+        color: ST.ContentColor,
+    },
+
+    // footer font
+    '& .MuiTablePagination-root .MuiTablePagination-displayedRows': {
+        fontFamily: ST.SpecialFont,
+        color: ST.ContentColor,
+    },
+    '& .MuiSvgIcon-root': {
+        color: ST.ContentColor,
+    },
 
     // remove outline on click
-    '& .MuiDataGrid-columnHeader:last-child .MuiDataGrid-columnSeparator': {
-        display: 'none', 
-    },
     '& .MuiDataGrid-columnHeader:focus-within, & .MuiDataGrid-columnHeader:focus': {
         outline: 'none !important',
     },
@@ -27,7 +41,7 @@ const EmptyTable = styled(ST.FlexHorizontal)(({ theme }) => ({
     height: '200px',
     border: '1px solid black',
     borderRadius: '2px',
-    background: 'white', 
+    background: ST.ControlBkgd, 
 }));
 
 function PaginatedTable(props) {
@@ -58,7 +72,9 @@ function PaginatedTable(props) {
         if (isNumber) colWidth = 80;
         if (longString) colWidth = 210;
         tableWidth += colWidth * 1.01;
-        //if (tableWidth > 280) tableWidth = 280;
+
+        if (colNames[c] == 'SetNo') colWidth = 90;
+        if (colNames[c] == 'Minifigs') colWidth = 90;
 
         var newCol = {
             field: colNames[c],
@@ -66,14 +82,14 @@ function PaginatedTable(props) {
             headerAlign: ( isNumber ? 'center' : 'left' ),
             align: ( isNumber ? 'center' : 'left' ),
             sortable: false,
-            renderCell: (params) => (<ST.BaseText> { params.value } </ST.BaseText>), 
+            renderCell: (params) => (<ST.SpecialText>{ params.value }</ST.SpecialText>), 
             width: colWidth, 
         }
         colDefs.push(newCol);
     }
 
     // render
-    
+
     return (<>
         { props.dataLs.length > 0 &&
             <StyledTable
@@ -83,14 +99,13 @@ function PaginatedTable(props) {
                 pageSize={12}
                 autoHeight={true}
                 density='compact'            
-                //getRowHeight={() => 'auto' }  // makes row conform to the height of the content, inconsistent with paginating
                 disableColumnMenu            
                 disableSelectionOnClick     
             />
         }
         { props.dataLs.length === 0 &&
             <EmptyTable sx={{ width: props.width, }}>
-                <ST.BaseText>No Data</ST.BaseText>
+                <ST.SpecialText sx={{fontSize: '20px'}}>No Data</ST.SpecialText>
             </EmptyTable>
         }
     </>);
